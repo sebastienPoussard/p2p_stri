@@ -11,7 +11,7 @@ public class SocketService {
 	 * @param port le numéro du port qui sera ouvert pour le socket de rendez vous
 	 * @return retourne la socket en cas de réussite.
 	 */
-	public ServerSocket ouvrirSocketRDV(int port) {
+	public static ServerSocket ouvrirSocketRDV(int port) {
 		
 		ServerSocket res = null;
 		try {
@@ -21,6 +21,7 @@ public class SocketService {
 			e.printStackTrace();
 			System.exit(0);
 		}
+		Messages.ecrireMessage("Serveur en écoute sur le port "+port);
 		return res;
 	}
 
