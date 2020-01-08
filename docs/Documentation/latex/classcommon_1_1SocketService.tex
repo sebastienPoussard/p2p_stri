@@ -1,0 +1,61 @@
+\hypertarget{classcommon_1_1SocketService}{}\section{common.\+Socket\+Service Class Reference}
+\label{classcommon_1_1SocketService}\index{common.\+Socket\+Service@{common.\+Socket\+Service}}
+
+
+Cette classe permet de gérer les sockets.  
+
+
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static Server\+Socket \hyperlink{classcommon_1_1SocketService_a015867bbf56a89c3cd7a43a780f4147c}{ouvrir\+Socket\+R\+DV} (int port)
+\begin{DoxyCompactList}\small\item\em Cette fonction permet permet d\textquotesingle{}ouvrir une socket de rendez vous sur un port donnée. \end{DoxyCompactList}\item 
+static Socket \hyperlink{classcommon_1_1SocketService_a2954ada119e92937ee0750a694f15330}{ouvrir\+Socket\+Client} (Server\+Socket socket\+De\+R\+DV)
+\begin{DoxyCompactList}\small\item\em Cette fonction permet d\textquotesingle{}ouvrire une socket client. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Cette classe permet de gérer les sockets. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcommon_1_1SocketService_a2954ada119e92937ee0750a694f15330}\label{classcommon_1_1SocketService_a2954ada119e92937ee0750a694f15330}} 
+\index{common\+::\+Socket\+Service@{common\+::\+Socket\+Service}!ouvrir\+Socket\+Client@{ouvrir\+Socket\+Client}}
+\index{ouvrir\+Socket\+Client@{ouvrir\+Socket\+Client}!common\+::\+Socket\+Service@{common\+::\+Socket\+Service}}
+\subsubsection{\texorpdfstring{ouvrir\+Socket\+Client()}{ouvrirSocketClient()}}
+{\footnotesize\ttfamily static Socket common.\+Socket\+Service.\+ouvrir\+Socket\+Client (\begin{DoxyParamCaption}\item[{Server\+Socket}]{socket\+De\+R\+DV }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Cette fonction permet d\textquotesingle{}ouvrire une socket client. 
+
+Cette fonction va renvoyer une socket client quand un client va se connecter au serveur. Cette fonction est bloquante, la fonction va attendre qu\textquotesingle{}un utilisateur vienne se connecter. 
+\begin{DoxyParams}{Parameters}
+{\em socket\+De\+R\+DV} & socket de rendez-\/vous sur lequelle le serveur écoute. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+retourne la socket client. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcommon_1_1SocketService_a015867bbf56a89c3cd7a43a780f4147c}\label{classcommon_1_1SocketService_a015867bbf56a89c3cd7a43a780f4147c}} 
+\index{common\+::\+Socket\+Service@{common\+::\+Socket\+Service}!ouvrir\+Socket\+R\+DV@{ouvrir\+Socket\+R\+DV}}
+\index{ouvrir\+Socket\+R\+DV@{ouvrir\+Socket\+R\+DV}!common\+::\+Socket\+Service@{common\+::\+Socket\+Service}}
+\subsubsection{\texorpdfstring{ouvrir\+Socket\+R\+D\+V()}{ouvrirSocketRDV()}}
+{\footnotesize\ttfamily static Server\+Socket common.\+Socket\+Service.\+ouvrir\+Socket\+R\+DV (\begin{DoxyParamCaption}\item[{int}]{port }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Cette fonction permet permet d\textquotesingle{}ouvrir une socket de rendez vous sur un port donnée. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em port} & le numéro du port qui sera ouvert pour le socket de rendez-\/vous. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+retourne la socket en cas de réussite. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/seb/\+Travail/\+Dev/\+P2\+P/p2p\+\_\+stri/code/src/common/Socket\+Service.\+java\end{DoxyCompactItemize}

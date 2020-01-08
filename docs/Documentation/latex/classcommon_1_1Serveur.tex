@@ -1,0 +1,53 @@
+\hypertarget{classcommon_1_1Serveur}{}\section{common.\+Serveur Class Reference}
+\label{classcommon_1_1Serveur}\index{common.\+Serveur@{common.\+Serveur}}
+
+
+Cette classe gère les fonctionnalitées de serveur.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcommon_1_1Serveur_a43e88f40a6f46e43bf6b3c71eb4d9828}{Serveur} (int port)
+\begin{DoxyCompactList}\small\item\em constructeur de la classe. \end{DoxyCompactList}\item 
+void \hyperlink{classcommon_1_1Serveur_a9924019a4577e360dafa9ab6df2d4ffd}{lancer} ()  throws I\+O\+Exception 
+\begin{DoxyCompactList}\small\item\em Cette méthode permet de lancer le serveur. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Cette classe gère les fonctionnalitées de serveur. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcommon_1_1Serveur_a43e88f40a6f46e43bf6b3c71eb4d9828}\label{classcommon_1_1Serveur_a43e88f40a6f46e43bf6b3c71eb4d9828}} 
+\index{common\+::\+Serveur@{common\+::\+Serveur}!Serveur@{Serveur}}
+\index{Serveur@{Serveur}!common\+::\+Serveur@{common\+::\+Serveur}}
+\subsubsection{\texorpdfstring{Serveur()}{Serveur()}}
+{\footnotesize\ttfamily common.\+Serveur.\+Serveur (\begin{DoxyParamCaption}\item[{int}]{port }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructeur de la classe. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em port} & port d\textquotesingle{}écoute du serveur. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcommon_1_1Serveur_a9924019a4577e360dafa9ab6df2d4ffd}\label{classcommon_1_1Serveur_a9924019a4577e360dafa9ab6df2d4ffd}} 
+\index{common\+::\+Serveur@{common\+::\+Serveur}!lancer@{lancer}}
+\index{lancer@{lancer}!common\+::\+Serveur@{common\+::\+Serveur}}
+\subsubsection{\texorpdfstring{lancer()}{lancer()}}
+{\footnotesize\ttfamily void common.\+Serveur.\+lancer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws I\+O\+Exception\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Cette méthode permet de lancer le serveur. 
+
+cette méthode lance le serveur en ouvrant la socket de rendez-\/vous, si le port est déjà occupé alors l\textquotesingle{}erreur est remonté au main. La méthode va par la suite attendre la venue d\textquotesingle{}un client puis transferer chaque connexion au gestionnaire de client. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/seb/\+Travail/\+Dev/\+P2\+P/p2p\+\_\+stri/code/src/common/Serveur.\+java\end{DoxyCompactItemize}

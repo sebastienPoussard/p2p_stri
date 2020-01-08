@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['ouvrirsocketrdv',['ouvrirSocketRDV',['../classcommon_1_1Socket.html#a921df60f921f6064dfc1b293bcf955cf',1,'common::Socket']]]
+  ['ecrireerreur',['ecrireErreur',['../classcommon_1_1Messages.html#a5d8d6f3ce6024d78171f9e49de7f6136',1,'common::Messages']]],
+  ['ecriremessage',['ecrireMessage',['../classcommon_1_1Messages.html#a6069bc66b0eda8fdd5966a7c7a8a1a0a',1,'common::Messages']]]
 ];
