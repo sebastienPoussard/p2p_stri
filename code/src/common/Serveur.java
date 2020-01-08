@@ -23,7 +23,8 @@ public class Serveur {
 	 * @brief Cette méthode permet de lancer le serveur
 	 * @details cette méthode lance le serveur en ouvrant la socket de rendez-vous, si le port est déjà occupé alors
 	 * l'erreur est remonté au main.
-	 * La méthode va par la suite attendre la venue d'un client puis transferer chaque connexion au gestionnaire de client.
+	 * La méthode va par la suite attendre la venue d'un client puis transferer chaque connexion au gestionnaire de client
+	 * pour qu'il traite les requête de chaque client dans un Thread unique.
 	 */
 	public void lancer() throws IOException {
 
@@ -43,8 +44,11 @@ public class Serveur {
 				socService = socRDV.accept();
 				
 				// quand un nouveau client se connecte, donner le traitement au gestionnaire de client
-				GestionnaireClient gestionnaireClient = new GestionnaireClient();
-				gestionnaireClient.traiterClient(socService);
+				// qui est un nouveau thread.
+				GestionnaireClient gestionnaireClient = new GestionnaireClient(socService);
+				Thread thread = new Thread(gestionnaireClient);
+				thread.start();
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 				Messages.getInstance().ecrireErreur("La connexion d'un client à échoué");
