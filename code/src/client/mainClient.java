@@ -1,14 +1,31 @@
 package client;
+
+import java.io.BufferedOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class mainClient {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UnknownHostException, IOException, InterruptedException {
+		
+		// TEST DE CLIENT POUR VALIDER FONCTIONNEMENT DU SERVEUR
+		
+		Socket s = new Socket("localhost", 8080);
+		BufferedOutputStream b = new BufferedOutputStream(s.getOutputStream());
+		
+		b.write("coucou".getBytes());
+		b.flush();
+		TimeUnit.SECONDS.sleep(3);
+		b.write("ça va ?".getBytes());
+		b.flush();
+		s.close();
+		
+		// FIN TEST
+		
+	}
+}
 		
 		
 // CODE SAMPLE 
@@ -117,4 +134,3 @@ public class mainClient {
 //			e.printStackTrace();
 //		}
 //	}
-}

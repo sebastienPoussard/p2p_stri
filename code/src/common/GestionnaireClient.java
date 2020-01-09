@@ -1,9 +1,7 @@
 package common;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.net.Socket;
 
 /**
@@ -12,8 +10,8 @@ import java.net.Socket;
 public class GestionnaireClient implements Runnable {
 
 	private Socket socService;					// socket de la connexion.
-	private BufferedInputStream streamIn;		// flux de données entrant.
-	private BufferedOutputStream streamOut;		// flux de données sortant.
+	private BufferedInputStream streamIn;		// flux de requêtes client.
+	private String requete;						// requete du client.
 	
 	/**
 	 * @brief constructeur de GestionnaireClient.
@@ -22,9 +20,8 @@ public class GestionnaireClient implements Runnable {
 	 */
 	public GestionnaireClient(Socket socService) throws IOException {
 		this.socService = socService;
-		// ouvrir les flux de données entrant et sortant.
-		this.streamIn = new BufferedInputStream(this.socService.getInputStream());
-		this.streamOut = new BufferedOutputStream(this.socService.getOutputStream());
+		// ouvrir le flux de requête clients.
+		this.streamIn = new BufferedInputStream(socService.getInputStream());
 	}
 
 	/**
@@ -32,18 +29,46 @@ public class GestionnaireClient implements Runnable {
 	 */
 	@Override
 	public void run() {
-		String requete = "vide";
-		while(true) {
-			try {
-				requete = new String(streamIn.readAllBytes());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println(requete);
-		}
 		
-		// tanque le client à des requêtes
-		// effectuer la requête du client
+		System.out.println(lireRequeteClient());
+//		try {
+//			byte[] donnee = new byte[1024];
+//			int marqueur;
+//			
+//			// tant que le client ne ferme pas la socket, servir les requêtes du client.
+//			while ((marqueur = streamIn.read(donnee) )!= -1) {
+//				this.requete += new String(donnee, 0, marqueur);
+//				// si le message est complétement lue, afficher le résultat.
+//				if (donnee[marqueur] == 0) {
+//					Messages.getInstance().ecrireMessage(requete);
+//				}
+//			}
+//		} catch (IOException e) {
+//			Messages.getInstance().ecrireErreur("probléme à la lecture de la requête client.");
+//			e.printStackTrace();
+//		}
+	}
+	
+	/**
+	 * @brief Cette méthode va lire une requête envoyée par le client.
+	 * @return retourne la requête sous forme de chaine de caractères.
+	 */
+	private String lireRequeteClient() {
+		byte[] donnee = new byte[1024];			// buffer de données pour stocker la requête client.
+		int marqueur;							// marqueur de position dans le buffer "donnee".
+		
+		try {
+			// tant que la socket n'est pas fermée, tenter de lire la requête client.
+			while ((marqueur = streamIn.read(donnee) )!= -1) {
+				this.requete += new String(donnee, 0, marqueur);
+				// si le message est complétement lue, retourner le resultat.
+				if (donnee[marqueur] == 0) {
+					return requete;
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

@@ -42,7 +42,8 @@ public class Serveur {
 			try {
 				Socket socService;
 				socService = socRDV.accept();
-				
+				Messages.getInstance().ecrireMessage("Nouvelle connexion d'un client, ouverture du port"
+						+ " "+socService.getPort()+" pour servir le client.");
 				// quand un nouveau client se connecte, donner le traitement au gestionnaire de client
 				// qui est un nouveau thread.
 				GestionnaireClient gestionnaireClient = new GestionnaireClient(socService);
