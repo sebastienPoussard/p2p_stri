@@ -26,10 +26,6 @@ public class MainServeur {
 		
 // CODE SAMPLE 
 
-//						// traitement du client
-//						inStream = new ObjectInputStream(socService.getInputStream());
-//						outStream = new ObjectOutputStream(socService.getOutputStream());
-//						System.out.println("Prêt pour communiquer...");
 //						try {
 //							// lire la requête envoyée par le client
 //							Object o = inStream.readObject();

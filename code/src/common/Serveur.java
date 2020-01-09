@@ -48,12 +48,10 @@ public class Serveur {
 				GestionnaireClient gestionnaireClient = new GestionnaireClient(socService);
 				Thread thread = new Thread(gestionnaireClient);
 				thread.start();
-				
 			} catch (IOException e) {
 				e.printStackTrace();
 				Messages.getInstance().ecrireErreur("La connexion d'un client à échoué");
 			}
-			
 		}
 		// fermer la socket de rdv
 		socRDV.close();
