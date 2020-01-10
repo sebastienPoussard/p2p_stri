@@ -13,8 +13,10 @@ public class MainServeur {
 		
 		// récuperer le port.
 		int port = 8080;
+		// récuperer le dossier l'adresse du dossier contenant les fichiers partagés.
+		String adresseDossierPartage = "/tmp/share";
 		// lancer le serveur.
-		Serveur serveur = new Serveur(port);
+		Serveur serveur = new Serveur(port, adresseDossierPartage);
 		try {
 			serveur.lancer();
 		} catch (IOException e) {

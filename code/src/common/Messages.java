@@ -8,6 +8,10 @@ public class Messages {
 	
 	private static Messages instance = null;
 	
+	/**
+	 * @brief singleton pour accéder à une instance unique de Messages
+	 * @return retourne une instance unique de Messages
+	 */
 	public static Messages getInstance() {
 		if (instance == null ) {
 			instance = new Messages();

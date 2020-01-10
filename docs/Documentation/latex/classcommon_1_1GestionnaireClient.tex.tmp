@@ -2,7 +2,7 @@
 \label{classcommon_1_1GestionnaireClient}\index{common.\+Gestionnaire\+Client@{common.\+Gestionnaire\+Client}}
 
 
-Gere les requêtes d\textquotesingle{}un client.  
+Cette classe gere les requêtes d\textquotesingle{}un client.  
 
 
 
@@ -16,7 +16,7 @@ Collaboration diagram for common.\+Gestionnaire\+Client\+:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classcommon_1_1GestionnaireClient_afe7da0f91f986ddc07f5888c0bc95f50}{Gestionnaire\+Client} (Socket soc\+Service)  throws I\+O\+Exception 
+\hyperlink{classcommon_1_1GestionnaireClient_a8d30da3e24ecb8f50eef67c462d57fc0}{Gestionnaire\+Client} (Socket soc\+Service, \hyperlink{classcommon_1_1GestionnaireFichier}{Gestionnaire\+Fichier} gestionnaire\+Fichier)  throws I\+O\+Exception 
 \begin{DoxyCompactList}\small\item\em constructeur de \hyperlink{classcommon_1_1GestionnaireClient}{Gestionnaire\+Client}. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcommon_1_1GestionnaireClient_ad5dd0c48cfe55073f5abcbdbf9ce9ff4}\label{classcommon_1_1GestionnaireClient_ad5dd0c48cfe55073f5abcbdbf9ce9ff4}} 
 void \hyperlink{classcommon_1_1GestionnaireClient_ad5dd0c48cfe55073f5abcbdbf9ce9ff4}{run} ()
@@ -24,14 +24,14 @@ void \hyperlink{classcommon_1_1GestionnaireClient_ad5dd0c48cfe55073f5abcbdbf9ce9
 
 
 \subsection{Detailed Description}
-Gere les requêtes d\textquotesingle{}un client. 
+Cette classe gere les requêtes d\textquotesingle{}un client. 
 
 \subsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classcommon_1_1GestionnaireClient_afe7da0f91f986ddc07f5888c0bc95f50}\label{classcommon_1_1GestionnaireClient_afe7da0f91f986ddc07f5888c0bc95f50}} 
+\mbox{\Hypertarget{classcommon_1_1GestionnaireClient_a8d30da3e24ecb8f50eef67c462d57fc0}\label{classcommon_1_1GestionnaireClient_a8d30da3e24ecb8f50eef67c462d57fc0}} 
 \index{common\+::\+Gestionnaire\+Client@{common\+::\+Gestionnaire\+Client}!Gestionnaire\+Client@{Gestionnaire\+Client}}
 \index{Gestionnaire\+Client@{Gestionnaire\+Client}!common\+::\+Gestionnaire\+Client@{common\+::\+Gestionnaire\+Client}}
 \subsubsection{\texorpdfstring{Gestionnaire\+Client()}{GestionnaireClient()}}
-{\footnotesize\ttfamily common.\+Gestionnaire\+Client.\+Gestionnaire\+Client (\begin{DoxyParamCaption}\item[{Socket}]{soc\+Service }\end{DoxyParamCaption}) throws I\+O\+Exception\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily common.\+Gestionnaire\+Client.\+Gestionnaire\+Client (\begin{DoxyParamCaption}\item[{Socket}]{soc\+Service,  }\item[{\hyperlink{classcommon_1_1GestionnaireFichier}{Gestionnaire\+Fichier}}]{gestionnaire\+Fichier }\end{DoxyParamCaption}) throws I\+O\+Exception\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 

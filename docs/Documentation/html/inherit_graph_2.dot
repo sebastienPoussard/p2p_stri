@@ -3,5 +3,5 @@ digraph "Graphical Class Hierarchy"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node0 [label="common.Messages",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classcommon_1_1Messages.html",tooltip="cette classe gère les messages d&#39;information et d&#39;erreurs "];
+  Node0 [label="common.GestionnaireFichier",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classcommon_1_1GestionnaireFichier.html",tooltip="Cette classe gere le fichier partagés. "];
 }

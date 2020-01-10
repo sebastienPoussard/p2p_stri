@@ -9,14 +9,18 @@ import java.net.Socket;
  */
 public class Serveur {
 
-	private int port;
+	private int port;										// port sur lequelle le serveur écoute.
+	private String adresseDossierPartage;					// adresse du dossier de partage.
+	private GestionnaireFichier gestionnaireFichier;		// gestionnaire de fichier.
 	
 	/**
 	 * @brief constructeur de la classe.
 	 * @param port port d'écoute du serveur.
+	 * @param adresseDossierPartage adresse du dossier qui contient les fichier partagés par le serveur.
 	 */
-	public Serveur(int port) {
+	public Serveur(int port, String adresseDossierPartage) {
 		this.port = port;
+		this.adresseDossierPartage = adresseDossierPartage;
 	}
 
 	/**
@@ -31,22 +35,21 @@ public class Serveur {
 		ServerSocket socRDV;
 		boolean continuer = true;
 		
-		// ouvre une socket de rendez-vous.
 		Messages.getInstance().ecrireMessage("Lancement du serveur...");
+		// charger le dossier de partage.
+		this.gestionnaireFichier = new GestionnaireFichier(this.adresseDossierPartage);
+		// ouvre une socket de rendez-vous.
 		socRDV = new ServerSocket(port);
-		Messages.getInstance().ecrireMessage("Le serveur écoute sur le port "+port);
-		
-		
+		Messages.getInstance().ecrireMessage("Le serveur écoute sur le port : "+port);
 		// attendre les clients
 		while(continuer) {
 			try {
-				Socket socService;
-				socService = socRDV.accept();
+				Socket socService = socRDV.accept();
 				Messages.getInstance().ecrireMessage("Nouvelle connexion d'un client, ouverture du port"
 						+ " "+socService.getPort()+" pour servir le client.");
 				// quand un nouveau client se connecte, donner le traitement au gestionnaire de client
 				// qui est un nouveau thread.
-				GestionnaireClient gestionnaireClient = new GestionnaireClient(socService);
+				GestionnaireClient gestionnaireClient = new GestionnaireClient(socService, this.gestionnaireFichier);
 				Thread thread = new Thread(gestionnaireClient);
 				thread.start();
 			} catch (IOException e) {

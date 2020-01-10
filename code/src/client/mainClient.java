@@ -15,10 +15,10 @@ public class mainClient {
 		Socket s = new Socket("localhost", 8080);
 		BufferedOutputStream b = new BufferedOutputStream(s.getOutputStream());
 		
-		b.write("coucou".getBytes());
+		b.write("LISTE".getBytes());
 		b.flush();
 		TimeUnit.SECONDS.sleep(3);
-		b.write("ça va ?".getBytes());
+		b.write("LISTE".getBytes());
 		b.flush();
 		s.close();
 		
