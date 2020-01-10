@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['gestionnaireclient',['GestionnaireClient',['../classcommon_1_1GestionnaireClient.html#a8d30da3e24ecb8f50eef67c462d57fc0',1,'common::GestionnaireClient']]],
-  ['gestionnairefichier',['GestionnaireFichier',['../classcommon_1_1GestionnaireFichier.html#a6d898651fee5646b4d6a5d795a3b1884',1,'common::GestionnaireFichier']]],
-  ['getinstance',['getInstance',['../classcommon_1_1Messages.html#a96928a28b3f958fc717fca2c076f773c',1,'common::Messages']]]
+  ['ecrireerreur',['ecrireErreur',['../classcommon_1_1Messages.html#a5d8d6f3ce6024d78171f9e49de7f6136',1,'common::Messages']]],
+  ['ecriremessage',['ecrireMessage',['../classcommon_1_1Messages.html#a6069bc66b0eda8fdd5966a7c7a8a1a0a',1,'common::Messages']]]
 ];

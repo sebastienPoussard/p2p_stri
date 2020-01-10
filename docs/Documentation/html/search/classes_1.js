@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['mainclient',['mainClient',['../classclient_1_1mainClient.html',1,'client']]],
-  ['mainserveur',['MainServeur',['../classserveur_1_1MainServeur.html',1,'serveur']]],
-  ['messages',['Messages',['../classcommon_1_1Messages.html',1,'common']]]
+  ['gestionnaireclient',['GestionnaireClient',['../classcommon_1_1GestionnaireClient.html',1,'common']]],
+  ['gestionnairefichier',['GestionnaireFichier',['../classcommon_1_1GestionnaireFichier.html',1,'common']]]
 ];

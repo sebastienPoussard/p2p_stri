@@ -1,0 +1,70 @@
+\hypertarget{classcommon_1_1Client}{}\section{common.\+Client Class Reference}
+\label{classcommon_1_1Client}\index{common.\+Client@{common.\+Client}}
+
+
+Cette classe gère une connexion à un serveur.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcommon_1_1Client_a9194e0865691059824d870b32731ece3}{Client} (String ip, int port)  throws Unknown\+Host\+Exception, I\+O\+Exception 
+\begin{DoxyCompactList}\small\item\em Constructeur de \hyperlink{classcommon_1_1Client}{Client}, connecte le client au serveur. \end{DoxyCompactList}\item 
+void \hyperlink{classcommon_1_1Client_a9e906ef13cae3b0be8c8899c2005d0d6}{traiter} (int choix)
+\begin{DoxyCompactList}\small\item\em traite la demande d\textquotesingle{}un client. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcommon_1_1Client_a1ca2b60d665eaa407e95f22633b58c59}\label{classcommon_1_1Client_a1ca2b60d665eaa407e95f22633b58c59}} 
+void {\bfseries terminer} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Cette classe gère une connexion à un serveur. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcommon_1_1Client_a9194e0865691059824d870b32731ece3}\label{classcommon_1_1Client_a9194e0865691059824d870b32731ece3}} 
+\index{common\+::\+Client@{common\+::\+Client}!Client@{Client}}
+\index{Client@{Client}!common\+::\+Client@{common\+::\+Client}}
+\subsubsection{\texorpdfstring{Client()}{Client()}}
+{\footnotesize\ttfamily common.\+Client.\+Client (\begin{DoxyParamCaption}\item[{String}]{ip,  }\item[{int}]{port }\end{DoxyParamCaption}) throws Unknown\+Host\+Exception, I\+O\+Exception\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructeur de \hyperlink{classcommon_1_1Client}{Client}, connecte le client au serveur. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ip} & IP du serveur \\
+\hline
+{\em port} & Port du serveur \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Unknown\+Host\+Exception} & Cette exception est levée quand l\textquotesingle{}adresse du serveur n\textquotesingle{}as pu être résolue. \\
+\hline
+{\em I\+O\+Exception} & Cette exception est levée en cas d\textquotesingle{}erreur à la connexion du serveur. \\
+\hline
+\end{DoxyExceptions}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcommon_1_1Client_a9e906ef13cae3b0be8c8899c2005d0d6}\label{classcommon_1_1Client_a9e906ef13cae3b0be8c8899c2005d0d6}} 
+\index{common\+::\+Client@{common\+::\+Client}!traiter@{traiter}}
+\index{traiter@{traiter}!common\+::\+Client@{common\+::\+Client}}
+\subsubsection{\texorpdfstring{traiter()}{traiter()}}
+{\footnotesize\ttfamily void common.\+Client.\+traiter (\begin{DoxyParamCaption}\item[{int}]{choix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+traite la demande d\textquotesingle{}un client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em choix} & choix du client 1 \+: lister les fichier, 2 télécharger un fichier \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Client.\+java\end{DoxyCompactItemize}

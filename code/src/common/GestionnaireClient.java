@@ -59,6 +59,7 @@ public class GestionnaireClient implements Runnable {
 		switch (requete) {
 			case "LISTE":
 				// renvoyer la liste des fichiers sur le serveur
+				Messages.getInstance().ecrireMessage("Utilisateur "+this.socService.getInetAddress()+" demande la liste des fichiers");
 				envoyerListe(this.gestionnaireFichier.listeFichiers());
 				break;
 			case "TELECARGER":
