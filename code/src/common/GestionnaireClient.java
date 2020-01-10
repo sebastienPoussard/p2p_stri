@@ -1,6 +1,7 @@
 package common;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
@@ -11,6 +12,7 @@ public class GestionnaireClient implements Runnable {
 
 	private Socket socService;							// socket de la connexion.
 	private BufferedInputStream streamIn;				// flux de requêtes client.
+	private BufferedOutputStream streamOut;				// flux de réponse du serveur au client.
 	private String requete;								// requete du client.
 	private GestionnaireFichier gestionnaireFichier;	// gestionnaire de fichier
 	
@@ -22,8 +24,9 @@ public class GestionnaireClient implements Runnable {
 	 */
 	public GestionnaireClient(Socket socService, GestionnaireFichier gestionnaireFichier) throws IOException {
 		this.socService = socService;
-		// ouvrir le flux de requête clients.
+		// ouvrir les fluxs
 		this.streamIn = new BufferedInputStream(socService.getInputStream());
+		this.streamOut = new BufferedOutputStream(socService.getOutputStream());
 		// affecter le gestionnaire de fichier
 		this.gestionnaireFichier = gestionnaireFichier;
 	}
@@ -42,7 +45,7 @@ public class GestionnaireClient implements Runnable {
 		} catch (IOException e) {
 			Messages.getInstance().ecrireErreur("Une requête client à échouée, fermeture ");
 			e.printStackTrace();
-			// fermer le thread en cas d'erreur.
+			// fermer le thread en cas d'erreur sur les socket.
 			return;
 		}
 	}
@@ -50,12 +53,13 @@ public class GestionnaireClient implements Runnable {
 	/**
 	 * @brief cette fonction répond aux demande du client.
 	 * @param requete requete demandé par l'utilisateur
+	 * @throws IOException exception levée par la méthode envoyerListe()
 	 */
-	private void servirClient(String requete) {
+	private void servirClient(String requete) throws IOException {
 		switch (requete) {
 			case "LISTE":
 				// renvoyer la liste des fichiers sur le serveur
-				Messages.getInstance().ecrireMessage(this.gestionnaireFichier.listeFichiers());
+				envoyerListe(this.gestionnaireFichier.listeFichiers());
 				break;
 			case "TELECARGER":
 				// telcharger un fichier
@@ -67,6 +71,17 @@ public class GestionnaireClient implements Runnable {
 	}
 
 	
+	/**
+	 * @brief envoie au client la liste des fichiers partagés par le serveur.
+	 * @param listeFichiers liste des fichiers (nom, taille) partagés par le serveur.
+	 * @throws IOException exception levée si on arrive pas à envoyer des données au client.
+	 */
+	private void envoyerListe(String listeFichiers) throws IOException {
+		this.streamOut.write(listeFichiers.getBytes());
+		this.streamOut.flush();
+	}
+
+
 	/**
 	 * @brief Cette méthode va lire une requête envoyée par le client.
 	 * @return retourne la requête sous forme de chaine de caractères.

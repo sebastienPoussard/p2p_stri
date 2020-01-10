@@ -1,31 +1,57 @@
 package client;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.concurrent.TimeUnit;
 
-public class mainClient {
+import common.Messages;
 
+public class mainClient {
+	
 	public static void main(String[] args) throws UnknownHostException, IOException, InterruptedException {
 		
 		// TEST DE CLIENT POUR VALIDER FONCTIONNEMENT DU SERVEUR
 		
 		Socket s = new Socket("localhost", 8080);
 		BufferedOutputStream b = new BufferedOutputStream(s.getOutputStream());
+		BufferedInputStream ib = new BufferedInputStream(s.getInputStream());
 		
 		b.write("LISTE".getBytes());
 		b.flush();
 		TimeUnit.SECONDS.sleep(3);
-		b.write("LISTE".getBytes());
-		b.flush();
+		
+		byte[] donnee = new byte[1024];			// buffer de données pour stocker la requête client.
+		int marqueur;							// marqueur de position dans le buffer "donnee".
+		String resultat = "";
+		
+		// tant que la socket n'est pas fermée, tenter de lire la requête client.
+		while ((marqueur = ib.read(donnee) )!= -1) {
+			resultat += new String(donnee, 0, marqueur);
+			// si le message est complétement lue, retourner le resultat.
+			if (donnee[marqueur] == 0) {
+				break;
+			}
+		}
+		// si la connexion est rompue, fermer la socket.
+		if (marqueur == -1) {
+			s.close();
+		}
+		Messages.getInstance().ecrireMessage(resultat);
+				
+
 		s.close();
 		
 		// FIN TEST
 		
 	}
+	
+
 }
+
+
 		
 		
 // CODE SAMPLE 
