@@ -15,12 +15,12 @@ public class MainServeur {
 		int port = 8080;
 		// récuperer le dossier l'adresse du dossier contenant les fichiers partagés.
 		String adresseDossierPartage = "/tmp/share";
+		String adresseDossierTelechargement = "/tmp/dowloads";
 		// lancer le serveur.
 		Serveur serveur = new Serveur(port, adresseDossierPartage);
 		try {
 			serveur.lancer();
 		} catch (IOException e) {
-			e.printStackTrace();
 			Messages.getInstance().ecrireErreur("Echec du lancement du serveur, le port est peut être déjà utilisé");
 		}
 	}

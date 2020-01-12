@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 
 import common.Client;
+import common.GestionnaireFichier;
 import common.Messages;
 
 public class mainClient {
@@ -12,17 +13,22 @@ public class mainClient {
 	public static void main(String[] args) {
 		
 		// récuperer IP et PORT
-		String ip = "localhost";		// IP du serveur.
-		int port = 8080;				// Port du serveur.
-		Client client = null;					// une connexion client au serveur.
+		String ip = "localhost";								// IP du serveur.
+		int port = 8080;										// Port du serveur.
+		Client client = null;									// une connexion client au serveur.
+		String adresseDossierTelechargements = "/tmp/rcv/";		// adresse du dossier qui va recevoir les fichiers du serveur.
+		GestionnaireFichier gestionnaireFichier;				// gestionnaire de fichier
+		
+		// ouvrir le gestionnaire de fichier 
+		gestionnaireFichier = new GestionnaireFichier(null, adresseDossierTelechargements);
 		
 		// connecter le client au serveur
 		try {
-			client = new Client(ip, port);
+			client = new Client(ip, port, gestionnaireFichier);
 			Messages.getInstance().ecrireMessage("Connexion au serveur "+ip+":"+port+" avec succès");
 			// traiter les demandes du client.
 			Scanner scanner = new Scanner(System.in);
-			int choix;
+			String choix;
 			// tant que l'utilisateur ne choisit pas de quitter l'application, récuperer son choix et effectuer le traitement
 			do {
 				Messages.getInstance().ecrireMessage("#################### MENU ##########################");
@@ -30,15 +36,13 @@ public class mainClient {
 				Messages.getInstance().ecrireMessage("# 2 <nom_fichier> : telecharger le fichier         #");
 				Messages.getInstance().ecrireMessage("# 3               : quitter le programme           #");
 				Messages.getInstance().ecrireMessage("####################################################");
-				choix = scanner.nextInt();
+				choix = scanner.nextLine();
 				client.traiter(choix);
-			} while  (choix != 3);
+			} while  (!choix.equals("3"));
 		} catch (UnknownHostException e) {
 			Messages.getInstance().ecrireErreur("Connexion impossible au serveur, l'adresse serveur n'a pas pu être résolue");
-			e.printStackTrace();
 		} catch (IOException e) {
 			Messages.getInstance().ecrireErreur("Problème à la connexion au serveur.");
-			e.printStackTrace();
 		}
 		client.terminer();
 		Messages.getInstance().ecrireMessage("Client terminé.");

@@ -4,20 +4,29 @@ import java.io.File;
 import java.text.DecimalFormat;
 
 /**
- * @brief Cette classe gere le fichier partagés. 
+ * @brief Cette classe gere le dossier contenant les fichiers partagés ainsi que le dossier de téléchargement.
  */
 public class GestionnaireFichier {
 	
-	File dossierDePartage;			// dossier contenat les fichiers partagés
+	private File dossierDePartage;			// dossier contenant les fichiers partagés.
+	private File dossierDeTelechargements;	// dossier ocntenant les fichiers téléchargés.
 	
 	/**
 	 * @brief constructeur de GestionnaireFichier
-	 * @param cheminFichiers chemin complet vers le dossiers contenant les fichiers partagés.
+	 * @param cheminDossierPartages chemin complet vers le dossiers contenant les fichiers partagés.
 	 * accepte uniquement un chemin Linux car Linux > Windows.
 	 */
-	public GestionnaireFichier(String cheminFichiers) {
-		this.dossierDePartage = new File(cheminFichiers);
-		Messages.getInstance().ecrireMessage("Le serveur partage le dossier : "+cheminFichiers);
+	public GestionnaireFichier(String cheminDossierPartages, String cheminDossierTelechargements) {
+		// pour l'instant (client et serveur sont séparés) on fait les construction en fonction de si
+		// le serveur ou le client requpete la création de l'objet.
+		if (cheminDossierPartages != null ) {
+			this.dossierDePartage = new File(cheminDossierPartages);
+			Messages.getInstance().ecrireMessage("Le serveur partage le dossier : "+cheminDossierPartages);
+		}
+		if (cheminDossierTelechargements != null ) {
+			this.dossierDeTelechargements = new File(cheminDossierTelechargements);
+			Messages.getInstance().ecrireMessage("dossier de téléchargement : "+cheminDossierTelechargements);
+		}
 	}
 	
 	

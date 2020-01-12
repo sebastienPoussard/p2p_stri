@@ -8,24 +8,24 @@ Cette classe gère une connexion à un serveur.
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classcommon_1_1Client_a9194e0865691059824d870b32731ece3}{Client} (String ip, int port)  throws Unknown\+Host\+Exception, I\+O\+Exception 
+\hyperlink{classcommon_1_1Client_aee3a57bd9c5b580429fe227490f32de2}{Client} (String ip, int port, \hyperlink{classcommon_1_1GestionnaireFichier}{Gestionnaire\+Fichier} gestionnaire\+Fichier)  throws Unknown\+Host\+Exception, I\+O\+Exception 
 \begin{DoxyCompactList}\small\item\em Constructeur de \hyperlink{classcommon_1_1Client}{Client}, connecte le client au serveur. \end{DoxyCompactList}\item 
-void \hyperlink{classcommon_1_1Client_a9e906ef13cae3b0be8c8899c2005d0d6}{traiter} (int choix)
+void \hyperlink{classcommon_1_1Client_aed8cc42e2cceb83b277c5776c8c314ec}{traiter} (String choix)
 \begin{DoxyCompactList}\small\item\em traite la demande d\textquotesingle{}un client. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcommon_1_1Client_a1ca2b60d665eaa407e95f22633b58c59}\label{classcommon_1_1Client_a1ca2b60d665eaa407e95f22633b58c59}} 
-void {\bfseries terminer} ()
-\end{DoxyCompactItemize}
+void \hyperlink{classcommon_1_1Client_a1ca2b60d665eaa407e95f22633b58c59}{terminer} ()
+\begin{DoxyCompactList}\small\item\em Cette méthode permet de termier la connexion et de fermer la socket. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 Cette classe gère une connexion à un serveur. 
 
 \subsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classcommon_1_1Client_a9194e0865691059824d870b32731ece3}\label{classcommon_1_1Client_a9194e0865691059824d870b32731ece3}} 
+\mbox{\Hypertarget{classcommon_1_1Client_aee3a57bd9c5b580429fe227490f32de2}\label{classcommon_1_1Client_aee3a57bd9c5b580429fe227490f32de2}} 
 \index{common\+::\+Client@{common\+::\+Client}!Client@{Client}}
 \index{Client@{Client}!common\+::\+Client@{common\+::\+Client}}
 \subsubsection{\texorpdfstring{Client()}{Client()}}
-{\footnotesize\ttfamily common.\+Client.\+Client (\begin{DoxyParamCaption}\item[{String}]{ip,  }\item[{int}]{port }\end{DoxyParamCaption}) throws Unknown\+Host\+Exception, I\+O\+Exception\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily common.\+Client.\+Client (\begin{DoxyParamCaption}\item[{String}]{ip,  }\item[{int}]{port,  }\item[{\hyperlink{classcommon_1_1GestionnaireFichier}{Gestionnaire\+Fichier}}]{gestionnaire\+Fichier }\end{DoxyParamCaption}) throws Unknown\+Host\+Exception, I\+O\+Exception\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -48,11 +48,11 @@ Constructeur de \hyperlink{classcommon_1_1Client}{Client}, connecte le client au
 
 
 \subsection{Member Function Documentation}
-\mbox{\Hypertarget{classcommon_1_1Client_a9e906ef13cae3b0be8c8899c2005d0d6}\label{classcommon_1_1Client_a9e906ef13cae3b0be8c8899c2005d0d6}} 
+\mbox{\Hypertarget{classcommon_1_1Client_aed8cc42e2cceb83b277c5776c8c314ec}\label{classcommon_1_1Client_aed8cc42e2cceb83b277c5776c8c314ec}} 
 \index{common\+::\+Client@{common\+::\+Client}!traiter@{traiter}}
 \index{traiter@{traiter}!common\+::\+Client@{common\+::\+Client}}
 \subsubsection{\texorpdfstring{traiter()}{traiter()}}
-{\footnotesize\ttfamily void common.\+Client.\+traiter (\begin{DoxyParamCaption}\item[{int}]{choix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void common.\+Client.\+traiter (\begin{DoxyParamCaption}\item[{String}]{choix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 

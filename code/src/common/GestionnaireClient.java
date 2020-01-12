@@ -44,7 +44,6 @@ public class GestionnaireClient implements Runnable {
 			}
 		} catch (IOException e) {
 			Messages.getInstance().ecrireErreur("Une requête client à échouée, fermeture ");
-			e.printStackTrace();
 			// fermer le thread en cas d'erreur sur les socket.
 			return;
 		}

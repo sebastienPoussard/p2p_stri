@@ -37,7 +37,7 @@ public class Serveur {
 		
 		Messages.getInstance().ecrireMessage("Lancement du serveur...");
 		// charger le dossier de partage.
-		this.gestionnaireFichier = new GestionnaireFichier(this.adresseDossierPartage);
+		this.gestionnaireFichier = new GestionnaireFichier(this.adresseDossierPartage, null);
 		// ouvre une socket de rendez-vous.
 		socRDV = new ServerSocket(port);
 		Messages.getInstance().ecrireMessage("Le serveur écoute sur le port : "+port);
@@ -53,7 +53,6 @@ public class Serveur {
 				Thread thread = new Thread(gestionnaireClient);
 				thread.start();
 			} catch (IOException e) {
-				e.printStackTrace();
 				Messages.getInstance().ecrireErreur("La connexion d'un client à échoué");
 			}
 		}
