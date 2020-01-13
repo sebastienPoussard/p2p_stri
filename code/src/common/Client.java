@@ -2,6 +2,8 @@ package common;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -58,12 +60,37 @@ public class Client {
 	 * @param nomFichier nom du fichier à télécharger.
 	 */
 	private void telecharger(String nomFichier) {
-		Messages.getInstance().ecrireMessage("fichier à télécharger : \""+nomFichier+"\"");
+		Messages.getInstance().ecrireMessage("Téléchargement du fichier : \""+nomFichier+"\" ...");
+		// envoyer l'instruction au serveur.
 		try {
-			this.streamOut.write(("TELECHARGER"+nomFichier).getBytes());
+			this.streamOut.write(("TELECHARGER "+nomFichier).getBytes());
+			this.streamOut.flush();
 		} catch (IOException e) {
 			Messages.getInstance().ecrireErreur("echec à l'envoie de la commande TELECHARGER");
 		}
+		// créer le fichier en local.
+		FileOutputStream streamFichier = null;
+		try {
+			streamFichier = this.gestionnaireFichier.creerFichier(nomFichier);
+		} catch (FileNotFoundException e) {
+			Messages.getInstance().ecrireErreur("erreur à la création du fichier dans le dossier téléchargement "+nomFichier);
+		}
+		// télécharger le fichier.
+		int marqueur;						// marqueur de positon dans le buffer de "données".
+		byte[] donnee = new byte[1024];		// buffer de données pour stocker la réponse du serveur.
+		try {
+			while ((marqueur = this.streamIn.read(donnee)) != -1) {
+				streamFichier.write(donnee);
+			}
+		} catch (IOException e) {
+			Messages.getInstance().ecrireErreur("erreur pendant le téléchargement du fichier.");
+		}
+		try {
+			streamFichier.close();
+		} catch (IOException e) {
+			Messages.getInstance().ecrireErreur("le fichier télécharger n'as pas été correctement fermé.");
+		}
+		Messages.getInstance().ecrireMessage("Téléchargement de "+nomFichier+" terminé !");
 	}
 
 	/**

@@ -13,11 +13,11 @@ public class mainClient {
 	public static void main(String[] args) {
 		
 		// récuperer IP et PORT
-		String ip = "localhost";								// IP du serveur.
-		int port = 8080;										// Port du serveur.
-		Client client = null;									// une connexion client au serveur.
-		String adresseDossierTelechargements = "/tmp/rcv/";		// adresse du dossier qui va recevoir les fichiers du serveur.
-		GestionnaireFichier gestionnaireFichier;				// gestionnaire de fichier
+		String ip = "localhost";										// IP du serveur.
+		int port = 8080;												// Port du serveur.
+		Client client = null;											// une connexion client au serveur.
+		String adresseDossierTelechargements = "/tmp/downloads/";		// adresse du dossier qui va recevoir les fichiers du serveur.
+		GestionnaireFichier gestionnaireFichier;						// gestionnaire de fichier
 		
 		// ouvrir le gestionnaire de fichier 
 		gestionnaireFichier = new GestionnaireFichier(null, adresseDossierTelechargements);

@@ -83,6 +83,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7189336732591523f7490df6a16cae34"><td class="memItemLeft" align="right" valign="top"><a id="a7189336732591523f7490df6a16cae34"></a>
 String&#160;</td><td class="memItemRight" valign="bottom"><b>listeFichiers</b> ()</td></tr>
 <tr class="separator:a7189336732591523f7490df6a16cae34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55da4571d743ce9ee31a96bd04de9aa4"><td class="memItemLeft" align="right" valign="top">FileInputStream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommon_1_1GestionnaireFichier.html#a55da4571d743ce9ee31a96bd04de9aa4">rechercherFichier</a> (String nomFichier)  throws FileNotFoundException </td></tr>
+<tr class="memdesc:a55da4571d743ce9ee31a96bd04de9aa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">cette méthode permet d'obtenir le stream du fichier à partir d'un nom de fichier.  <a href="#a55da4571d743ce9ee31a96bd04de9aa4">More...</a><br /></td></tr>
+<tr class="separator:a55da4571d743ce9ee31a96bd04de9aa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7aa94ceed1766208e16cd4d3ce8465b7"><td class="memItemLeft" align="right" valign="top">FileOutputStream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommon_1_1GestionnaireFichier.html#a7aa94ceed1766208e16cd4d3ce8465b7">creerFichier</a> (String nomFichier)  throws FileNotFoundException </td></tr>
+<tr class="memdesc:a7aa94ceed1766208e16cd4d3ce8465b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">créer un nouveau fichier dans le dossier de téléchargement.  <a href="#a7aa94ceed1766208e16cd4d3ce8465b7">More...</a><br /></td></tr>
+<tr class="separator:a7aa94ceed1766208e16cd4d3ce8465b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Cette classe gere le dossier contenant les fichiers partagés ainsi que le dossier de téléchargement. </p>
@@ -125,6 +131,89 @@ String&#160;</td><td class="memItemRight" valign="bottom"><b>listeFichiers</b> (
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cheminDossierPartages</td><td>chemin complet vers le dossiers contenant les fichiers partagés. accepte uniquement un chemin Linux car Linux &gt; Windows. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7aa94ceed1766208e16cd4d3ce8465b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7aa94ceed1766208e16cd4d3ce8465b7">&#9670;&nbsp;</a></span>creerFichier()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FileOutputStream common.GestionnaireFichier.creerFichier </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>nomFichier</em></td><td>)</td>
+          <td> throws FileNotFoundException</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>créer un nouveau fichier dans le dossier de téléchargement. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nomFichier</td><td>le nom du fichier créer. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>renvoie le stream du fichier créer. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">FileNotFoundException</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a55da4571d743ce9ee31a96bd04de9aa4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55da4571d743ce9ee31a96bd04de9aa4">&#9670;&nbsp;</a></span>rechercherFichier()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FileInputStream common.GestionnaireFichier.rechercherFichier </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>nomFichier</em></td><td>)</td>
+          <td> throws FileNotFoundException</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>cette méthode permet d'obtenir le stream du fichier à partir d'un nom de fichier. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nomFichier</td><td>nom du fihier que l'on souhaite </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>renvoie null si on ne trouve pas le fichier. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">FileNotFoundException</td><td>renvoie cette exception si le fichier demandé d'exist pas. </td></tr>
   </table>
   </dd>
 </dl>

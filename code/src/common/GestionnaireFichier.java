@@ -1,6 +1,9 @@
 package common;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.text.DecimalFormat;
 
 /**
@@ -52,7 +55,33 @@ public class GestionnaireFichier {
 		}
 		return resultat;
 	}
+
+	/**
+	 * @brief cette méthode permet d'obtenir le stream du fichier à partir d'un nom de fichier.
+	 * @param nomFichier nom du fihier que l'on souhaite 
+	 * @return	renvoie null si on ne trouve pas le fichier.
+	 * @throws FileNotFoundException renvoie cette exception si le fichier demandé d'exist pas.
+	 */
+	public FileInputStream rechercherFichier(String nomFichier) throws FileNotFoundException {
+		
+		File[] listeDesFichiers = this.dossierDePartage.listFiles();
+		for (File fichier : listeDesFichiers) {
+			if (fichier.getName().equals(nomFichier)) {
+					return new FileInputStream(fichier);
+			}
+		}
+		throw new FileNotFoundException();
+	}
 	
+	/**
+	 * @brief créer un nouveau fichier dans le dossier de téléchargement.
+	 * @param nomFichier le nom du fichier créer.
+	 * @return renvoie le stream du fichier créer.
+	 * @throws FileNotFoundException 
+	 */
+	public FileOutputStream creerFichier(String nomFichier) throws FileNotFoundException {
+		return new FileOutputStream(new File(this.dossierDeTelechargements.getAbsolutePath()+"/"+nomFichier));
+	}
 	
 	
 	

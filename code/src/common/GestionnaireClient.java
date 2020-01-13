@@ -2,6 +2,9 @@ package common;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
@@ -15,7 +18,6 @@ public class GestionnaireClient implements Runnable {
 	private BufferedOutputStream streamOut;				// flux de réponse du serveur au client.
 	private String requete;								// requete du client.
 	private GestionnaireFichier gestionnaireFichier;	// gestionnaire de fichier
-	
 	
 	/**
 	 * @brief constructeur de GestionnaireClient.
@@ -40,6 +42,7 @@ public class GestionnaireClient implements Runnable {
 		try {
 			// tant que le client souhaite un service et que la connexion est ouverte.
 			while ((this.requete = lireRequeteClient()) != "STOP" && !this.socService.isClosed()) {
+				Messages.getInstance().ecrireMessage("requête reçue : "+this.requete);
 				servirClient(this.requete);
 			}
 		} catch (IOException e) {
@@ -55,32 +58,52 @@ public class GestionnaireClient implements Runnable {
 	 * @throws IOException exception levée par la méthode envoyerListe()
 	 */
 	private void servirClient(String requete) throws IOException {
-		switch (requete) {
-			case "LISTE":
-				// renvoyer la liste des fichiers sur le serveur
-				Messages.getInstance().ecrireMessage("Utilisateur "+this.socService.getInetAddress()+" demande la liste des fichiers");
-				envoyerListe(this.gestionnaireFichier.listeFichiers());
-				break;
-			case "TELECARGER":
-				// telcharger un fichier
-				break;
-			default:
-				Messages.getInstance().ecrireErreur("La requête client ne correspond pas au bon standard"
-						+ ": LISTE, TELECHARGER ");
+		// envoyer la liste des fichiers sur le serveur
+		if(requete.equals("LISTE")) {
+			Messages.getInstance().ecrireMessage("Utilisateur "+this.socService.getInetAddress()+" demande la liste des fichiers");
+			this.streamOut.write(this.gestionnaireFichier.listeFichiers().getBytes());
+			this.streamOut.flush();
+			
+		// envoyer le fichier
+		} else if (requete.substring(0, 11).equals("TELECHARGER")) {
+			Messages.getInstance().ecrireMessage("Utilisateur "+this.socService.getInetAddress()+" demande "
+					+ "à télécharger le fichier : "+requete.substring(12));
+			try {
+				envoyerFichier(this.gestionnaireFichier.rechercherFichier(requete.substring(12)));
+				Messages.getInstance().ecrireMessage("Fichier "+requete.substring(12)+" envoyé");
+			} catch (FileNotFoundException e) {
+				Messages.getInstance().ecrireErreur("Le fichier à partager "+requete.substring(12)+" n'a pas été trouvé");
+			}
+		} else {
+			Messages.getInstance().ecrireErreur("La requête client ne correspond pas au bon standard"
+					+ ": LISTE, TELECHARGER ");
 		}
 	}
 
-	
 	/**
-	 * @brief envoie au client la liste des fichiers partagés par le serveur.
-	 * @param listeFichiers liste des fichiers (nom, taille) partagés par le serveur.
-	 * @throws IOException exception levée si on arrive pas à envoyer des données au client.
+	 * @brief permet d'envoyer le contenu d'un stream de fichier sur le stream de la socket client.
+	 * @param streamFichier stream d'un fichier.
 	 */
-	private void envoyerListe(String listeFichiers) throws IOException {
-		this.streamOut.write(listeFichiers.getBytes());
-		this.streamOut.flush();
+	private void envoyerFichier(FileInputStream streamFichier) {
+		int compteur;
+		byte[] buffer = new byte[1024];
+		try {
+			// si le stream du fichier est null, c'est à dire si le fichier n'à pas été trouvé par le gestionnaire
+			// de fichier, envoyer une réponse d'erreur au client.
+			if (streamFichier == null ) {
+				this.streamOut.write("FICHIER INEXISTANT".getBytes());
+				this.streamOut.flush();
+			} else {
+				// sinon envoyer le fichier
+				while ((compteur = streamFichier.read(buffer) ) > 0 ) {
+					this.streamOut.write(buffer);
+				}
+				this.streamOut.flush();
+			}
+		} catch (IOException e) {
+			Messages.getInstance().ecrireErreur("echec à l'envoie du fichier au client.");
+		}
 	}
-
 
 	/**
 	 * @brief Cette méthode va lire une requête envoyée par le client.
