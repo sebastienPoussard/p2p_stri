@@ -79,8 +79,12 @@ public class Client {
 		int marqueur;						// marqueur de positon dans le buffer de "données".
 		byte[] donnee = new byte[1024];		// buffer de données pour stocker la réponse du serveur.
 		try {
-			while ((marqueur = this.streamIn.read(donnee)) != -1) {
-				streamFichier.write(donnee);
+			while ((marqueur = this.streamIn.read(donnee)) > 0) {
+				streamFichier.write(donnee, 0, marqueur);
+				// si c'est le dernier bloc, sortir de la boucle
+				if (marqueur < 1024) {
+					break;
+				}
 			}
 		} catch (IOException e) {
 			Messages.getInstance().ecrireErreur("erreur pendant le téléchargement du fichier.");

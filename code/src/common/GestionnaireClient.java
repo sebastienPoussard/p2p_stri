@@ -85,7 +85,7 @@ public class GestionnaireClient implements Runnable {
 	 * @param streamFichier stream d'un fichier.
 	 */
 	private void envoyerFichier(FileInputStream streamFichier) {
-		int compteur;
+		int taille;
 		byte[] buffer = new byte[1024];
 		try {
 			// si le stream du fichier est null, c'est à dire si le fichier n'à pas été trouvé par le gestionnaire
@@ -94,9 +94,9 @@ public class GestionnaireClient implements Runnable {
 				this.streamOut.write("FICHIER INEXISTANT".getBytes());
 				this.streamOut.flush();
 			} else {
-				// sinon envoyer le fichier
-				while ((compteur = streamFichier.read(buffer) ) > 0 ) {
-					this.streamOut.write(buffer);
+				// sinon envoyer le fichier par blocs
+				while ((taille = streamFichier.read(buffer) ) > 0 ) {
+					this.streamOut.write(buffer, 0, taille);
 				}
 				this.streamOut.flush();
 			}
