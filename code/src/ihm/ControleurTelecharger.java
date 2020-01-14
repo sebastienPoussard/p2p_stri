@@ -8,5 +8,12 @@ public class ControleurTelecharger extends ControleurFX{
 	@FXML
 	private Button deconnexion;
 	
+	@FXML
+	public void clicDeconnexion() {
+		//Deconnexion serveur
+		
+		//redirection
+		this.retourPageAccueil();
+	}
 	
 }

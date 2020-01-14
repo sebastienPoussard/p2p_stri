@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="661.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="661.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ihm.ControleurTelecharger">
    <children>
       <ScrollPane layoutX="16.0" layoutY="316.0" prefHeight="79.0" prefWidth="631.0">
         <content>
@@ -23,7 +23,7 @@
             </Text>
          </children>
       </Pane>
-      <Button layoutX="14.0" layoutY="412.0" mnemonicParsing="false" text="Déconnexion" />
+      <Button layoutX="14.0" layoutY="412.0" mnemonicParsing="false" onAction="#clicDeconnexion" text="Déconnexion" />
       <Text layoutX="14.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom serveur" wrappingWidth="336.0">
          <font>
             <Font size="19.0" />

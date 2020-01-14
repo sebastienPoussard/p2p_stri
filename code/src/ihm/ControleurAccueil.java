@@ -18,5 +18,12 @@ public class ControleurAccueil extends ControleurFX{
 	@FXML
 	private Button reset;
 	
+	@FXML
+	public void clicConnexion() {
+		//connexion serveur
+		
+		//Redirection
+		this.mainApp.showPage("telecharger");
+	}
 
 }

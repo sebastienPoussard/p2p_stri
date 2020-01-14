@@ -26,7 +26,7 @@
          </font>
       </Text>
       <Button fx:id="reset" layoutX="173.0" layoutY="266.0" mnemonicParsing="false" text="Reset" />
-      <Button fx:id="connexion" layoutX="382.0" layoutY="266.0" mnemonicParsing="false" text="Connexion" />
+      <Button fx:id="connexion" layoutX="382.0" layoutY="266.0" mnemonicParsing="false" onAction="#clicConnexion" text="Connexion" />
       <Button layoutX="14.0" layoutY="412.0" mnemonicParsing="false" text="About us" />
    </children>
 </AnchorPane>
