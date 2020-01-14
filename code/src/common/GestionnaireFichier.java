@@ -77,10 +77,34 @@ public class GestionnaireFichier {
 	 * @brief créer un nouveau fichier dans le dossier de téléchargement.
 	 * @param nomFichier le nom du fichier créer.
 	 * @return renvoie le stream du fichier créer.
-	 * @throws FileNotFoundException 
+	 * @throws FileNotFoundException renvoie une erreur si la création du fichier à échoué.
+	 * @return renvoie le flux de donnée pour écrire dans le fichier.
 	 */
 	public FileOutputStream creerFichier(String nomFichier) throws FileNotFoundException {
 		return new FileOutputStream(new File(this.dossierDeTelechargements.getAbsolutePath()+"/"+nomFichier));
+	}
+	
+	/**
+	 * @brief créer un nouveau fichier temporaire dans le dossier temporaire du fichier.
+	 * @param nomFichier nom du fichier téléchargé en bloc à créer.
+	 * @param blocDebut numéro du premier bloc.
+	 * @param blocFin numéro du dernier bloc.
+	 * @throws FileNotFoundException renvoie une erreur si la création du fichier à échoué.
+	 * @return renvoie le flux de donnée pour écrire dans le fichier.
+	 */
+	public FileOutputStream creerFichierTemporaire(String nomFichier, int blocDebut, int blocFin) throws FileNotFoundException{
+		return new FileOutputStream(new File(this.dossierDeTelechargements.getAbsoluteFile()+"/temp_"+blocDebut+"-"+blocFin));
+	}
+	
+	/**
+	 * @brief créer le dossier temporaire pour acceuillir les fichiers temporaires du téléchargement en plusieurs blocs.
+	 * @param nomFichier nom du fichier qui sera télécharger en plusieurs blocs.
+	 */
+	public void creerDossierTemporaire(String nomFichier) {
+		File dossierTemporaire = new File(this.dossierDeTelechargements.getAbsolutePath()+"/temp_"+nomFichier);
+		if (!dossierTemporaire.exists()) {
+			dossierTemporaire.mkdir();
+		}
 	}
 	
 	

@@ -1,0 +1,93 @@
+\hypertarget{classrequete_1_1Requete}{}\section{requete.\+Requete Class Reference}
+\label{classrequete_1_1Requete}\index{requete.\+Requete@{requete.\+Requete}}
+
+
+classe abstraite définissant une requête d\textquotesingle{}un client au serveur.  
+
+
+
+
+Inheritance diagram for requete.\+Requete\+:
+% FIG 0
+
+
+Collaboration diagram for requete.\+Requete\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classrequete_1_1Requete_a6ed8eefb9335b37f2348f5c323a46b53}{Requete} (String adresse\+Serveur)
+\begin{DoxyCompactList}\small\item\em constructeur de \hyperlink{classrequete_1_1Requete}{Requete}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classrequete_1_1Requete_a919081397ea25302286d7077e3ece323}\label{classrequete_1_1Requete_a919081397ea25302286d7077e3ece323}} 
+void \hyperlink{classrequete_1_1Requete_a919081397ea25302286d7077e3ece323}{run} ()
+\begin{DoxyCompactList}\small\item\em methode pour lancer le thread. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classrequete_1_1Requete_a4adc60edaa26be2f8d9b4e4b0a1377cd}{envoyer\+Requete} (String requete)
+\begin{DoxyCompactList}\small\item\em envoie une requête au serveur. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classrequete_1_1Requete_a139183d42763866d351b3569c858b169}\label{classrequete_1_1Requete_a139183d42763866d351b3569c858b169}} 
+void \hyperlink{classrequete_1_1Requete_a139183d42763866d351b3569c858b169}{terminer} ()
+\begin{DoxyCompactList}\small\item\em fermer les differents éléments du Thread. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classrequete_1_1Requete_ac459a04e0e05713cf40d2810141730f1}\label{classrequete_1_1Requete_ac459a04e0e05713cf40d2810141730f1}} 
+String {\bfseries ip\+Serveur}
+\item 
+\mbox{\Hypertarget{classrequete_1_1Requete_a09be09377c9ce1174e027c9bc852c0ab}\label{classrequete_1_1Requete_a09be09377c9ce1174e027c9bc852c0ab}} 
+int {\bfseries port\+Serveur}
+\item 
+\mbox{\Hypertarget{classrequete_1_1Requete_a487b0b95bcb22cd79e17b8ba2756daa6}\label{classrequete_1_1Requete_a487b0b95bcb22cd79e17b8ba2756daa6}} 
+Buffered\+Input\+Stream {\bfseries in\+Stream}
+\item 
+\mbox{\Hypertarget{classrequete_1_1Requete_aec10f73f1c9edcba8a6aeffbd9dc932b}\label{classrequete_1_1Requete_aec10f73f1c9edcba8a6aeffbd9dc932b}} 
+Buffered\+Output\+Stream {\bfseries out\+Stream}
+\item 
+\mbox{\Hypertarget{classrequete_1_1Requete_a8bbfc163d41bdf7d3ed614e0341a1bc8}\label{classrequete_1_1Requete_a8bbfc163d41bdf7d3ed614e0341a1bc8}} 
+Socket {\bfseries socket}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+classe abstraite définissant une requête d\textquotesingle{}un client au serveur. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classrequete_1_1Requete_a6ed8eefb9335b37f2348f5c323a46b53}\label{classrequete_1_1Requete_a6ed8eefb9335b37f2348f5c323a46b53}} 
+\index{requete\+::\+Requete@{requete\+::\+Requete}!Requete@{Requete}}
+\index{Requete@{Requete}!requete\+::\+Requete@{requete\+::\+Requete}}
+\subsubsection{\texorpdfstring{Requete()}{Requete()}}
+{\footnotesize\ttfamily requete.\+Requete.\+Requete (\begin{DoxyParamCaption}\item[{String}]{adresse\+Serveur }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructeur de \hyperlink{classrequete_1_1Requete}{Requete}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em adresse\+Serveur} & adresse et port du serveur de la forme \char`\"{}\+I\+P\+:\+P\+O\+R\+T\char`\"{}. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classrequete_1_1Requete_a4adc60edaa26be2f8d9b4e4b0a1377cd}\label{classrequete_1_1Requete_a4adc60edaa26be2f8d9b4e4b0a1377cd}} 
+\index{requete\+::\+Requete@{requete\+::\+Requete}!envoyer\+Requete@{envoyer\+Requete}}
+\index{envoyer\+Requete@{envoyer\+Requete}!requete\+::\+Requete@{requete\+::\+Requete}}
+\subsubsection{\texorpdfstring{envoyer\+Requete()}{envoyerRequete()}}
+{\footnotesize\ttfamily void requete.\+Requete.\+envoyer\+Requete (\begin{DoxyParamCaption}\item[{String}]{requete }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+envoie une requête au serveur. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em requete} & requete envoyé au serveur. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Requete.\+java\end{DoxyCompactItemize}
