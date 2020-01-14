@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['ouvrirsocketrdv',['ouvrirSocketRDV',['../classcommon_1_1Socket.html#a921df60f921f6064dfc1b293bcf955cf',1,'common::Socket']]]
+  ['client',['Client',['../classcommon_1_1Client.html#aee3a57bd9c5b580429fe227490f32de2',1,'common::Client']]],
+  ['creerfichier',['creerFichier',['../classcommon_1_1GestionnaireFichier.html#a7aa94ceed1766208e16cd4d3ce8465b7',1,'common::GestionnaireFichier']]]
 ];

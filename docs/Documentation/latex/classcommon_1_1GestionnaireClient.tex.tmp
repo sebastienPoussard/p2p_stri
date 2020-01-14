@@ -1,0 +1,54 @@
+\hypertarget{classcommon_1_1GestionnaireClient}{}\section{common.\+Gestionnaire\+Client Class Reference}
+\label{classcommon_1_1GestionnaireClient}\index{common.\+Gestionnaire\+Client@{common.\+Gestionnaire\+Client}}
+
+
+Cette classe gere les requêtes d\textquotesingle{}un client.  
+
+
+
+
+Inheritance diagram for common.\+Gestionnaire\+Client\+:
+% FIG 0
+
+
+Collaboration diagram for common.\+Gestionnaire\+Client\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcommon_1_1GestionnaireClient_a8d30da3e24ecb8f50eef67c462d57fc0}{Gestionnaire\+Client} (Socket soc\+Service, \hyperlink{classcommon_1_1GestionnaireFichier}{Gestionnaire\+Fichier} gestionnaire\+Fichier)  throws I\+O\+Exception 
+\begin{DoxyCompactList}\small\item\em constructeur de \hyperlink{classcommon_1_1GestionnaireClient}{Gestionnaire\+Client}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcommon_1_1GestionnaireClient_ad5dd0c48cfe55073f5abcbdbf9ce9ff4}\label{classcommon_1_1GestionnaireClient_ad5dd0c48cfe55073f5abcbdbf9ce9ff4}} 
+void \hyperlink{classcommon_1_1GestionnaireClient_ad5dd0c48cfe55073f5abcbdbf9ce9ff4}{run} ()
+\begin{DoxyCompactList}\small\item\em methode pour lancer le traitement des requêtes d\textquotesingle{}un client \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Cette classe gere les requêtes d\textquotesingle{}un client. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcommon_1_1GestionnaireClient_a8d30da3e24ecb8f50eef67c462d57fc0}\label{classcommon_1_1GestionnaireClient_a8d30da3e24ecb8f50eef67c462d57fc0}} 
+\index{common\+::\+Gestionnaire\+Client@{common\+::\+Gestionnaire\+Client}!Gestionnaire\+Client@{Gestionnaire\+Client}}
+\index{Gestionnaire\+Client@{Gestionnaire\+Client}!common\+::\+Gestionnaire\+Client@{common\+::\+Gestionnaire\+Client}}
+\subsubsection{\texorpdfstring{Gestionnaire\+Client()}{GestionnaireClient()}}
+{\footnotesize\ttfamily common.\+Gestionnaire\+Client.\+Gestionnaire\+Client (\begin{DoxyParamCaption}\item[{Socket}]{soc\+Service,  }\item[{\hyperlink{classcommon_1_1GestionnaireFichier}{Gestionnaire\+Fichier}}]{gestionnaire\+Fichier }\end{DoxyParamCaption}) throws I\+O\+Exception\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructeur de \hyperlink{classcommon_1_1GestionnaireClient}{Gestionnaire\+Client}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em soc\+Service} & la socket de service qui permet de communiquer avec le client. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em I\+O\+Exception} & exception qui survient à la création du stream \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Gestionnaire\+Client.\+java\end{DoxyCompactItemize}

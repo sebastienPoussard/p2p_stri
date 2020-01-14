@@ -4,10 +4,25 @@ package common;
  */
 public class Messages {
 	
+	private Messages() {}
+	
+	private static Messages instance = null;
+	
+	/**
+	 * @brief singleton pour accéder à une instance unique de Messages
+	 * @return retourne une instance unique de Messages
+	 */
+	public static Messages getInstance() {
+		if (instance == null ) {
+			instance = new Messages();
+		}
+		return instance;
+	}
+	
 	/** @brief écrit un message d'information
 	 * @param message message à écrire
 	 */
-	public static void ecrireMessage(String message) {
+	public void ecrireMessage(String message) {
 		System.out.println(message);
 	}
 
@@ -15,7 +30,7 @@ public class Messages {
 	 * @brief écrit un message d'erreur
 	 * @param message message à écrire
 	 */
-	public static void ecrireErreur(String message) {
+	public void ecrireErreur(String message) {
 		System.out.println("ERREUR : "+message);
 	}
 }

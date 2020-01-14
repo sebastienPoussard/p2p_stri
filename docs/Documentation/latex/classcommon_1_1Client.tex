@@ -1,0 +1,70 @@
+\hypertarget{classcommon_1_1Client}{}\section{common.\+Client Class Reference}
+\label{classcommon_1_1Client}\index{common.\+Client@{common.\+Client}}
+
+
+Cette classe gère une connexion à un serveur.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcommon_1_1Client_aee3a57bd9c5b580429fe227490f32de2}{Client} (String ip, int port, \hyperlink{classcommon_1_1GestionnaireFichier}{Gestionnaire\+Fichier} gestionnaire\+Fichier)  throws Unknown\+Host\+Exception, I\+O\+Exception 
+\begin{DoxyCompactList}\small\item\em Constructeur de \hyperlink{classcommon_1_1Client}{Client}, connecte le client au serveur. \end{DoxyCompactList}\item 
+void \hyperlink{classcommon_1_1Client_aed8cc42e2cceb83b277c5776c8c314ec}{traiter} (String choix)
+\begin{DoxyCompactList}\small\item\em traite la demande d\textquotesingle{}un client. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcommon_1_1Client_a1ca2b60d665eaa407e95f22633b58c59}\label{classcommon_1_1Client_a1ca2b60d665eaa407e95f22633b58c59}} 
+void \hyperlink{classcommon_1_1Client_a1ca2b60d665eaa407e95f22633b58c59}{terminer} ()
+\begin{DoxyCompactList}\small\item\em Cette méthode permet de termier la connexion et de fermer la socket. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Cette classe gère une connexion à un serveur. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcommon_1_1Client_aee3a57bd9c5b580429fe227490f32de2}\label{classcommon_1_1Client_aee3a57bd9c5b580429fe227490f32de2}} 
+\index{common\+::\+Client@{common\+::\+Client}!Client@{Client}}
+\index{Client@{Client}!common\+::\+Client@{common\+::\+Client}}
+\subsubsection{\texorpdfstring{Client()}{Client()}}
+{\footnotesize\ttfamily common.\+Client.\+Client (\begin{DoxyParamCaption}\item[{String}]{ip,  }\item[{int}]{port,  }\item[{\hyperlink{classcommon_1_1GestionnaireFichier}{Gestionnaire\+Fichier}}]{gestionnaire\+Fichier }\end{DoxyParamCaption}) throws Unknown\+Host\+Exception, I\+O\+Exception\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructeur de \hyperlink{classcommon_1_1Client}{Client}, connecte le client au serveur. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ip} & IP du serveur \\
+\hline
+{\em port} & Port du serveur \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Unknown\+Host\+Exception} & Cette exception est levée quand l\textquotesingle{}adresse du serveur n\textquotesingle{}as pu être résolue. \\
+\hline
+{\em I\+O\+Exception} & Cette exception est levée en cas d\textquotesingle{}erreur à la connexion du serveur. \\
+\hline
+\end{DoxyExceptions}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcommon_1_1Client_aed8cc42e2cceb83b277c5776c8c314ec}\label{classcommon_1_1Client_aed8cc42e2cceb83b277c5776c8c314ec}} 
+\index{common\+::\+Client@{common\+::\+Client}!traiter@{traiter}}
+\index{traiter@{traiter}!common\+::\+Client@{common\+::\+Client}}
+\subsubsection{\texorpdfstring{traiter()}{traiter()}}
+{\footnotesize\ttfamily void common.\+Client.\+traiter (\begin{DoxyParamCaption}\item[{String}]{choix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+traite la demande d\textquotesingle{}un client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em choix} & choix du client 1 \+: lister les fichier, 2 télécharger un fichier \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Client.\+java\end{DoxyCompactItemize}

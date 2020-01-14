@@ -66,20 +66,132 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classcommon_1_1Messages-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">common.Messages Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>cette classe gère les messages d'information et d'erreurs  
+ <a href="classcommon_1_1Messages.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5b24070c575f1aa7e4491db487f5dadb"><td class="memItemLeft" align="right" valign="top"><a id="a5b24070c575f1aa7e4491db487f5dadb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ecrire</b> (String message)</td></tr>
-<tr class="separator:a5b24070c575f1aa7e4491db487f5dadb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6069bc66b0eda8fdd5966a7c7a8a1a0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommon_1_1Messages.html#a6069bc66b0eda8fdd5966a7c7a8a1a0a">ecrireMessage</a> (String message)</td></tr>
+<tr class="memdesc:a6069bc66b0eda8fdd5966a7c7a8a1a0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">écrit un message d'information.  <a href="#a6069bc66b0eda8fdd5966a7c7a8a1a0a">More...</a><br /></td></tr>
+<tr class="separator:a6069bc66b0eda8fdd5966a7c7a8a1a0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d8d6f3ce6024d78171f9e49de7f6136"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommon_1_1Messages.html#a5d8d6f3ce6024d78171f9e49de7f6136">ecrireErreur</a> (String message)</td></tr>
+<tr class="memdesc:a5d8d6f3ce6024d78171f9e49de7f6136"><td class="mdescLeft">&#160;</td><td class="mdescRight">écrit un message d'erreur.  <a href="#a5d8d6f3ce6024d78171f9e49de7f6136">More...</a><br /></td></tr>
+<tr class="separator:a5d8d6f3ce6024d78171f9e49de7f6136"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a96928a28b3f958fc717fca2c076f773c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcommon_1_1Messages.html">Messages</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommon_1_1Messages.html#a96928a28b3f958fc717fca2c076f773c">getInstance</a> ()</td></tr>
+<tr class="memdesc:a96928a28b3f958fc717fca2c076f773c"><td class="mdescLeft">&#160;</td><td class="mdescRight">singleton pour accéder à une instance unique de <a class="el" href="classcommon_1_1Messages.html" title="cette classe gère les messages d&#39;information et d&#39;erreurs ">Messages</a>  <a href="#a96928a28b3f958fc717fca2c076f773c">More...</a><br /></td></tr>
+<tr class="separator:a96928a28b3f958fc717fca2c076f773c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>cette classe gère les messages d'information et d'erreurs </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5d8d6f3ce6024d78171f9e49de7f6136"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d8d6f3ce6024d78171f9e49de7f6136">&#9670;&nbsp;</a></span>ecrireErreur()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void common.Messages.ecrireErreur </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>message</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>écrit un message d'erreur. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td>message à écrire </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6069bc66b0eda8fdd5966a7c7a8a1a0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6069bc66b0eda8fdd5966a7c7a8a1a0a">&#9670;&nbsp;</a></span>ecrireMessage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void common.Messages.ecrireMessage </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>message</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>écrit un message d'information. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td>message à écrire </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a96928a28b3f958fc717fca2c076f773c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96928a28b3f958fc717fca2c076f773c">&#9670;&nbsp;</a></span>getInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classcommon_1_1Messages.html">Messages</a> common.Messages.getInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>singleton pour accéder à une instance unique de <a class="el" href="classcommon_1_1Messages.html" title="cette classe gère les messages d&#39;information et d&#39;erreurs ">Messages</a> </p>
+<dl class="section return"><dt>Returns</dt><dd>retourne une instance unique de <a class="el" href="classcommon_1_1Messages.html" title="cette classe gère les messages d&#39;information et d&#39;erreurs ">Messages</a> </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/seb/Travail/Dev/P2P/p2p_stri/code/src/common/Messages.java</li>
+<li>Messages.java</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
