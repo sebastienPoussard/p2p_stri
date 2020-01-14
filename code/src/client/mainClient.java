@@ -31,14 +31,15 @@ public class mainClient {
 			String choix;
 			// tant que l'utilisateur ne choisit pas de quitter l'application, récuperer son choix et effectuer le traitement
 			do {
-				Messages.getInstance().ecrireMessage("#################### MENU ##########################");
-				Messages.getInstance().ecrireMessage("# 1               : Obtenir la liste des fichiers  #");
-				Messages.getInstance().ecrireMessage("# 2 <nom_fichier> : telecharger le fichier         #");
-				Messages.getInstance().ecrireMessage("# 3               : quitter le programme           #");
-				Messages.getInstance().ecrireMessage("####################################################");
+				Messages.getInstance().ecrireMessage("#################### MENU ######################################");
+				Messages.getInstance().ecrireMessage("# 1               			: obtenir la liste des fichiers  #");
+				Messages.getInstance().ecrireMessage("# 2 <nom_fichier> 			: telecharger fichier            #");
+				Messages.getInstance().ecrireMessage("# 3 <debut> <fin> <fichier> 	: dl fichier de x à y	         #");
+				Messages.getInstance().ecrireMessage("# 4               			: quitter le programme     		 #");
+				Messages.getInstance().ecrireMessage("################################################################");
 				choix = scanner.nextLine();
 				client.traiter(choix);
-			} while  (!choix.equals("3"));
+			} while  (!choix.equals("4"));
 		} catch (UnknownHostException e) {
 			Messages.getInstance().ecrireErreur("Connexion impossible au serveur, l'adresse serveur n'a pas pu être résolue");
 		} catch (IOException e) {

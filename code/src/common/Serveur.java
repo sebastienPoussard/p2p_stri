@@ -49,7 +49,7 @@ public class Serveur {
 						+ ") ouverture du port "+socService.getPort()+" pour servir le client.");
 				// quand un nouveau client se connecte, donner le traitement au gestionnaire de client
 				// qui est un nouveau thread.
-				GestionnaireClient gestionnaireClient = new GestionnaireClient(socService, this.gestionnaireFichier);
+				GestionnaireRequetesServeur gestionnaireClient = new GestionnaireRequetesServeur(socService, this.gestionnaireFichier);
 				Thread thread = new Thread(gestionnaireClient);
 				thread.start();
 			} catch (IOException e) {

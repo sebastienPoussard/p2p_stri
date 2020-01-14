@@ -13,7 +13,7 @@ import java.net.UnknownHostException;
  */
 public class Client {
 
-	private Socket socket;								// socket de connexion au client.
+	private Socket socket;								// socket de connexion au serveur.
 	private BufferedInputStream streamIn;				// flux de données entrants
 	private BufferedOutputStream streamOut;				// flux de données sortants (requêtes)
 	private GestionnaireFichier gestionnaireFichier;	// gestionnaire de fichiers.
@@ -37,16 +37,20 @@ public class Client {
 	 * @param choix choix du client 1 : lister les fichier, 2 télécharger un fichier
 	 */
 	public void traiter(String choix) {
-		switch (choix.substring(0, 1)) {
+		String[] choixParametres = choix.split(" ");
+		switch (choixParametres[0]) {
 		case "1":
 			// afficher la liste des fichiers en partage sur le serveur
 			listeFichier();
 			break;
 		case "2":
 			// télécharger un fichier
-			telecharger(choix.substring(1).strip());
+			telecharger(choixParametres[1]);
 			break;
 		case "3":
+			telechargerBloc(choixParametres[3], choixParametres[1], choixParametres[2]);
+			break;
+		case "4":
 			// terminer la connexion
 			terminer();
 			break;
@@ -97,6 +101,53 @@ public class Client {
 		Messages.getInstance().ecrireMessage("Téléchargement de "+nomFichier+" terminé !");
 	}
 
+	/**
+	 * @brief télécharge un bloc d'un fichier.
+	 * @param nomFichier le nom du fichier à télécharger.
+	 * @param debut numéro du début du bloc à télécharger.
+	 * @param fin numéro du dernier bloc à télécharger.
+	 */
+	private void telechargerBloc(String nomFichier, String debut, String fin) {
+		Messages.getInstance().ecrireMessage("Téléchargement du fichier : \""+nomFichier+"\""
+				+ " bloc "+debut+" à bloc "+fin+" ...");
+		// envoyer l'instruction au serveur.
+		try {
+			this.streamOut.write(("DL "+nomFichier+" "+debut+" "+fin).getBytes());
+			this.streamOut.flush();
+		} catch (IOException e) {
+			Messages.getInstance().ecrireErreur("echec à l'envoie de la commande DL");
+		}
+		// créer le fichier en local.
+		FileOutputStream streamFichier = null;
+		try {
+			streamFichier = this.gestionnaireFichier.creerFichier(nomFichier);
+		} catch (FileNotFoundException e) {
+			Messages.getInstance().ecrireErreur("erreur à la création du fichier dans le dossier téléchargement "+nomFichier);
+		}
+		// télécharger le fichier.
+		int marqueur;						// marqueur de positon dans le buffer de "données".
+		byte[] donnee = new byte[1024];		// buffer de données pour stocker la réponse du serveur.
+		try {
+			while ((marqueur = this.streamIn.read(donnee)) > 0) {
+				streamFichier.write(donnee, 0, marqueur);
+				// si c'est le dernier bloc, sortir de la boucle
+				if (marqueur < 1024) {
+					break;
+				}
+			}
+		} catch (IOException e) {
+			Messages.getInstance().ecrireErreur("erreur pendant le téléchargement du fichier.");
+		}
+		try {
+			streamFichier.close();
+		} catch (IOException e) {
+			Messages.getInstance().ecrireErreur("le fichier télécharger n'as pas été correctement fermé.");
+		}
+		Messages.getInstance().ecrireMessage("Téléchargement de "+nomFichier+" terminé !");
+	}
+	
+	
+	
 	/**
 	 * @brief permet de lire la liste des fichiers partagés par le serveur.
 	 */

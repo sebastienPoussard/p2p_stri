@@ -11,7 +11,7 @@ import java.net.Socket;
 /**
  * @brief Cette classe gere les requêtes d'un client 
  */
-public class GestionnaireClient implements Runnable {
+public class GestionnaireRequetesServeur implements Runnable {
 
 	private Socket socService;							// socket de la connexion.
 	private BufferedInputStream streamIn;				// flux de requêtes client.
@@ -20,11 +20,11 @@ public class GestionnaireClient implements Runnable {
 	private GestionnaireFichier gestionnaireFichier;	// gestionnaire de fichier
 	
 	/**
-	 * @brief constructeur de GestionnaireClient.
+	 * @brief constructeur de GestionnaireRequetesServeur.
 	 * @param socService la socket de service qui permet de communiquer avec le client.
 	 * @throws IOException exception qui survient à la création du stream
 	 */
-	public GestionnaireClient(Socket socService, GestionnaireFichier gestionnaireFichier) throws IOException {
+	public GestionnaireRequetesServeur(Socket socService, GestionnaireFichier gestionnaireFichier) throws IOException {
 		this.socService = socService;
 		// ouvrir les fluxs
 		this.streamIn = new BufferedInputStream(socService.getInputStream());
@@ -58,14 +58,16 @@ public class GestionnaireClient implements Runnable {
 	 * @throws IOException exception levée par la méthode envoyerListe()
 	 */
 	private void servirClient(String requete) throws IOException {
-		// envoyer la liste des fichiers sur le serveur
-		if(requete.equals("LISTE")) {
+		String[] tableauRequete = requete.split(" ");
+		switch(tableauRequete[0]) {
+		case "LISTE":
+			// envoyer la liste des fichiers sur le serveur.
 			Messages.getInstance().ecrireMessage("Utilisateur "+this.socService.getInetAddress()+" demande la liste des fichiers");
 			this.streamOut.write(this.gestionnaireFichier.listeFichiers().getBytes());
 			this.streamOut.flush();
-			
-		// envoyer le fichier
-		} else if (requete.substring(0, 11).equals("TELECHARGER")) {
+			break;
+		case "TELECHARGER":
+			// envoyer le bloc du fichier.
 			Messages.getInstance().ecrireMessage("Utilisateur "+this.socService.getInetAddress()+" demande "
 					+ "à télécharger le fichier : "+requete.substring(12));
 			try {
@@ -74,9 +76,12 @@ public class GestionnaireClient implements Runnable {
 			} catch (FileNotFoundException e) {
 				Messages.getInstance().ecrireErreur("Le fichier à partager "+requete.substring(12)+" n'a pas été trouvé");
 			}
-		} else {
+			break;
+		default:
+			// si le message n'est pas correcte.
 			Messages.getInstance().ecrireErreur("La requête client ne correspond pas au bon standard"
 					+ ": LISTE, TELECHARGER ");
+			break;
 		}
 	}
 
@@ -102,6 +107,37 @@ public class GestionnaireClient implements Runnable {
 			}
 		} catch (IOException e) {
 			Messages.getInstance().ecrireErreur("echec à l'envoie du fichier au client.");
+		}
+	}
+	
+	/**
+	 * @brief envoie une partie d'un fichier de l'octet debut à l'octet fin.
+	 * @param streamFichier stream du fichier à envoyer
+	 * @param debut numero du premier bloc à envoyr
+	 * @param fin numero du dernier bloc à envoyer
+	 */
+	private void envoyerfichier(FileInputStream streamFichier, int debut, int fin) {
+		int taille;
+		int tailleRestantAEnvoyer = fin - debut;
+		byte[] buffer = new byte[1024];
+		// si le stream du fichier est null, c'est à dire si le fichier n'à pas été trouvé par le gestionnaire
+		// de fichier, envoyer une réponse d'erreur au client.
+		try {
+			if (streamFichier == null) {
+				this.streamOut.write("FICHIER INEXISTANT".getBytes());
+				this.streamOut.flush();
+			} else {
+				// avancer jusqu'au début du bloc à envoyer
+				streamFichier.readNBytes(debut);
+				// envoyer le bloc de fichier
+				while ((taille = streamFichier.read(buffer) ) > 0 && tailleRestantAEnvoyer > 0 ) {
+					this.streamOut.write(buffer, 0, Integer.min(taille, tailleRestantAEnvoyer));
+					tailleRestantAEnvoyer -= Integer.min(taille, tailleRestantAEnvoyer);
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
