@@ -55,10 +55,10 @@ public class mainClient {
 				threadTelecharger.run();
 				break;
 			case "3":
-				// répartire la téléchargement entre plusieurs serveurs.
-				RequeteTelechargerBlocFichier requete1 = new RequeteTelechargerBlocFichier(serveur1, "ankara.flac", gestionnaireFichier, "START", "10000");
+				// répartire la téléchargement entre plusieurs serveurs gerés par plusieurs threads.
+				RequeteTelechargerBlocFichier requete1 = new RequeteTelechargerBlocFichier(serveur1, choix[1], gestionnaireFichier, "START", "10000");
 				Thread thread1 = new Thread(requete1);
-				RequeteTelechargerBlocFichier requete2 = new RequeteTelechargerBlocFichier(serveur2, "ankara.flac", gestionnaireFichier, "10001", "END");
+				RequeteTelechargerBlocFichier requete2 = new RequeteTelechargerBlocFichier(serveur2, choix[1], gestionnaireFichier, "10001", "END");
 				Thread thread2 = new Thread(requete2);
 				thread1.start();
 				thread2.start();
@@ -68,7 +68,7 @@ public class mainClient {
 				}
 				// quand tous les blocs du fichier sont téléchargés, réassembler le fichier final.
 				try {
-					gestionnaireFichier.reformer("ankara.flac");
+					gestionnaireFichier.reformer(choix[1]);
 				} catch (IOException e) {
 					Messages.getInstance().ecrireErreur("Echec à la reformation du fichier final "+choix[1]); 
 				}
