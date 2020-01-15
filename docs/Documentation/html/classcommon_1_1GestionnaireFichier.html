@@ -89,12 +89,18 @@ String&#160;</td><td class="memItemRight" valign="bottom"><b>listeFichiers</b> (
 <tr class="memitem:a7aa94ceed1766208e16cd4d3ce8465b7"><td class="memItemLeft" align="right" valign="top">FileOutputStream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommon_1_1GestionnaireFichier.html#a7aa94ceed1766208e16cd4d3ce8465b7">creerFichier</a> (String nomFichier)  throws FileNotFoundException </td></tr>
 <tr class="memdesc:a7aa94ceed1766208e16cd4d3ce8465b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">créer un nouveau fichier dans le dossier de téléchargement.  <a href="#a7aa94ceed1766208e16cd4d3ce8465b7">More...</a><br /></td></tr>
 <tr class="separator:a7aa94ceed1766208e16cd4d3ce8465b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e950d470279008607afa8b6a525625e"><td class="memItemLeft" align="right" valign="top">FileOutputStream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommon_1_1GestionnaireFichier.html#a0e950d470279008607afa8b6a525625e">creerFichierTemporaire</a> (String nomFichier, int blocDebut, int blocFin)  throws FileNotFoundException</td></tr>
-<tr class="memdesc:a0e950d470279008607afa8b6a525625e"><td class="mdescLeft">&#160;</td><td class="mdescRight">créer un nouveau fichier temporaire dans le dossier temporaire du fichier.  <a href="#a0e950d470279008607afa8b6a525625e">More...</a><br /></td></tr>
-<tr class="separator:a0e950d470279008607afa8b6a525625e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bdc681e581824bba5c4463c680e4d29"><td class="memItemLeft" align="right" valign="top">FileOutputStream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommon_1_1GestionnaireFichier.html#a3bdc681e581824bba5c4463c680e4d29">creerFichierTemporaire</a> (String nomFichier, String blocDebut, String blocFin)  throws FileNotFoundException</td></tr>
+<tr class="memdesc:a3bdc681e581824bba5c4463c680e4d29"><td class="mdescLeft">&#160;</td><td class="mdescRight">créer un nouveau fichier temporaire dans le dossier temporaire du fichier.  <a href="#a3bdc681e581824bba5c4463c680e4d29">More...</a><br /></td></tr>
+<tr class="separator:a3bdc681e581824bba5c4463c680e4d29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa32c12e7c7269b4142b4f93dc89603b7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommon_1_1GestionnaireFichier.html#aa32c12e7c7269b4142b4f93dc89603b7">creerDossierTemporaire</a> (String nomFichier)</td></tr>
 <tr class="memdesc:aa32c12e7c7269b4142b4f93dc89603b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">créer le dossier temporaire pour acceuillir les fichiers temporaires du téléchargement en plusieurs blocs.  <a href="#aa32c12e7c7269b4142b4f93dc89603b7">More...</a><br /></td></tr>
 <tr class="separator:aa32c12e7c7269b4142b4f93dc89603b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc70adcceabf46a5721ff2b1149e2730"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommon_1_1GestionnaireFichier.html#afc70adcceabf46a5721ff2b1149e2730">tailleFichier</a> (String nomFichier)</td></tr>
+<tr class="memdesc:afc70adcceabf46a5721ff2b1149e2730"><td class="mdescLeft">&#160;</td><td class="mdescRight">methode pour connaitre la taille d'un fichier.  <a href="#afc70adcceabf46a5721ff2b1149e2730">More...</a><br /></td></tr>
+<tr class="separator:afc70adcceabf46a5721ff2b1149e2730"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af554d6cc45505271d3f393feb7b5e0f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommon_1_1GestionnaireFichier.html#af554d6cc45505271d3f393feb7b5e0f6">reformer</a> (String nomFichier)  throws IOException </td></tr>
+<tr class="memdesc:af554d6cc45505271d3f393feb7b5e0f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">prend les differents bloc de fichier pour reformer le fichier final.  <a href="#af554d6cc45505271d3f393feb7b5e0f6">More...</a><br /></td></tr>
+<tr class="separator:af554d6cc45505271d3f393feb7b5e0f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Cette classe gere le dossier contenant les fichiers partagés ainsi que le dossier de téléchargement. </p>
@@ -220,8 +226,8 @@ String&#160;</td><td class="memItemRight" valign="bottom"><b>listeFichiers</b> (
 
 </div>
 </div>
-<a id="a0e950d470279008607afa8b6a525625e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0e950d470279008607afa8b6a525625e">&#9670;&nbsp;</a></span>creerFichierTemporaire()</h2>
+<a id="a3bdc681e581824bba5c4463c680e4d29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bdc681e581824bba5c4463c680e4d29">&#9670;&nbsp;</a></span>creerFichierTemporaire()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -238,13 +244,13 @@ String&#160;</td><td class="memItemRight" valign="bottom"><b>listeFichiers</b> (
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">String&#160;</td>
           <td class="paramname"><em>blocDebut</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">String&#160;</td>
           <td class="paramname"><em>blocFin</em>&#160;</td>
         </tr>
         <tr>
@@ -317,6 +323,81 @@ String&#160;</td><td class="memItemRight" valign="bottom"><b>listeFichiers</b> (
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="af554d6cc45505271d3f393feb7b5e0f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af554d6cc45505271d3f393feb7b5e0f6">&#9670;&nbsp;</a></span>reformer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void common.GestionnaireFichier.reformer </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>nomFichier</em></td><td>)</td>
+          <td> throws IOException</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>prend les differents bloc de fichier pour reformer le fichier final. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nomFichier</td><td>le nom du fichier à reformer. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">IOException</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="afc70adcceabf46a5721ff2b1149e2730"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc70adcceabf46a5721ff2b1149e2730">&#9670;&nbsp;</a></span>tailleFichier()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">long common.GestionnaireFichier.tailleFichier </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>nomFichier</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>methode pour connaitre la taille d'un fichier. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nomFichier</td><td>le nom du fichier. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>renvoie la taille du fichier. </dd></dl>
 
 </div>
 </div>

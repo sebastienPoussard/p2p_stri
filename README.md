@@ -41,12 +41,13 @@ Les applications demanderont aléatoirement chaque bloc manquant à n'importe qu
 
 Dans cette étape, on ajoute un serveur dont le rôle est de maintenir la liste des applications gérant le téléchargement d'un fichier et quel bloc chaque application possède.
 Ce serveur coordonnera le téléchargement en précisant à chaque application, à qui se connecter et ce qui y est disponible.
-Étape 5 : P2P coopératif
+
+## Étape 5 : P2P coopératif
 
 Dans cette étape, on doit s'assurer que les applications envoient et reçoivent globalement les même quantités.
 On essaiera ainsi de désavantager les applications qui ne font que télécharger et n'envoient rien.
 
-Options :
+## Options :
 
 - Créer une IHM (interface homme machine) Graphique pour les applications avec Swing par exemple.
 - Gérer à la fois des communications UDP et TCP.

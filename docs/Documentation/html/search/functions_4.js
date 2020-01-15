@@ -1,6 +1,7 @@
 var searchData=
 [
   ['rechercherfichier',['rechercherFichier',['../classcommon_1_1GestionnaireFichier.html#a55da4571d743ce9ee31a96bd04de9aa4',1,'common::GestionnaireFichier']]],
+  ['reformer',['reformer',['../classcommon_1_1GestionnaireFichier.html#af554d6cc45505271d3f393feb7b5e0f6',1,'common::GestionnaireFichier']]],
   ['requete',['Requete',['../classrequete_1_1Requete.html#a6ed8eefb9335b37f2348f5c323a46b53',1,'requete::Requete']]],
   ['requeteliste',['RequeteListe',['../classrequete_1_1RequeteListe.html#abf11f2cbe8b9eb9eae7621dff966ebd5',1,'requete::RequeteListe']]],
   ['requetetelechargerblocfichier',['RequeteTelechargerBlocFichier',['../classrequete_1_1RequeteTelechargerBlocFichier.html#aff47f4619365925874158d0721f392e6',1,'requete::RequeteTelechargerBlocFichier']]],

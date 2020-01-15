@@ -3,6 +3,7 @@ package requete;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import common.GestionnaireFichier;
 import common.Messages;
@@ -14,8 +15,8 @@ public class RequeteTelechargerBlocFichier extends Requete {
 
 	private String nomFichier;									// nom du fichier à télécharger.
 	private GestionnaireFichier gestionnaireFichier;			// le gestionnaire de fichier.
-	private int blocDebut;										// numéro du premier bloc à télécharger.
-	private int blocFin;										// numéro du dernier bloc à télécharger.
+	private String blocDebut;									// numéro du premier bloc à télécharger.
+	private String blocFin;										// numéro du dernier bloc à télécharger.
 	private FileOutputStream streamFichier;						// le flux pour écrire dans le fichier.
 	
 	/**
@@ -31,8 +32,8 @@ public class RequeteTelechargerBlocFichier extends Requete {
 		super(adresseServeur);
 		this.nomFichier = nomFichier;
 		this.gestionnaireFichier = gestionnaireFichier;
-		this.blocDebut = Integer.getInteger(blocDebut);
-		this.blocFin = Integer.getInteger(blocFin);
+		this.blocDebut = blocDebut;
+		this.blocFin = blocFin;
 	}
 	
 	/**
@@ -43,7 +44,7 @@ public class RequeteTelechargerBlocFichier extends Requete {
 		// connecter au serveur et récuperer les fluxs.
 		super.run();
 		// envoyer la requête au serveur.
-		envoyerRequete("DL "+this.nomFichier+" "+this.blocDebut+" "+this.blocFin);
+		envoyerRequete("TELECHARGER_BLOC "+this.nomFichier+" "+this.blocDebut+" "+this.blocFin);
 		// créer le dossier pour stocker les fichier temporaire
 		this.gestionnaireFichier.creerDossierTemporaire(this.nomFichier);
 		// créer le fichier temporaire contenant les blocs souhaités

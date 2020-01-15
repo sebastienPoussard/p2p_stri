@@ -61,26 +61,39 @@ public class GestionnaireRequetesServeur implements Runnable {
 		String[] tableauRequete = requete.split(" ");
 		switch(tableauRequete[0]) {
 		case "LISTE":
+			// message d'information
+			Messages.getInstance().ecrireMessage("Utilisateur "+this.socService.getInetAddress()+
+					" demande la liste des fichiers");
 			// envoyer la liste des fichiers sur le serveur.
-			Messages.getInstance().ecrireMessage("Utilisateur "+this.socService.getInetAddress()+" demande la liste des fichiers");
 			this.streamOut.write(this.gestionnaireFichier.listeFichiers().getBytes());
 			this.streamOut.flush();
 			break;
 		case "TELECHARGER":
-			// envoyer le bloc du fichier.
+			// message d'information
 			Messages.getInstance().ecrireMessage("Utilisateur "+this.socService.getInetAddress()+" demande "
-					+ "à télécharger le fichier : "+requete.substring(12));
+					+ "à télécharger le fichier : "+tableauRequete[1]);
+			// envoyer le fichier.
 			try {
-				envoyerFichier(this.gestionnaireFichier.rechercherFichier(requete.substring(12)));
-				Messages.getInstance().ecrireMessage("Fichier "+requete.substring(12)+" envoyé");
+				envoyerFichier(this.gestionnaireFichier.rechercherFichier(tableauRequete[1]));
+				Messages.getInstance().ecrireMessage("Fichier "+tableauRequete[1]+" envoyé");
 			} catch (FileNotFoundException e) {
-				Messages.getInstance().ecrireErreur("Le fichier à partager "+requete.substring(12)+" n'a pas été trouvé");
+				Messages.getInstance().ecrireErreur("Le fichier à partager "+tableauRequete[1]+" n'a pas été trouvé");
 			}
+			break;
+		case "TELECHARGER_BLOC":
+			// message d'information
+			Messages.getInstance().ecrireMessage("Utilisateur "+this.socService.getInetAddress()+" demande "
+					+ "à télécharger le fichier : "+tableauRequete[1]+" du bloc "+tableauRequete[2]+
+					" à "+tableauRequete[3]);
+			// envoyer le bloc
+			envoyerfichier(this.gestionnaireFichier.rechercherFichier(tableauRequete[1]), 
+					tableauRequete[2], tableauRequete[3],
+					this.gestionnaireFichier.tailleFichier(tableauRequete[1]));
 			break;
 		default:
 			// si le message n'est pas correcte.
 			Messages.getInstance().ecrireErreur("La requête client ne correspond pas au bon standard"
-					+ ": LISTE, TELECHARGER ");
+					+ ": LISTE, TELECHARGER, TELECHARGER_BLOC ");
 			break;
 		}
 	}
@@ -116,29 +129,47 @@ public class GestionnaireRequetesServeur implements Runnable {
 	 * @param debut numero du premier bloc à envoyr
 	 * @param fin numero du dernier bloc à envoyer
 	 */
-	private void envoyerfichier(FileInputStream streamFichier, int debut, int fin) {
-		int taille;
-		int tailleRestantAEnvoyer = fin - debut;
+	private void envoyerfichier(FileInputStream streamFichier, String debutString, String finString, long tailleFichier) {
+		long debut;		// numéro du début du bloc à envoyer.
+		long fin;		// numéro du dernier bloc à envoyer.
+		long taille;		// taille envoyé par passage.
+		// convertir le parametre de début.
+		
+		if (debutString.equals("START")) {
+			debut = 0;
+		} else {
+			debut = Long.parseLong(debutString);
+		}
+		// convertir le parametre de fin.
+		if (finString.equals("END")) {
+			fin = tailleFichier;
+		} else {
+			fin = Long.parseLong(finString);
+		}
+		long tailleRestantAEnvoyer = fin - debut;
 		byte[] buffer = new byte[1024];
 		// si le stream du fichier est null, c'est à dire si le fichier n'à pas été trouvé par le gestionnaire
 		// de fichier, envoyer une réponse d'erreur au client.
+		long envoyer =0;
 		try {
 			if (streamFichier == null) {
 				this.streamOut.write("FICHIER INEXISTANT".getBytes());
 				this.streamOut.flush();
 			} else {
 				// avancer jusqu'au début du bloc à envoyer
-				streamFichier.readNBytes(debut);
+				if (debut != 0) {
+					streamFichier.skip(debut);
+				}
 				// envoyer le bloc de fichier
 				while ((taille = streamFichier.read(buffer) ) > 0 && tailleRestantAEnvoyer > 0 ) {
-					this.streamOut.write(buffer, 0, Integer.min(taille, tailleRestantAEnvoyer));
-					tailleRestantAEnvoyer -= Integer.min(taille, tailleRestantAEnvoyer);
+					this.streamOut.write(buffer, 0, (int)Long.min(taille, tailleRestantAEnvoyer));
+					tailleRestantAEnvoyer -= Long.min(taille, tailleRestantAEnvoyer);
 				}
+				this.streamOut.flush();
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+		Messages.getInstance().ecrireMessage("bloc du fichier envoyé");
 	}
 
 	/**

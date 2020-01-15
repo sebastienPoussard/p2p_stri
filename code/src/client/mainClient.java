@@ -1,17 +1,19 @@
 package client;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.util.concurrent.TimeUnit;
 
 import common.GestionnaireFichier;
 import common.Messages;
 import requete.RequeteListe;
+import requete.RequeteTelechargerBlocFichier;
 import requete.RequeteTelechargerFichier;
 
 public class mainClient {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		
 		// récuperer IP et PORT
 		ArrayList<String[]> listeDesServeurs;							// liste des serveurs.
@@ -53,7 +55,24 @@ public class mainClient {
 				threadTelecharger.run();
 				break;
 			case "3":
-				
+				// répartire la téléchargement entre plusieurs serveurs.
+				RequeteTelechargerBlocFichier requete1 = new RequeteTelechargerBlocFichier(serveur1, "ankara.flac", gestionnaireFichier, "START", "10000");
+				Thread thread1 = new Thread(requete1);
+				RequeteTelechargerBlocFichier requete2 = new RequeteTelechargerBlocFichier(serveur2, "ankara.flac", gestionnaireFichier, "10001", "END");
+				Thread thread2 = new Thread(requete2);
+				thread1.start();
+				thread2.start();
+				// attendre que les threads se terminent (il ne reste plus que le main).
+				while (Thread.activeCount() != 1) {
+					TimeUnit.MILLISECONDS.sleep(10);
+				}
+				// quand tous les blocs du fichier sont téléchargés, réassembler le fichier final.
+				try {
+					gestionnaireFichier.reformer("ankara.flac");
+				} catch (IOException e) {
+					Messages.getInstance().ecrireErreur("Echec à la reformation du fichier final "+choix[1]); 
+				}
+				Messages.getInstance().ecrireMessage("Fichier "+choix[1]+" téléchargé en bloc avec succés !");
 				break;
 			case "4":
 				Messages.getInstance().ecrireMessage("Fermeture de l'application...");
