@@ -32,12 +32,12 @@ public class mainClient {
 		String[] choix;
 		// tant que l'utilisateur ne choisit pas de quitter l'application, récuperer son choix et effectuer le traitement
 		do {
-			Messages.getInstance().ecrireMessage("#################### MENU ######################################");
-			Messages.getInstance().ecrireMessage("# 1               			: obtenir la liste des fichiers  #");
-			Messages.getInstance().ecrireMessage("# 2 <nom_fichier> 			: telecharger fichier            #");
-			Messages.getInstance().ecrireMessage("# 3 <debut> <fin> <fichier> 	: dl fichier de x à y	         #");
-			Messages.getInstance().ecrireMessage("# 4               			: quitter le programme     		 #");
-			Messages.getInstance().ecrireMessage("################################################################");
+			Messages.getInstance().ecrireMessage("#################### MENU ##############################");
+			Messages.getInstance().ecrireMessage("# 1                : obtenir la liste des fichiers     #");
+			Messages.getInstance().ecrireMessage("# 2 <nom_fichier>  : telecharger fichier               #");
+			Messages.getInstance().ecrireMessage("# 3 <nom_fichier>  : télécharger depuis plusieurs srv  #");
+			Messages.getInstance().ecrireMessage("# 4                : quitter le programme              #");
+			Messages.getInstance().ecrireMessage("########################################################");
 			reponse = scanner.nextLine();
 			choix = reponse.split(" ");
 			// traiter le choix du client.
@@ -53,10 +53,13 @@ public class mainClient {
 				threadTelecharger.run();
 				break;
 			case "3":
+				
 				break;
 			case "4":
+				Messages.getInstance().ecrireMessage("Fermeture de l'application...");
 				break;
 			default:
+				Messages.getInstance().ecrireMessage("Commande incorrecte");
 				break;
 			}
 		} while  (!choix[0].equals("4"));
