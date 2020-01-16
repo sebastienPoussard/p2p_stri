@@ -58,7 +58,7 @@ public class mainClient {
 				// répartire la téléchargement entre plusieurs serveurs gerés par plusieurs threads.
 				RequeteTelechargerBlocFichier requete1 = new RequeteTelechargerBlocFichier(serveur1, choix[1], gestionnaireFichier, "START", "10000");
 				Thread thread1 = new Thread(requete1);
-				RequeteTelechargerBlocFichier requete2 = new RequeteTelechargerBlocFichier(serveur2, choix[1], gestionnaireFichier, "10001", "END");
+				RequeteTelechargerBlocFichier requete2 = new RequeteTelechargerBlocFichier(serveur2, choix[1], gestionnaireFichier, "10000", "END");
 				Thread thread2 = new Thread(requete2);
 				thread1.start();
 				thread2.start();
