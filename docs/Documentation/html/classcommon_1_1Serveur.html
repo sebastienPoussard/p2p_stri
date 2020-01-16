@@ -74,15 +74,29 @@ $(function() {
 
 <p>Cette classe gère les fonctionnalitées de serveur.  
  <a href="classcommon_1_1Serveur.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for common.Serveur:</div>
+<div class="dyncontent">
+<div class="center"><img src="classcommon_1_1Serveur__inherit__graph.png" border="0" usemap="#common_8Serveur_inherit__map" alt="Inheritance graph"/></div>
+<map name="common_8Serveur_inherit__map" id="common_8Serveur_inherit__map">
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for common.Serveur:</div>
+<div class="dyncontent">
+<div class="center"><img src="classcommon_1_1Serveur__coll__graph.png" border="0" usemap="#common_8Serveur_coll__map" alt="Collaboration graph"/></div>
+<map name="common_8Serveur_coll__map" id="common_8Serveur_coll__map">
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aef95775f670ec2ecd40e72111b125889"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommon_1_1Serveur.html#aef95775f670ec2ecd40e72111b125889">Serveur</a> (int port, String adresseDossierPartage)</td></tr>
 <tr class="memdesc:aef95775f670ec2ecd40e72111b125889"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructeur de la classe.  <a href="#aef95775f670ec2ecd40e72111b125889">More...</a><br /></td></tr>
 <tr class="separator:aef95775f670ec2ecd40e72111b125889"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9924019a4577e360dafa9ab6df2d4ffd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommon_1_1Serveur.html#a9924019a4577e360dafa9ab6df2d4ffd">lancer</a> ()  throws IOException </td></tr>
-<tr class="memdesc:a9924019a4577e360dafa9ab6df2d4ffd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cette méthode permet de lancer le serveur.  <a href="#a9924019a4577e360dafa9ab6df2d4ffd">More...</a><br /></td></tr>
-<tr class="separator:a9924019a4577e360dafa9ab6df2d4ffd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14bedaf947acad1ebd395abf548b2a98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommon_1_1Serveur.html#a14bedaf947acad1ebd395abf548b2a98">run</a> ()</td></tr>
+<tr class="memdesc:a14bedaf947acad1ebd395abf548b2a98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cette méthode permet de lancer le serveur.  <a href="#a14bedaf947acad1ebd395abf548b2a98">More...</a><br /></td></tr>
+<tr class="separator:a14bedaf947acad1ebd395abf548b2a98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Cette classe gère les fonctionnalitées de serveur. </p>
@@ -133,8 +147,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a9924019a4577e360dafa9ab6df2d4ffd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9924019a4577e360dafa9ab6df2d4ffd">&#9670;&nbsp;</a></span>lancer()</h2>
+<a id="a14bedaf947acad1ebd395abf548b2a98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14bedaf947acad1ebd395abf548b2a98">&#9670;&nbsp;</a></span>run()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -143,10 +157,10 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void common.Serveur.lancer </td>
+          <td class="memname">void common.Serveur.run </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> throws IOException</td>
+          <td></td>
         </tr>
       </table>
   </td>
@@ -157,7 +171,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Cette méthode permet de lancer le serveur. </p>
-<p>cette méthode lance le serveur en ouvrant la socket de rendez-vous, si le port est déjà occupé alors l'erreur est remonté au main. La méthode va par la suite attendre la venue d'un client puis transferer chaque connexion au gestionnaire de client pour qu'il traite les requête de chaque client dans un Thread unique. </p>
+<p>cette méthode lance le serveur en ouvrant la socket de rendez-vous, la méthode va par la suite attendre la venue d'un client puis transferer chaque connexion au gestionnaire de client pour qu'il traite les requête de chaque client dans un Thread unique. </p>
 
 </div>
 </div>

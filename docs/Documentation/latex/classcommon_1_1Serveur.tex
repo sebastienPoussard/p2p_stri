@@ -5,12 +5,32 @@
 Cette classe gère les fonctionnalitées de serveur.  
 
 
+
+
+Inheritance diagram for common.\+Serveur\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=171pt]{classcommon_1_1Serveur__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for common.\+Serveur\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=171pt]{classcommon_1_1Serveur__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{classcommon_1_1Serveur_aef95775f670ec2ecd40e72111b125889}{Serveur} (int port, String adresse\+Dossier\+Partage)
 \begin{DoxyCompactList}\small\item\em constructeur de la classe. \end{DoxyCompactList}\item 
-void \hyperlink{classcommon_1_1Serveur_a9924019a4577e360dafa9ab6df2d4ffd}{lancer} ()  throws I\+O\+Exception 
+void \hyperlink{classcommon_1_1Serveur_a14bedaf947acad1ebd395abf548b2a98}{run} ()
 \begin{DoxyCompactList}\small\item\em Cette méthode permet de lancer le serveur. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -38,17 +58,17 @@ constructeur de la classe.
 
 
 \subsection{Member Function Documentation}
-\mbox{\Hypertarget{classcommon_1_1Serveur_a9924019a4577e360dafa9ab6df2d4ffd}\label{classcommon_1_1Serveur_a9924019a4577e360dafa9ab6df2d4ffd}} 
-\index{common\+::\+Serveur@{common\+::\+Serveur}!lancer@{lancer}}
-\index{lancer@{lancer}!common\+::\+Serveur@{common\+::\+Serveur}}
-\subsubsection{\texorpdfstring{lancer()}{lancer()}}
-{\footnotesize\ttfamily void common.\+Serveur.\+lancer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws I\+O\+Exception\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\Hypertarget{classcommon_1_1Serveur_a14bedaf947acad1ebd395abf548b2a98}\label{classcommon_1_1Serveur_a14bedaf947acad1ebd395abf548b2a98}} 
+\index{common\+::\+Serveur@{common\+::\+Serveur}!run@{run}}
+\index{run@{run}!common\+::\+Serveur@{common\+::\+Serveur}}
+\subsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void common.\+Serveur.\+run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 Cette méthode permet de lancer le serveur. 
 
-cette méthode lance le serveur en ouvrant la socket de rendez-\/vous, si le port est déjà occupé alors l\textquotesingle{}erreur est remonté au main. La méthode va par la suite attendre la venue d\textquotesingle{}un client puis transferer chaque connexion au gestionnaire de client pour qu\textquotesingle{}il traite les requête de chaque client dans un Thread unique. 
+cette méthode lance le serveur en ouvrant la socket de rendez-\/vous, la méthode va par la suite attendre la venue d\textquotesingle{}un client puis transferer chaque connexion au gestionnaire de client pour qu\textquotesingle{}il traite les requête de chaque client dans un Thread unique. 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
