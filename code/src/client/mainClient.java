@@ -1,101 +1,88 @@
 package client;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
-import common.Client;
 import common.GestionnaireFichier;
 import common.Messages;
+import requete.RequeteListe;
+import requete.RequeteTelechargerBlocFichier;
+import requete.RequeteTelechargerFichier;
 
 public class mainClient {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		
 		// récuperer IP et PORT
-		String ip = "localhost";										// IP du serveur.
-		int port = 8080;												// Port du serveur.
-		Client client = null;											// une connexion client au serveur.
+		ArrayList<String[]> listeDesServeurs;							// liste des serveurs.
 		String adresseDossierTelechargements = "/tmp/downloads/";		// adresse du dossier qui va recevoir les fichiers du serveur.
-		GestionnaireFichier gestionnaireFichier;						// gestionnaire de fichier
+		GestionnaireFichier gestionnaireFichier;					// gestionnaire de fichier
+		Scanner scanner;
+		
+		// créer la liste des serveurs.
+		String serveur1 = "localhost:8080";
+		String serveur2 = "localhost:8081";
 		
 		// ouvrir le gestionnaire de fichier 
 		gestionnaireFichier = new GestionnaireFichier(null, adresseDossierTelechargements);
 		
-		// connecter le client au serveur
-		try {
-			client = new Client(ip, port, gestionnaireFichier);
-			Messages.getInstance().ecrireMessage("Connexion au serveur "+ip+":"+port+" avec succès");
-			// traiter les demandes du client.
-			Scanner scanner = new Scanner(System.in);
-			String choix;
-			// tant que l'utilisateur ne choisit pas de quitter l'application, récuperer son choix et effectuer le traitement
-			do {
-				Messages.getInstance().ecrireMessage("#################### MENU ##########################");
-				Messages.getInstance().ecrireMessage("# 1               : Obtenir la liste des fichiers  #");
-				Messages.getInstance().ecrireMessage("# 2 <nom_fichier> : telecharger le fichier         #");
-				Messages.getInstance().ecrireMessage("# 3               : quitter le programme           #");
-				Messages.getInstance().ecrireMessage("####################################################");
-				choix = scanner.nextLine();
-				client.traiter(choix);
-			} while  (!choix.equals("3"));
-		} catch (UnknownHostException e) {
-			Messages.getInstance().ecrireErreur("Connexion impossible au serveur, l'adresse serveur n'a pas pu être résolue");
-		} catch (IOException e) {
-			Messages.getInstance().ecrireErreur("Problème à la connexion au serveur.");
-		}
-		client.terminer();
+		// traiter les demandes du client.
+		scanner = new Scanner(System.in);
+		String reponse;
+		String[] choix;
+		// tant que l'utilisateur ne choisit pas de quitter l'application, récuperer son choix et effectuer le traitement
+		do {
+			Messages.getInstance().ecrireMessage("#################### MENU ##############################");
+			Messages.getInstance().ecrireMessage("# 1                : obtenir la liste des fichiers     #");
+			Messages.getInstance().ecrireMessage("# 2 <nom_fichier>  : telecharger fichier               #");
+			Messages.getInstance().ecrireMessage("# 3 <nom_fichier>  : télécharger depuis plusieurs srv  #");
+			Messages.getInstance().ecrireMessage("# 4                : quitter le programme              #");
+			Messages.getInstance().ecrireMessage("########################################################");
+			reponse = scanner.nextLine();
+			choix = reponse.split(" ");
+			// traiter le choix du client.
+			switch (choix[0]) {
+			case "1":
+				RequeteListe requeteListe = new RequeteListe(serveur1);
+				Thread threadListe = new Thread(requeteListe);
+				threadListe.run();
+				break;
+			case "2":
+				RequeteTelechargerFichier requeteTelecharger = new RequeteTelechargerFichier(serveur1, choix[1], gestionnaireFichier);
+				Thread threadTelecharger = new Thread(requeteTelecharger);
+				threadTelecharger.run();
+				break;
+			case "3":
+				// répartire la téléchargement entre plusieurs serveurs gerés par plusieurs threads.
+				RequeteTelechargerBlocFichier requete1 = new RequeteTelechargerBlocFichier(serveur1, choix[1], gestionnaireFichier, "START", "10000");
+				Thread thread1 = new Thread(requete1);
+				RequeteTelechargerBlocFichier requete2 = new RequeteTelechargerBlocFichier(serveur2, choix[1], gestionnaireFichier, "10000", "END");
+				Thread thread2 = new Thread(requete2);
+				thread1.start();
+				thread2.start();
+				// attendre que les threads se terminent (il ne reste plus que le main).
+				while (Thread.activeCount() != 1) {
+					TimeUnit.MILLISECONDS.sleep(10);
+				}
+				// quand tous les blocs du fichier sont téléchargés, réassembler le fichier final.
+				try {
+					gestionnaireFichier.reformer(choix[1]);
+				} catch (IOException e) {
+					Messages.getInstance().ecrireErreur("Echec à la reformation du fichier final "+choix[1]); 
+				}
+				Messages.getInstance().ecrireMessage("Fichier "+choix[1]+" téléchargé en bloc avec succés !");
+				break;
+			case "4":
+				Messages.getInstance().ecrireMessage("Fermeture de l'application...");
+				break;
+			default:
+				Messages.getInstance().ecrireMessage("Commande incorrecte");
+				break;
+			}
+		} while  (!choix[0].equals("4"));
+		scanner.close();
 		Messages.getInstance().ecrireMessage("Client terminé.");
-		
-		
-		
-		// tant que le client n'arréte pas
-		// envoyer une requête au serveur
-		// lire la réponse
-		
 	}
 }
-		
-		
-		
-//		// TEST DE CLIENT POUR VALIDER FONCTIONNEMENT DU SERVEUR
-//		
-//		Socket s = new Socket("localhost", 8080);
-//		BufferedOutputStream b = new BufferedOutputStream(s.getOutputStream());
-//		BufferedInputStream ib = new BufferedInputStream(s.getInputStream());
-//		
-//		b.write("LISTE".getBytes());
-//		b.flush();
-//		TimeUnit.SECONDS.sleep(3);
-//		
-//		byte[] donnee = new byte[1024];			// buffer de données pour stocker la requête client.
-//		int marqueur;							// marqueur de position dans le buffer "donnee".
-//		String resultat = "";
-//		
-//		// tant que la socket n'est pas fermée, tenter de lire la requête client.
-//		while ((marqueur = ib.read(donnee) )!= -1) {
-//			resultat += new String(donnee, 0, marqueur);
-//			// si le message est complétement lue, retourner le resultat.
-//			if (donnee[marqueur] == 0) {
-//				break;
-//			}
-//		}
-//		// si la connexion est rompue, fermer la socket.
-//		if (marqueur == -1) {
-//			s.close();
-//		}
-//		Messages.getInstance().ecrireMessage(resultat);
-//				
-//
-//		s.close();
-//		
-//		// FIN TEST
-//		
-//	}
-//	
-//
-//}
-
-
-		
-		

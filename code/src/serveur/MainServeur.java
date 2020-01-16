@@ -12,7 +12,7 @@ public class MainServeur {
 	public static void main(String[] args) {
 		
 		// récuperer le port.
-		int port = 8080;
+		int port = 8081;
 		// récuperer le dossier l'adresse du dossier contenant les fichiers partagés.
 		String adresseDossierPartage = "/tmp/share";
 		String adresseDossierTelechargement = "/tmp/dowloads";

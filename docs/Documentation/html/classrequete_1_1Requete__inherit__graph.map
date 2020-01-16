@@ -1,0 +1,5 @@
+<map id="requete.Requete" name="requete.Requete">
+<area shape="rect" id="node3" href="$classrequete_1_1RequeteListe.html" title="Cette classe permet de créer un Thread qui va demander à un serveur la liste des fichiers qu&#39;il conti..." alt="" coords="317,5,464,32"/>
+<area shape="rect" id="node4" href="$classrequete_1_1RequeteTelechargerBlocFichier.html" title="cette classe va télécharger un bloc de fichier depuis un serveur. " alt="" coords="297,57,484,98"/>
+<area shape="rect" id="node5" href="$classrequete_1_1RequeteTelechargerFichier.html" title="cette classe va télécharger un fichier depuis un serveur. " alt="" coords="297,122,484,163"/>
+</map>
