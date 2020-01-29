@@ -5,7 +5,8 @@ import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import common.Messages;
+
+import commun.Messages;
 
 /**
  * @brief classe abstraite définissant une requête d'un client au serveur.

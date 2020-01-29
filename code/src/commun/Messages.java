@@ -1,4 +1,4 @@
-package common;
+package commun;
 
 /** @brief cette classe gère les messages d'information et d'erreurs
  */

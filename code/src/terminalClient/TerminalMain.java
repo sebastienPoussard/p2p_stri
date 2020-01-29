@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-import common.GestionnaireFichier;
-import common.Messages;
-import common.Serveur;
+import commun.Messages;
 import requete.RequeteListe;
 import requete.RequeteTelechargerBlocFichier;
 import requete.RequeteTelechargerFichier;
@@ -26,6 +24,11 @@ public class TerminalMain {
 		Serveur serveur = new Serveur(portServeur, adresseDossierPartage);
 		Thread serveurThread = new Thread(serveur);
 		serveurThread.start();
+		
+		//envoyer les données de l'utilisateur au serveur central
+		//###############################################################################
+		
+		
 		
 		//lancer le client
 		//###############################################################################

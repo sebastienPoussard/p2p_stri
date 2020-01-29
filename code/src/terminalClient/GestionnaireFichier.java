@@ -1,4 +1,4 @@
-package common;
+package terminalClient;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,66 +6,52 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.Arrays;
+
+import commun.InfoUtilisateur;
+import commun.ListeDeBlocs;
+import commun.Messages;
 
 /**
  * @brief Cette classe gere le dossier contenant les fichiers partagés ainsi que le dossier de téléchargement.
  */
 public class GestionnaireFichier {
 	
-	private File dossierDePartage;			// dossier contenant les fichiers partagés.
-	private File dossierDeTelechargements;	// dossier ocntenant les fichiers téléchargés.
+	private File dossierDesFichiers;		// dossier contenant les fichiers partagés & téléchargés.
+	private File dossierTemp;				// dossier contenant les fichier temporaires.
 	
 	/**
 	 * @brief constructeur de GestionnaireFichier
 	 * @param cheminDossierPartages chemin complet vers le dossiers contenant les fichiers partagés.
 	 * accepte uniquement un chemin Linux car Linux > Windows.
 	 */
-	public GestionnaireFichier(String cheminDossierPartages, String cheminDossierTelechargements) {
-		// pour l'instant (client et serveur sont séparés) on fait les construction en fonction de si
-		// le serveur ou le client requpete la création de l'objet.
-		if (cheminDossierPartages != null ) {
-			this.dossierDePartage = new File(cheminDossierPartages);
-			Messages.getInstance().ecrireMessage("Le serveur partage le dossier : "+cheminDossierPartages);
-		}
-		if (cheminDossierTelechargements != null ) {
-			this.dossierDeTelechargements = new File(cheminDossierTelechargements);
-			Messages.getInstance().ecrireMessage("dossier de téléchargement : "+cheminDossierTelechargements);
-		}
+	public GestionnaireFichier(String cheminDossierApplication) {
+		File dossierApplication = new File(cheminDossierApplication);
+		// créer le dossier d'application s'il nexiste pas déjà.
+		if (!dossierApplication.exists())
+			dossierApplication.mkdir();
+		// créer le dossier des fichiers téléchargés & partagés s'il n'existe pas déjà.
+		this.dossierDesFichiers = new File(cheminDossierApplication+"/fichiers");
+		if (!this.dossierDesFichiers.exists())
+			this.dossierDesFichiers.mkdir();
+		Messages.getInstance().ecrireMessage("Dossier des fichiers téléchargés et partagés : "+this.dossierDesFichiers.getAbsolutePath());
+		// créer le dossier de téléchargements temporaire s'il n'existe pas déjà.
+		this.dossierTemp = new File(cheminDossierApplication+"/temp");
+		if (!this.dossierTemp.exists())
+			this.dossierTemp.mkdir();
 	}
 	
-	
-	public String listeFichiers() {
-		String resultat = "";
-		// recuperer la liste des fichier dans le dossier
-		File[] listeDeFichiers = this.dossierDePartage.listFiles();
-		for (File fichier : listeDeFichiers) {
-			// ajouter le nom du fichier
-			resultat+= fichier.getName()+" ";
-			// ajouter la taille convertie du fichier
-			long poids = fichier.length();
-			if (poids >= 1000 && poids < 1000*1000) {
-				resultat += new DecimalFormat("###.##").format(poids/1000.0) + " Ko";
-			} else if ( poids >= 1000*1000 && poids < 1000*1000*1000) {
-				resultat += new DecimalFormat("###.##").format(poids/(1000.0*1000.0)) + " Mo";
-			} else if ( poids >= 1000*1000*1000) {
-				resultat += new DecimalFormat("###.##").format(poids/(1000.0*1000.0*1000.0)) + " Go";
-			} else {
-				resultat += poids + " octets";
-			}
-			resultat += "\n";
-		}
-		return resultat;
-	}
-
 	/**
+	 *    A REVOIR
+	 * 
 	 * @brief cette méthode permet d'obtenir le stream du fichier à partir d'un nom de fichier.
 	 * @param nomFichier nom du fihier que l'on souhaite 
-	 * @return	renvoie null si on ne trouve pas le fichier.
-	 * @throws FileNotFoundException renvoie cette exception si le fichier demandé d'exist pas.
+	 * @return renvoie null si on ne trouve pas le fichier.
+	 * @throws FileNotFoundException renvoie cette exception si le fichier demandé d'existe pas.
 	 */
 	public FileInputStream rechercherFichier(String nomFichier) throws FileNotFoundException {
 		
-		File[] listeDesFichiers = this.dossierDePartage.listFiles();
+		File[] listeDesFichiers = this.dossierDesFichiers.listFiles();
 		for (File fichier : listeDesFichiers) {
 			if (fichier.getName().equals(nomFichier)) {
 					return new FileInputStream(fichier);
@@ -82,7 +68,7 @@ public class GestionnaireFichier {
 	 * @return renvoie le flux de donnée pour écrire dans le fichier.
 	 */
 	public FileOutputStream creerFichier(String nomFichier) throws FileNotFoundException {
-		return new FileOutputStream(new File(this.dossierDeTelechargements.getAbsolutePath()+"/"+nomFichier));
+		return new FileOutputStream(new File(this.dossierDesFichiers.getAbsolutePath()+"/"+nomFichier));
 	}
 	
 	/**
@@ -95,8 +81,7 @@ public class GestionnaireFichier {
 	 */
 	public FileOutputStream creerFichierTemporaire(String nomFichier, String blocDebut, String blocFin) throws FileNotFoundException{
 		creerDossierTemporaire(nomFichier);
-		return new FileOutputStream(new File(this.dossierDeTelechargements.getAbsoluteFile()+"/temp_"+
-		nomFichier+"/"+blocDebut+"-"+blocFin));
+		return new FileOutputStream(new File(this.dossierTemp.getAbsoluteFile()+nomFichier+"/"+blocDebut+"-"+blocFin));
 	}
 	
 	/**
@@ -104,22 +89,12 @@ public class GestionnaireFichier {
 	 * @param nomFichier nom du fichier qui sera télécharger en plusieurs blocs.
 	 */
 	public void creerDossierTemporaire(String nomFichier) {
-		File dossierTemporaire = new File(this.dossierDeTelechargements.getAbsolutePath()+"/temp_"+nomFichier);
+		File dossierTemporaire = new File(this.dossierTemp.getAbsolutePath()+"/"+nomFichier);
 		if (!dossierTemporaire.exists()) {
 			dossierTemporaire.mkdir();
 		}
 	}
 	
-	/**
-	 * @brief methode pour connaitre la taille d'un fichier.
-	 * @param nomFichier le nom du fichier.
-	 * @return renvoie la taille du fichier.
-	 */
-	public long tailleFichier(String nomFichier) {
-		File fichier = new File(this.dossierDePartage.getAbsoluteFile()+"/"+nomFichier);
-		return fichier.length();
-	}
-
 	/**
 	 * @brief prend les differents bloc de fichier pour reformer le fichier final.
 	 * @param nomFichier le nom du fichier à reformer.
@@ -127,10 +102,10 @@ public class GestionnaireFichier {
 	 */
 	public void reformer(String nomFichier) throws IOException {
 		// créer le fichier final
-		File fichierFinal = new File(this.dossierDeTelechargements.getAbsoluteFile()+"/"+nomFichier);
+		File fichierFinal = new File(this.dossierDesFichiers.getAbsoluteFile()+"/"+nomFichier);
 		FileOutputStream streamFichierFinal = new FileOutputStream(fichierFinal);
 		// récuperer la liste des fichiers blocs
-		File dossierTemp = new File(this.dossierDeTelechargements.getAbsoluteFile()+"/temp_"+nomFichier);
+		File dossierTemp = new File(this.dossierTemp.getAbsoluteFile()+"/"+nomFichier);
 		File[] listeFichierTemp = dossierTemp.listFiles();
 		// ouvrir chaque fichier temporaire et écrire son contenu dans le fichier final.
 		for (File fichierTemp : listeFichierTemp) {
@@ -154,5 +129,31 @@ public class GestionnaireFichier {
 		streamFichierFinal.close();
 		// supprimer le dossier temporaire contenant les bloc fichiers
 		dossierTemp.delete();
+	}
+
+
+	public void remplirListeDesFichiers(InfoUtilisateur infoUtilisateur) {
+		//remplir la liste des fichiers complets.
+		File[] fichiersComplets = dossierDesFichiers.listFiles();
+		Arrays.sort(fichiersComplets);
+		for (File fichierComplet : fichiersComplets) {
+			ListeDeBlocs listeDeBlocs = new ListeDeBlocs();
+			// taille max = 2147 Go
+			int nbrBlocs =  (int)fichierComplet.length()/(1000*8);
+			listeDeBlocs.ajouterIntervalle(1, nbrBlocs);
+			System.out.println(fichierComplet.getAbsolutePath());
+		}
+		//remplir la liste des fichiers incomplets
+		File[] dossierDeFichierIncomplet = dossierTemp.listFiles();
+		Arrays.sort(dossierDeFichierIncomplet);
+		// parcourir les dossiers
+		for (File dossier : dossierDeFichierIncomplet) {
+			File[] fichiersTemp = dossier.listFiles();
+			Arrays.sort(fichiersTemp);
+			// parcourir les fichier de chaque dossier
+			for (File fichier : fichiersTemp) {
+				System.out.println(fichier.getAbsolutePath());
+			}
+		}
 	}
 }

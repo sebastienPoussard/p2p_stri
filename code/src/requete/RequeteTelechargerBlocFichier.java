@@ -5,8 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import common.GestionnaireFichier;
-import common.Messages;
+import commun.Messages;
+import terminalClient.GestionnaireFichier;
 
 /**
  * @brief cette classe va télécharger un bloc de fichier depuis un serveur.

@@ -4,8 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import common.GestionnaireFichier;
-import common.Messages;
+import commun.Messages;
+import terminalClient.GestionnaireFichier;
 
 /**
  * @brief cette classe va télécharger un fichier depuis un serveur.

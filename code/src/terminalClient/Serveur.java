@@ -1,8 +1,11 @@
-package common;
+package terminalClient;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+
+import commun.Messages;
+import gestionnaireRequete.GestionnaireRequetesServeur;
 
 /**
  * @brief Cette classe gère les fonctionnalitées de serveur.

@@ -2,19 +2,26 @@ package requete;
 
 import java.io.IOException;
 
+import commun.InfoUtilisateur;
 import commun.Messages;
+import terminalClient.GestionnaireFichier;
 
 /**
  * @brief Cette classe permet de créer un Thread qui va demander à un serveur la liste des fichiers qu'il contient.
  */
-public class RequeteListe extends Requete {
+public class RequeteInfoServeurCentral extends Requete {
 
+	private GestionnaireFichier gestionnaireDeFichiers;
+	private InfoUtilisateur infoUtilisateur;
+	
 	/**
 	 * @brief constructeur de la classe RequeteListe
 	 * @param adresseServeur adresse et port du serveur de la forme "IP:PORT".
 	 */
-	public RequeteListe(String adresseServeur) {
+	public RequeteInfoServeurCentral(String adresseServeur, GestionnaireFichier gestionnaireDeFichiers) {
 		super(adresseServeur);
+		this.gestionnaireDeFichiers = gestionnaireDeFichiers;
+		this.infoUtilisateur = new InfoUtilisateur(adresseServeur.split(":")[0], Integer.parseInt(adresseServeur.split(":")[1]));
 	}
 
 	/**
@@ -24,6 +31,9 @@ public class RequeteListe extends Requete {
 	public void run() {
 		// connecter au serveur et récuperer les fluxs.
 		super.run();
+		// preparer les infos à envoyer au serveur central
+		this.gestionnaireDeFichiers.remplirListeDesFichiers(this.infoUtilisateur);
+		
 		// envoyer la requête pour lister les fichiers.
 		envoyerRequete("LISTE");
 		// lire la réponse du serveur.
