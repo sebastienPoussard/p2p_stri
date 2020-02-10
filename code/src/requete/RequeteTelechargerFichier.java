@@ -3,6 +3,7 @@ package requete;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 
 import commun.Messages;
 import terminalClient.GestionnaireFichier;
@@ -14,7 +15,7 @@ public class RequeteTelechargerFichier extends Requete {
 
 	private String nomFichier;									// nom du fichier à télécharger.
 	private GestionnaireFichier gestionnaireFichier;			// le gestionnaire de fichier.
-	private FileOutputStream streamFichier;						// le flux pour écrire dans le fichier.
+	private RandomAccessFile fichier;							// le fichier.
 	
 	/**
 	 * @brief télécharge un fichier depuis un serveur.
@@ -39,7 +40,7 @@ public class RequeteTelechargerFichier extends Requete {
 		envoyerRequete("TELECHARGER "+this.nomFichier);
 		// créer le fichier vide en local.
 		try {
-			this.streamFichier = this.gestionnaireFichier.creerFichier(this.nomFichier);
+			this.fichier = this.gestionnaireFichier.creerFichier(this.nomFichier);
 		} catch (FileNotFoundException e) {
 			Messages.getInstance().ecrireErreur("erreur à la création du fichier dans le dossier téléchargement "+this.nomFichier);
 		}
@@ -48,7 +49,7 @@ public class RequeteTelechargerFichier extends Requete {
 		byte[] donnee = new byte[1024];		// buffer de données pour stocker la réponse du serveur.
 		try {
 			while ((marqueur = this.inStream.read(donnee)) > 0) {
-				this.streamFichier.write(donnee, 0, marqueur);
+				this.fichier.write(donnee, 0, marqueur);
 				// si c'est le dernier bloc, sortir de la boucle
 				if (marqueur < 1024) {
 					break;
@@ -58,7 +59,7 @@ public class RequeteTelechargerFichier extends Requete {
 			Messages.getInstance().ecrireErreur("erreur pendant le téléchargement du fichier.");
 		}
 		try {
-			streamFichier.close();
+			fichier.close();
 		} catch (IOException e) {
 			Messages.getInstance().ecrireErreur("le fichier télécharger n'as pas été correctement fermé.");
 		}
@@ -66,7 +67,7 @@ public class RequeteTelechargerFichier extends Requete {
 		// fermer le Thread.
 		terminer();
 		try {
-			streamFichier.close();
+			fichier.close();
 		} catch (IOException e) {
 			Messages.getInstance().ecrireErreur("Echec à la fermeture du fichier");
 		}

@@ -1,9 +1,12 @@
 package terminalClient;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
+import commun.InfoUtilisateur;
 import commun.Messages;
 import gestionnaireRequete.GestionnaireRequetesServeur;
 
@@ -13,17 +16,27 @@ import gestionnaireRequete.GestionnaireRequetesServeur;
 public class Serveur implements Runnable {
 
 	private int port;										// port sur lequelle le serveur écoute.
-	private String adresseDossierPartage;					// adresse du dossier de partage.
+	private String ip;										// ip du serveur.
 	private GestionnaireFichier gestionnaireFichier;		// gestionnaire de fichier.
+	private String ipServeurCentral;						// ip du serveur central.
+	private int portServeurCentral;							// port du serveur central.
+	private InfoUtilisateur infos;							// infos de l'utilisateur.
 	
 	/**
 	 * @brief constructeur de la classe.
 	 * @param port port d'écoute du serveur.
 	 * @param adresseDossierPartage adresse du dossier qui contient les fichier partagés par le serveur.
 	 */
-	public Serveur(int port, String adresseDossierPartage) {
+	public Serveur(int port, GestionnaireFichier gestionnaireDeFichier) {
 		this.port = port;
-		this.adresseDossierPartage = adresseDossierPartage;
+		try {
+			// récuperer l'adresse IP du serveur.
+			this.ip = InetAddress.getLocalHost().toString().split("/")[1];
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.gestionnaireFichier = gestionnaireDeFichier;
 	}
 
 	/**
@@ -39,12 +52,13 @@ public class Serveur implements Runnable {
 		boolean continuer = true;			// continuer ou non le serveur.	
 		
 		Messages.getInstance().ecrireMessage("Lancement du serveur...");
-		// charger le dossier de partage.
-		this.gestionnaireFichier = new GestionnaireFichier(this.adresseDossierPartage, null);
 		// ouvre une socket de rendez-vous.
 		try {
 			socRDV = new ServerSocket(port);
 			Messages.getInstance().ecrireMessage("Le serveur écoute sur le port : "+port);
+			// si le serveur à réussit à démarrer, démarrer le thread qui envoie les infos de 
+			// l'utilisateur au serveur central.
+			GestionnaireInfosUtilisateur gestionnaireInfosUtilisateur = new GestionnaireInfosUtilisateur(this.gestionnaireFichier, this.ipServeurCentral, this.portServeurCentral, this.port);
 			// attendre les clients
 			while(continuer) {
 				try {

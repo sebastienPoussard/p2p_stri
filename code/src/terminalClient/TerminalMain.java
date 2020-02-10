@@ -14,14 +14,16 @@ public class TerminalMain {
 	public static void main(String[] args) {
 		//variable de lancements
 		int portServeur = 8081;										// port du serveur de partage
-		String adresseDossierPartage = "/tmp/share";				// adresse du dossier de fichiers partagés
-		String adresseDossierTelechargement = "/tmp/dowloads";		// adresse du dossier de fichiers téléchargés
+		String adresseDossierTelechargement = "/tmp/dowloadss";		// adresse du dossier de fichiers téléchargés
+		Scanner scanner;											// scanner pr lire les E/S de l'utilisateur
 		
+		//créer le gestionnaire de fichiers
+		GestionnaireFichier gestionnaireDeFichier = new GestionnaireFichier(adresseDossierTelechargement);
 		
 		//lancer le serveur.
 		//###############################################################################
 		// lancer le serveur de partage.
-		Serveur serveur = new Serveur(portServeur, adresseDossierPartage);
+		Serveur serveur = new Serveur(portServeur, gestionnaireDeFichier);
 		Thread serveurThread = new Thread(serveur);
 		serveurThread.start();
 		
@@ -33,16 +35,11 @@ public class TerminalMain {
 		//lancer le client
 		//###############################################################################
 		// récuperer IP et PORT
-				String adresseDossierTelechargements = "/tmp/downloads/";		// adresse du dossier qui va recevoir les fichiers du serveur.
-				GestionnaireFichier gestionnaireFichier;					// gestionnaire de fichier
-				Scanner scanner;
+				
 				
 				// créer la liste des serveurs.
 				String serveur1 = "localhost:8080";
 				String serveur2 = "localhost:8081";
-				
-				// ouvrir le gestionnaire de fichier 
-				gestionnaireFichier = new GestionnaireFichier(null, adresseDossierTelechargements);
 				
 				// traiter les demandes du client.
 				scanner = new Scanner(System.in);
@@ -63,18 +60,18 @@ public class TerminalMain {
 					case "1":
 						RequeteListe requeteListe = new RequeteListe(serveur1);
 						Thread threadListe = new Thread(requeteListe);
-						threadListe.run();
+						threadListe.start();
 						break;
 					case "2":
-						RequeteTelechargerFichier requeteTelecharger = new RequeteTelechargerFichier(serveur1, choix[1], gestionnaireFichier);
+						RequeteTelechargerFichier requeteTelecharger = new RequeteTelechargerFichier(serveur1, choix[1], gestionnaireDeFichier);
 						Thread threadTelecharger = new Thread(requeteTelecharger);
-						threadTelecharger.run();
+						threadTelecharger.start();
 						break;
 					case "3":
 						// répartire la téléchargement entre plusieurs serveurs gerés par plusieurs threads.
-						RequeteTelechargerBlocFichier requete1 = new RequeteTelechargerBlocFichier(serveur1, choix[1], gestionnaireFichier, "START", "10000");
+						RequeteTelechargerBlocFichier requete1 = new RequeteTelechargerBlocFichier(serveur1, choix[1], gestionnaireDeFichier, "START", "10000");
 						Thread thread1 = new Thread(requete1);
-						RequeteTelechargerBlocFichier requete2 = new RequeteTelechargerBlocFichier(serveur2, choix[1], gestionnaireFichier, "10000", "END");
+						RequeteTelechargerBlocFichier requete2 = new RequeteTelechargerBlocFichier(serveur2, choix[1], gestionnaireDeFichier, "10000", "END");
 						Thread thread2 = new Thread(requete2);
 						thread1.start();
 						thread2.start();
@@ -85,12 +82,6 @@ public class TerminalMain {
 							} catch (InterruptedException e) {
 								Messages.getInstance().ecrireErreur("echec à l'attente que tous les Thread soit terminés");
 							}
-						}
-						// quand tous les blocs du fichier sont téléchargés, réassembler le fichier final.
-						try {
-							gestionnaireFichier.reformer(choix[1]);
-						} catch (IOException e) {
-							Messages.getInstance().ecrireErreur("Echec à la reformation du fichier final "+choix[1]); 
 						}
 						Messages.getInstance().ecrireMessage("Fichier "+choix[1]+" téléchargé en bloc avec succés !");
 						break;

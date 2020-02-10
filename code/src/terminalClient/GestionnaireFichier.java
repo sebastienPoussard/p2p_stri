@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 
@@ -13,50 +14,42 @@ import commun.ListeDeBlocs;
 import commun.Messages;
 
 /**
- * @brief Cette classe gere le dossier contenant les fichiers partagés ainsi que le dossier de téléchargement.
+ * @brief Cette classe gere le dossier contenant les fichiers partagés et téléchargés.
  */
 public class GestionnaireFichier {
 	
 	private File dossierDesFichiers;		// dossier contenant les fichiers partagés & téléchargés.
-	private File dossierTemp;				// dossier contenant les fichier temporaires.
 	
 	/**
 	 * @brief constructeur de GestionnaireFichier
 	 * @param cheminDossierPartages chemin complet vers le dossiers contenant les fichiers partagés.
 	 * accepte uniquement un chemin Linux car Linux > Windows.
 	 */
-	public GestionnaireFichier(String cheminDossierApplication) {
-		File dossierApplication = new File(cheminDossierApplication);
+	public GestionnaireFichier(String cheminDossierFichiers) {
+		
+		this.dossierDesFichiers = new File(cheminDossierFichiers);
 		// créer le dossier d'application s'il nexiste pas déjà.
-		if (!dossierApplication.exists())
-			dossierApplication.mkdir();
-		// créer le dossier des fichiers téléchargés & partagés s'il n'existe pas déjà.
-		this.dossierDesFichiers = new File(cheminDossierApplication+"/fichiers");
 		if (!this.dossierDesFichiers.exists())
 			this.dossierDesFichiers.mkdir();
 		Messages.getInstance().ecrireMessage("Dossier des fichiers téléchargés et partagés : "+this.dossierDesFichiers.getAbsolutePath());
-		// créer le dossier de téléchargements temporaire s'il n'existe pas déjà.
-		this.dossierTemp = new File(cheminDossierApplication+"/temp");
-		if (!this.dossierTemp.exists())
-			this.dossierTemp.mkdir();
 	}
 	
 	/**
-	 *    A REVOIR
 	 * 
 	 * @brief cette méthode permet d'obtenir le stream du fichier à partir d'un nom de fichier.
 	 * @param nomFichier nom du fihier que l'on souhaite 
 	 * @return renvoie null si on ne trouve pas le fichier.
 	 * @throws FileNotFoundException renvoie cette exception si le fichier demandé d'existe pas.
 	 */
-	public FileInputStream rechercherFichier(String nomFichier) throws FileNotFoundException {
+	public RandomAccessFile rechercherFichier(String nomFichier) throws FileNotFoundException {
 		
 		File[] listeDesFichiers = this.dossierDesFichiers.listFiles();
 		for (File fichier : listeDesFichiers) {
 			if (fichier.getName().equals(nomFichier)) {
-					return new FileInputStream(fichier);
+					return new RandomAccessFile(fichier, "rw");
 			}
 		}
+		// lancer une erreur si on ne trouve pas le fichier.
 		throw new FileNotFoundException();
 	}
 	
@@ -67,93 +60,46 @@ public class GestionnaireFichier {
 	 * @throws FileNotFoundException renvoie une erreur si la création du fichier à échoué.
 	 * @return renvoie le flux de donnée pour écrire dans le fichier.
 	 */
-	public FileOutputStream creerFichier(String nomFichier) throws FileNotFoundException {
-		return new FileOutputStream(new File(this.dossierDesFichiers.getAbsolutePath()+"/"+nomFichier));
+	public RandomAccessFile creerFichier(String nomFichier) throws FileNotFoundException {
+		
+		return new RandomAccessFile(new File(this.dossierDesFichiers.getAbsolutePath()+"/"+nomFichier), "rw");
 	}
 	
 	/**
-	 * @brief créer un nouveau fichier temporaire dans le dossier temporaire du fichier.
-	 * @param nomFichier nom du fichier téléchargé en bloc à créer.
-	 * @param blocDebut numéro du premier bloc.
-	 * @param blocFin numéro du dernier bloc.
-	 * @throws FileNotFoundException renvoie une erreur si la création du fichier à échoué.
-	 * @return renvoie le flux de donnée pour écrire dans le fichier.
+	 * @brief créer les informations sur l'utilisateur.
+	 * @param ip ip du serveur.
+	 * @param port port d'écoute du serveur.
+	 * @return renvoie les infos de l'utilisateur.
 	 */
-	public FileOutputStream creerFichierTemporaire(String nomFichier, String blocDebut, String blocFin) throws FileNotFoundException{
-		creerDossierTemporaire(nomFichier);
-		return new FileOutputStream(new File(this.dossierTemp.getAbsoluteFile()+nomFichier+"/"+blocDebut+"-"+blocFin));
-	}
 	
-	/**
-	 * @brief créer le dossier temporaire pour acceuillir les fichiers temporaires du téléchargement en plusieurs blocs.
-	 * @param nomFichier nom du fichier qui sera télécharger en plusieurs blocs.
-	 */
-	public void creerDossierTemporaire(String nomFichier) {
-		File dossierTemporaire = new File(this.dossierTemp.getAbsolutePath()+"/"+nomFichier);
-		if (!dossierTemporaire.exists()) {
-			dossierTemporaire.mkdir();
-		}
-	}
-	
-	/**
-	 * @brief prend les differents bloc de fichier pour reformer le fichier final.
-	 * @param nomFichier le nom du fichier à reformer.
-	 * @throws IOException 
-	 */
-	public void reformer(String nomFichier) throws IOException {
-		// créer le fichier final
-		File fichierFinal = new File(this.dossierDesFichiers.getAbsoluteFile()+"/"+nomFichier);
-		FileOutputStream streamFichierFinal = new FileOutputStream(fichierFinal);
-		// récuperer la liste des fichiers blocs
-		File dossierTemp = new File(this.dossierTemp.getAbsoluteFile()+"/"+nomFichier);
-		File[] listeFichierTemp = dossierTemp.listFiles();
-		// ouvrir chaque fichier temporaire et écrire son contenu dans le fichier final.
-		for (File fichierTemp : listeFichierTemp) {
-			// ouvrir le stream du fichier temporaire
-			FileInputStream streamFichierTemp = new FileInputStream(fichierTemp);
-			int marqueur;						// marqueur de positon dans le buffer de "données".
-			byte[] donnee = new byte[1024];		// buffer de données pour stocker la réponse du serveur.
-			while ((marqueur = streamFichierTemp.read(donnee)) > 0) {
-				streamFichierFinal.write(donnee, 0, marqueur);
-				// si c'est le dernier bloc, sortir de la boucle
-				if (marqueur < 1024) {
-					break;
+	public InfoUtilisateur creerInfosUtilisateur(String ip, int port) {
+		InfoUtilisateur infos = new InfoUtilisateur(ip, port);
+		// pour chaque fichier de l'utilisateur, regarder les blocs qu'il possede.
+		File[] listeDesFichiers = this.dossierDesFichiers.listFiles();
+		for (File fichier : listeDesFichiers) {
+			long taille = fichier.getTotalSpace();
+			// chaque bloc fait 100Ko (1000 * 100 * 8 )
+			// convertir la taille en nombre de blocs
+			double nombreDeBlocsFlottant = (taille/(1000*100*8.0));
+			int nbrDeBlocs = (int) Math.ceil(nombreDeBlocsFlottant);
+			try {
+				FileInputStream fIn = new FileInputStream(fichier);
+				ListeDeBlocs listeDeBlocs = new ListeDeBlocs();
+				for (int i = 0; i < nbrDeBlocs ; i++) {
+					// lire le premier byte du bloc.
+					byte[] b = new byte[1];
+					fIn.read(b, i*(1000*100*8), 1);
+					// si le début du bloc contient le caractère \0 alors le bloc est vide.
+					if (b[0] != '\0') {
+						// ajouter le bloc a la liste.
+						listeDeBlocs.ajouterUnBloc(i);
+					}
 				}
-			}
-			// fermer le flux du bloc fichier
-			streamFichierTemp.close();
-			// supprimer le fichier temporaire
-			fichierTemp.delete();
-		}
-		// fermer le flux du fichier final
-		streamFichierFinal.close();
-		// supprimer le dossier temporaire contenant les bloc fichiers
-		dossierTemp.delete();
-	}
-
-
-	public void remplirListeDesFichiers(InfoUtilisateur infoUtilisateur) {
-		//remplir la liste des fichiers complets.
-		File[] fichiersComplets = dossierDesFichiers.listFiles();
-		Arrays.sort(fichiersComplets);
-		for (File fichierComplet : fichiersComplets) {
-			ListeDeBlocs listeDeBlocs = new ListeDeBlocs();
-			// taille max = 2147 Go
-			int nbrBlocs =  (int)fichierComplet.length()/(1000*8);
-			listeDeBlocs.ajouterIntervalle(1, nbrBlocs);
-			System.out.println(fichierComplet.getAbsolutePath());
-		}
-		//remplir la liste des fichiers incomplets
-		File[] dossierDeFichierIncomplet = dossierTemp.listFiles();
-		Arrays.sort(dossierDeFichierIncomplet);
-		// parcourir les dossiers
-		for (File dossier : dossierDeFichierIncomplet) {
-			File[] fichiersTemp = dossier.listFiles();
-			Arrays.sort(fichiersTemp);
-			// parcourir les fichier de chaque dossier
-			for (File fichier : fichiersTemp) {
-				System.out.println(fichier.getAbsolutePath());
+				infos.ajouterFichier(fichier.getName(), listeDeBlocs);
+			} catch (IOException e) {
+				Messages.getInstance().ecrireErreur("impossible de lire le fichier pour voir ses blocs...");
 			}
 		}
+		return infos;
 	}
 }

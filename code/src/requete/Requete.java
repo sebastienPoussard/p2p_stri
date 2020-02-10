@@ -3,6 +3,7 @@ package requete;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -18,6 +19,7 @@ public abstract class Requete implements Runnable {
 	protected BufferedInputStream inStream;				// flux de données entrant.
 	protected BufferedOutputStream outStream;			// flux de données sortant.
 	protected Socket socket;							// socket de connexion au serveur.
+	protected ObjectOutputStream objOut;				// stream pour envoyer un object.
 	
 	/**
 	 * @brief constructeur de Requete.
@@ -48,6 +50,7 @@ public abstract class Requete implements Runnable {
 		try {
 			this.inStream = new BufferedInputStream(this.socket.getInputStream());
 			this.outStream = new BufferedOutputStream(this.socket.getOutputStream());
+			this.objOut = new ObjectOutputStream(this.socket.getOutputStream());
 		} catch (IOException e) {
 			Messages.getInstance().ecrireErreur("Erreur à l'ouverture des flux de données avec le serveur");
 			return;
@@ -66,6 +69,15 @@ public abstract class Requete implements Runnable {
 			this.outStream.flush();
 		} catch (IOException e) {
 			Messages.getInstance().ecrireErreur("echec à l'envoie de la commande "+requete);
+		}
+	}
+	
+	protected void envoyerObjet(Object objet) {
+		try {
+			this.objOut.writeObject(objet);
+			this.objOut.flush();
+		} catch (IOException e) {
+			Messages.getInstance().ecrireErreur("Echec à l'envoie de l'objet InfoUtilisateurs");
 		}
 	}
 	

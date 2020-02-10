@@ -7,7 +7,7 @@ public class ServeurCentralMain {
 		// définir le port.
 		int port = 8080;
 		// lancer le serveur central.
-		ServeurCentral serveurCentral = new ServeurCentral(port;
+		ServeurCentral serveurCentral = new ServeurCentral(port);
 		serveurCentral.lancer();
 	}
 
