@@ -3,6 +3,7 @@ package requete;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -20,6 +21,7 @@ public abstract class Requete implements Runnable {
 	protected BufferedOutputStream outStream;			// flux de données sortant.
 	protected Socket socket;							// socket de connexion au serveur.
 	protected ObjectOutputStream objOut;				// stream pour envoyer un object.
+	protected ObjectInputStream objIn;					// stream pour recevoir un object.
 	
 	/**
 	 * @brief constructeur de Requete.
@@ -51,6 +53,7 @@ public abstract class Requete implements Runnable {
 			this.inStream = new BufferedInputStream(this.socket.getInputStream());
 			this.outStream = new BufferedOutputStream(this.socket.getOutputStream());
 			this.objOut = new ObjectOutputStream(this.socket.getOutputStream());
+			this.objIn = new ObjectInputStream(this.socket.getInputStream());
 		} catch (IOException e) {
 			Messages.getInstance().ecrireErreur("Erreur à l'ouverture des flux de données avec le serveur");
 			return;
@@ -79,6 +82,20 @@ public abstract class Requete implements Runnable {
 		} catch (IOException e) {
 			Messages.getInstance().ecrireErreur("Echec à l'envoie de l'objet InfoUtilisateurs");
 		}
+	}
+	
+	protected Object recevoirObjet() {
+		try {
+			// essayer de recevoir l'objet.
+			return this.objIn.readObject();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	/**

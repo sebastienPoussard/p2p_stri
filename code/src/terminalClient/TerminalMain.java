@@ -13,17 +13,22 @@ public class TerminalMain {
 
 	public static void main(String[] args) {
 		//variable de lancements
-		int portServeur = 8081;										// port du serveur de partage
-		String adresseDossierTelechargement = "/tmp/dowloadss";		// adresse du dossier de fichiers téléchargés
-		Scanner scanner;											// scanner pr lire les E/S de l'utilisateur
+		int portServeur = 8080;										// port du serveur de partage.
+		String adresseDossierTelechargement = "/tmp/dowloads";		// adresse du dossier de fichiers téléchargés.
+		Scanner scanner;											// scanner pr lire les E/S de l'utilisateur.
+		String ipServeurCentral;									// ip du serveur central.
+		int portServeurCentral;										// port du serveur central.
 		
 		//créer le gestionnaire de fichiers
 		GestionnaireFichier gestionnaireDeFichier = new GestionnaireFichier(adresseDossierTelechargement);
 		
 		//lancer le serveur.
 		//###############################################################################
+		// instancier les valeurs du serveur central.
+		ipServeurCentral = "localhost";
+		portServeurCentral = 9090;
 		// lancer le serveur de partage.
-		Serveur serveur = new Serveur(portServeur, gestionnaireDeFichier);
+		Serveur serveur = new Serveur(portServeur, gestionnaireDeFichier, ipServeurCentral, portServeurCentral);
 		Thread serveurThread = new Thread(serveur);
 		serveurThread.start();
 		

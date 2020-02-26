@@ -5,6 +5,9 @@ import java.io.IOException;
 import commun.Messages;
 
 /**
+ * 
+ * DEPRACTED : inutile quand architecture clients + serveur central.
+ * 
  * @brief Cette classe permet de créer un Thread qui va demander à un serveur la liste des fichiers qu'il contient.
  */
 public class RequeteListe extends Requete {

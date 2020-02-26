@@ -2,10 +2,9 @@ package gestionnaireRequete;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import commun.Messages;
 
@@ -17,6 +16,8 @@ public abstract class GestionnaireRequetes implements Runnable {
 	protected Socket socService;							// socket de la connexion.
 	protected BufferedInputStream streamIn;					// flux de requêtes client.
 	protected BufferedOutputStream streamOut;				// flux de réponse du serveur au client.
+	protected ObjectInputStream objIn;						// stream pour reçevoit les objets.
+	protected ObjectOutputStream objOut;					// stream pour envoyer des objets.
 	protected String requete;								// requete du client.
 	
 	/**
@@ -27,8 +28,10 @@ public abstract class GestionnaireRequetes implements Runnable {
 	public GestionnaireRequetes(Socket socService) throws IOException {
 		this.socService = socService;
 		// ouvrir les fluxs
-		this.streamIn = new BufferedInputStream(socService.getInputStream());
 		this.streamOut = new BufferedOutputStream(socService.getOutputStream());
+		this.streamIn = new BufferedInputStream(socService.getInputStream());
+		this.objOut = new ObjectOutputStream(socService.getOutputStream());
+		this.objIn = new ObjectInputStream(socService.getInputStream());
 		// affecter le gestionnaire de fichier
 	}
 

@@ -9,6 +9,7 @@ import commun.Messages;
 import terminalClient.GestionnaireFichier;
 
 /**
+ * 
  * @brief cette classe va télécharger un bloc de fichier depuis un serveur.
  */
 public class RequeteTelechargerBlocFichier extends Requete {

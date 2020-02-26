@@ -27,14 +27,15 @@ public class Serveur implements Runnable {
 	 * @param port port d'écoute du serveur.
 	 * @param adresseDossierPartage adresse du dossier qui contient les fichier partagés par le serveur.
 	 */
-	public Serveur(int port, GestionnaireFichier gestionnaireDeFichier) {
+	public Serveur(int port, GestionnaireFichier gestionnaireDeFichier, String ipServeurCentral, int portServeurCentral) {
 		this.port = port;
+		this.ipServeurCentral = ipServeurCentral;
+		this.portServeurCentral = portServeurCentral;
 		try {
 			// récuperer l'adresse IP du serveur.
 			this.ip = InetAddress.getLocalHost().toString().split("/")[1];
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Messages.getInstance().ecrireErreur("Impossible de determiner l'IP du client.");
 		}
 		this.gestionnaireFichier = gestionnaireDeFichier;
 	}
@@ -59,6 +60,8 @@ public class Serveur implements Runnable {
 			// si le serveur à réussit à démarrer, démarrer le thread qui envoie les infos de 
 			// l'utilisateur au serveur central.
 			GestionnaireInfosUtilisateur gestionnaireInfosUtilisateur = new GestionnaireInfosUtilisateur(this.gestionnaireFichier, this.ipServeurCentral, this.portServeurCentral, this.port);
+			Thread threadInfosUtilisateur = new Thread(gestionnaireInfosUtilisateur);
+			threadInfosUtilisateur.start();
 			// attendre les clients
 			while(continuer) {
 				try {

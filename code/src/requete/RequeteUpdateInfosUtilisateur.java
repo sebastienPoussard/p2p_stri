@@ -19,7 +19,18 @@ public class RequeteUpdateInfosUtilisateur extends Requete {
 	@Override
 	public void run() {
 		super.run();
+		// envoyer la requete pour signaler que l'on va envoyer les infos.
+		this.envoyerRequete("UPDATE");
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// envoyer les infos utilisateurs.
 		this.envoyerObjet(infos);
+		// fermer la connexion
+		this.terminer();
 	}
 
 }
