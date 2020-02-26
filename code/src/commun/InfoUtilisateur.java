@@ -11,6 +11,7 @@ public class InfoUtilisateur implements Serializable {
 	private String ip;											// ip de l'utilisateur.
 	private int port;											// port d'écoute de l'utilisateur.
 	private HashMap<String, ListeDeBlocs> fichiersPartages;		// liste des fichiers et des blocs que l'utilisateur à.
+	private HashMap<String , Long> listeDesFichiersComplets;	// liste des fichiers complets de l'utilisateur.
 	
 	/**
 	 * @brief constructeur de la classe.
@@ -21,6 +22,7 @@ public class InfoUtilisateur implements Serializable {
 		this.ip = ip;
 		this.port = port;
 		this.fichiersPartages = new HashMap<String, ListeDeBlocs>();
+		this.listeDesFichiersComplets = new HashMap<String, Long>();
 	}
 
 	/**
@@ -29,6 +31,14 @@ public class InfoUtilisateur implements Serializable {
 	 */
 	public String getIp() {
 		return ip;
+	}
+	
+	/**
+	 * @brief permet de récuperer la liste des fichiers complets de l'utilisateur.
+	 * @return renvoie la liste des fichiers complets de l'utilisateur.
+	 */
+	public HashMap<String, Long> obtenirLaListeDesFichiersComplets() {
+		return this.listeDesFichiersComplets;
 	}
 
 	/**
@@ -45,6 +55,12 @@ public class InfoUtilisateur implements Serializable {
 	 * @param listeDeBlocs la liste des blocs du fichier.
 	 */
 	public void ajouterFichier(String nomFichier, ListeDeBlocs listeDeBlocs) {
+		// si la liste de blocs contient la taille, alors le fichier est complet à la liste.
+		long tailleDuFichier = listeDeBlocs.obtenirTailleDuFichier();
+		if (tailleDuFichier != -1) {
+			this.listeDesFichiersComplets.put(nomFichier, tailleDuFichier);
+		}
+		// dans tous les cas, ajouter la liste de bloc.
 		this.fichiersPartages.put(nomFichier, listeDeBlocs);
 	}
 	
@@ -65,6 +81,7 @@ public class InfoUtilisateur implements Serializable {
 	public ListeDeBlocs blocDuFichier(String nomFichier) {
 		return this.fichiersPartages.get(nomFichier);
 	}
+	
 	
 	/**
 	 * @brief methode pour obtenir une description de l'info utilisateur 

@@ -1,6 +1,5 @@
 package terminalClient;
 
-import java.io.IOException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -18,6 +17,7 @@ public class TerminalMain {
 		Scanner scanner;											// scanner pr lire les E/S de l'utilisateur.
 		String ipServeurCentral;									// ip du serveur central.
 		int portServeurCentral;										// port du serveur central.
+		String adresseServeurCentral;
 		
 		//créer le gestionnaire de fichiers
 		GestionnaireFichier gestionnaireDeFichier = new GestionnaireFichier(adresseDossierTelechargement);
@@ -27,6 +27,7 @@ public class TerminalMain {
 		// instancier les valeurs du serveur central.
 		ipServeurCentral = "localhost";
 		portServeurCentral = 9090;
+		adresseServeurCentral = ipServeurCentral+":"+portServeurCentral;
 		// lancer le serveur de partage.
 		Serveur serveur = new Serveur(portServeur, gestionnaireDeFichier, ipServeurCentral, portServeurCentral);
 		Thread serveurThread = new Thread(serveur);
@@ -55,15 +56,14 @@ public class TerminalMain {
 					Messages.getInstance().ecrireMessage("#################### MENU ##############################");
 					Messages.getInstance().ecrireMessage("# 1                : obtenir la liste des fichiers     #");
 					Messages.getInstance().ecrireMessage("# 2 <nom_fichier>  : telecharger fichier               #");
-					Messages.getInstance().ecrireMessage("# 3 <nom_fichier>  : télécharger depuis plusieurs srv  #");
-					Messages.getInstance().ecrireMessage("# 4                : quitter le programme              #");
+					Messages.getInstance().ecrireMessage("# 3                : quitter le programme              #");
 					Messages.getInstance().ecrireMessage("########################################################");
 					reponse = scanner.nextLine();
 					choix = reponse.split(" ");
 					// traiter le choix du client.
 					switch (choix[0]) {
 					case "1":
-						RequeteListe requeteListe = new RequeteListe(serveur1);
+						RequeteListe requeteListe = new RequeteListe(adresseServeurCentral);
 						Thread threadListe = new Thread(requeteListe);
 						threadListe.start();
 						break;

@@ -25,6 +25,7 @@ public class GestionnaireFichier {
 	private String cheminDossierFichiers;
 	private String cheminDossierFichiersComplets;
 	private String cheminDossierFichiersIncomplets;
+	private static int TAILLEDEBLOC = 1000*100;		// un bloc fait 100Ko (doit être multiple de 10)
 	
 	/**
 	 * @brief constructeur de GestionnaireFichier
@@ -42,18 +43,18 @@ public class GestionnaireFichier {
 		// créer le dossier d'application s'il n'existe pas déjà.
 		if (!this.dossierDesFichiers.exists())
 			this.dossierDesFichiers.mkdir();
-		Messages.getInstance().ecrireErreur("Dossier des fichiers : "+this.cheminDossierFichiers);
+		Messages.getInstance().ecrireMessage("Dossier des fichiers : "+this.cheminDossierFichiers);
 		// créer le dossier des fichiers complets s'il n'existe pas déjà.
 		if (!this.dossierDesFichiersComplets.exists())
 			this.dossierDesFichiersComplets.mkdir();
-		Messages.getInstance().ecrireErreur("Dossier des fichiers complets : "+this.cheminDossierFichiersComplets);
+		Messages.getInstance().ecrireMessage("Dossier des fichiers complets : "+this.cheminDossierFichiersComplets);
 		// créer le dossier des fichiers incomplet s'il n'existe pas déjà.
 		if (!this.dossierDesFichiersIncomplets.exists())
 			this.dossierDesFichiersIncomplets.mkdir();
-		Messages.getInstance().ecrireErreur("dossier des fichiers incomplets : "+this.cheminDossierFichiersIncomplets);
+		Messages.getInstance().ecrireMessage("dossier des fichiers incomplets : "+this.cheminDossierFichiersIncomplets);
 		// remplir le marqueur de bloc vide
-		this.marqueurVide = new byte[1000*100];
-		for(int i = 0; i < 1000*100 ; i+=10) {
+		this.marqueurVide = new byte[TAILLEDEBLOC];
+		for(int i = 0; i < TAILLEDEBLOC ; i+=10) {
 			this.marqueurVide[i+0] = 'J';
 			this.marqueurVide[i+1] = 'E';
 			this.marqueurVide[i+2] = 'A';
@@ -94,24 +95,33 @@ public class GestionnaireFichier {
 	}
 	
 	/**
-	 * 
-	 * TODO : construire le fichier avec le buffer vide, necessite la taille en paramètre.
-	 * TODO : attention au dernier bloc, comment le gerer ?
-	 * 
 	 * @brief créer un nouveau fichier dans le dossier des fichiers incomplets.
 	 * @param nomFichier le nom du fichier créer.
 	 * @return renvoie le stream du fichier créer.
 	 * @throws FileNotFoundException renvoie une erreur si la création du fichier à échoué.
 	 * @return renvoie le flux de donnée pour écrire dans le fichier.
 	 */
-	public RandomAccessFile creerFichier(String nomFichier) throws FileNotFoundException {
+	public RandomAccessFile creerFichier(String nomFichier, long taille) throws FileNotFoundException {
 		
-		return new RandomAccessFile(new File(this.dossierDesFichiersIncomplets.getAbsolutePath()+"/"+nomFichier), "rw");
+		RandomAccessFile fichier = new RandomAccessFile(new File(this.dossierDesFichiersIncomplets.getAbsolutePath()+"/"+nomFichier), "rw");
+		//remplir le fichier de bloc "vides"
+		for (long i = 0; i < taille; i += TAILLEDEBLOC ) {
+			try {
+				// s'il reste encore de la place écrier un bloc entier
+				if (taille - i >= TAILLEDEBLOC) {
+					fichier.write(this.marqueurVide);
+				// sinon écrire seulement la taille restante
+				} else {
+					fichier.write(marqueurVide, 0, (int)(taille-i));
+				}
+			} catch (IOException e) {
+				Messages.getInstance().ecrireErreur("probléme à la génération du fichier vide.");
+			}
+		}
+		return fichier;
 	}
 	
 	/**
-	 * TODO : comment gerer le dernier bloc s'il n'est pas de taille standard ?
-	 * 
 	 * @brief créer les informations sur l'utilisateur.
 	 * @param ip ip du serveur.
 	 * @param port port d'écoute du serveur.
@@ -128,27 +138,41 @@ public class GestionnaireFichier {
 			listeDeBlocs.definirTailleDuFichier(fichier.length());
 			infos.ajouterFichier(fichier.getName(), listeDeBlocs);
 		}
+		
 		// pour chaque fichier incomplet de l'utilisateur, regarder les blocs qu'il possede.
 		File[] listeDesFichiersIncomplets = this.dossierDesFichiersIncomplets.listFiles();
 		for (File fichier : listeDesFichiersIncomplets) {
 			long taille = fichier.length();
 			System.out.println(fichier.getName() +" bytes : "+taille);
-			// chaque bloc fait 100Ko (1000 * 100)
 			// convertir la taille en nombre de blocs
-			double nombreDeBlocsFlottant = (taille/(1000*100));
+			double nombreDeBlocsFlottant = (taille/(TAILLEDEBLOC));
 			int nbrDeBlocs = (int) Math.ceil(nombreDeBlocsFlottant);
 			System.out.println(fichier.getName()+" nb blocs : "+nbrDeBlocs);
 			try {
 				FileInputStream fIn = new FileInputStream(fichier);
 				ListeDeBlocs listeDeBlocs = new ListeDeBlocs();
 				for (int i = 0; i < nbrDeBlocs ; i++) {
-					// lire le premier byte du bloc.
-					byte[] b = new byte[1000*100];
-					fIn.read(b, 0, 1000*100);
-					// si le début du bloc contient le caractère \0 alors le bloc est vide.
-					if (!b.equals(this.marqueurVide) ) {
-						// ajouter le bloc a la liste.
-						listeDeBlocs.ajouterUnBloc(i);
+					// lire le bloc.
+					byte[] bloc = new byte[TAILLEDEBLOC];
+					int tailleRestante = fIn.available();
+					// si la taille restante à lire est supérieur à un bloc.
+					if (tailleRestante >= TAILLEDEBLOC) {
+						// lire la taille d'un bloc.
+						fIn.read(bloc, 0, TAILLEDEBLOC);
+						// si le bloc lue n'est pas égale au bloc vide.
+						if (!estEgaleAuMarqueurVide(bloc) ) {
+							// ajouter le bloc à la liste.
+							listeDeBlocs.ajouterUnBloc(i);
+						}
+					} else {
+						// sinon on est sur le dernier bloc
+						byte[] blocIncomplet = new byte[tailleRestante];
+						fIn.read(blocIncomplet, 0, tailleRestante);
+						// si le bloc de byte restant n'est pas égale au marqueur vide
+						if (!estEgaleAuMarqueurVide(blocIncomplet)) {
+							// ajouter le bloc à la liste
+							listeDeBlocs.ajouterUnBloc(i);
+						}
 					}
 				}
 				infos.ajouterFichier(fichier.getName(), listeDeBlocs);
@@ -158,5 +182,22 @@ public class GestionnaireFichier {
 			}
 		} 
 		return infos;
+	}
+	
+	/**
+	 * @brief methode interne utiliser pour comparer un tableau de byte au marqueur vide.
+	 * @param bufferLue le buffer à tester.
+	 * @return renvoie true si le tableau de byte est égale au marqueur vide.
+	 */
+	private boolean estEgaleAuMarqueurVide(byte[] bufferLue) {
+		int taille = bufferLue.length;
+		boolean res = true;
+		for (int i = 0 ; i < taille; i++) {
+			if (bufferLue[i] != this.marqueurVide[i] ) {
+				res = false;
+				break;
+			}
+		}
+		return res;
 	}
 }
