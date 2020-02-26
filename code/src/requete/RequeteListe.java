@@ -38,7 +38,6 @@ public class RequeteListe extends Requete {
 			obj = this.objIn.readObject();
 			HashMap<String, Long> listeDesFichiersComplets = (HashMap<String, Long>)obj;
 			Iterator iterateur = listeDesFichiersComplets.entrySet().iterator();
-			System.out.println("vide ? "+listeDesFichiersComplets.isEmpty());
 			while (iterateur.hasNext()) {
 				Map.Entry fichier = (Entry)iterateur.next();
 				reponse += fichier.getKey()+" ("+fichier.getValue()+")\n";

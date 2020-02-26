@@ -9,8 +9,8 @@ public class Messages {
 	private static Messages instance = null;
 	
 	/**
-	 * @brief singleton pour accéder à une instance unique de Messages
-	 * @return retourne une instance unique de Messages
+	 * @brief singleton pour accéder à une instance unique de ListeDesFichiersComplets
+	 * @return retourne une instance unique de ListeDesFichiersComplets
 	 */
 	public static Messages getInstance() {
 		if (instance == null ) {

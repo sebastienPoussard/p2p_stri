@@ -16,7 +16,6 @@ public class ServeurCentral {
 	private int port;									// port du serveur central.
 	private ServerSocket socRDV;						// socket de rendez-vous.
 	private boolean continuer;							// continuer le traitement.
-	private HashMap<String, InfoUtilisateur> BD;		// dictionnaire des informations sur les utilisateurs.
 	
 	/**
 	 * @brief constructeur de ServeurCentral
@@ -26,7 +25,6 @@ public class ServeurCentral {
 	public ServeurCentral(int port) {
 		this.port = port;
 		this.continuer = true;
-		this.BD = new HashMap<String, InfoUtilisateur>();
 	}
 
 	public void lancer() {
@@ -42,7 +40,7 @@ public class ServeurCentral {
 							+ ") ouverture du port "+socService.getPort()+" pour servir le client.");
 					// quand un nouveau client se connecte, donner le traitement au gestionnaire de client
 					// qui est un nouveau thread.
-					GestionnaireRequetesServeurCentral gestionnaireRequeteServeurCentral = new GestionnaireRequetesServeurCentral(socService, BD);
+					GestionnaireRequetesServeurCentral gestionnaireRequeteServeurCentral = new GestionnaireRequetesServeurCentral(socService);
 					Thread thread = new Thread(gestionnaireRequeteServeurCentral);
 					thread.start();
 				} catch (IOException e) {

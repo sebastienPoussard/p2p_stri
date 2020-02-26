@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.concurrent.Callable;
+
 import commun.Messages;
 
 /**
@@ -37,6 +39,7 @@ public abstract class GestionnaireRequetes implements Runnable {
 
 	
 	/**
+	 * @return 
 	 * @brief methode pour lancer le traitement des requêtes d'un client
 	 */
 	@Override
@@ -49,8 +52,6 @@ public abstract class GestionnaireRequetes implements Runnable {
 			}
 		} catch (IOException e) {
 			Messages.getInstance().ecrireErreur("Une requête client à échouée, fermeture ");
-			// fermer le thread en cas d'erreur sur les socket.
-			return;
 		}
 	}
 	
