@@ -2,6 +2,7 @@ package gestionnaireRequete;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -59,18 +60,28 @@ public class GestionnaireRequetesServeurCentral extends GestionnaireRequetes {
 			}
 			break;
 		case "LISTE":
-			// message d'information);
-
+			// message d'information;
 			Messages.getInstance().ecrireMessage("Utilisateur "+this.socService.getInetAddress()+" demande "
 					+ "la liste des fichiers");
 			// envoyer la liste des fichiers
 			this.objOut.writeObject(ListeDesFichiersComplets.getInstance().obtenirListeDesFichiersComplets());
 			this.objOut.flush();
 			break;
+		case "DOWNLOAD":
+			String fichier = tableauRequete[1];
+			// message d'information
+			Messages.getInstance().ecrireMessage("Utilisateur "+this.socService.getInetAddress()+" demande"
+					+ " la listes des utilisateurs possédant le fichier "+fichier);
+			// créer la listes d'information à renvoyer à l'utilisateur.
+			HashMap<String, InfoUtilisateur> listeUtilisateursAyantLeFichier = ListeDesInfoUtilisateur.getInstance().obtenirLaListeDesUtilisateursAyantLeFichier(fichier);
+			// envoyer la listes des utilisateurs ayant le fichier.
+			this.objOut.writeObject(listeUtilisateursAyantLeFichier);
+			this.objOut.flush();
+			break;
 		default:
 			// si le message n'est pas correcte.
 			Messages.getInstance().ecrireErreur("La requête client ne correspond pas au bon standard"
-					+ ": UPDATE,  ");
+					+ ": UPDATE, LISTE, DOWNLOAD");
 			break;
 		}
 	}

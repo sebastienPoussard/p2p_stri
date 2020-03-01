@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 import commun.Messages;
 import requete.RequeteListe;
 import requete.RequeteTelechargerBlocFichier;
-import requete.RequeteTelechargerFichier;
+import requete.RequeteTelechargerFichierMultiple;
 
 public class TerminalMain {
 
@@ -68,9 +68,9 @@ public class TerminalMain {
 						threadListe.start();
 						break;
 					case "2":
-						RequeteTelechargerFichier requeteTelecharger = new RequeteTelechargerFichier(serveur1, choix[1], gestionnaireDeFichier);
-						Thread threadTelecharger = new Thread(requeteTelecharger);
-						threadTelecharger.start();
+						RequeteTelechargerFichierMultiple requete = new RequeteTelechargerFichierMultiple(adresseServeurCentral, choix[1], gestionnaireDeFichier);
+						Thread thread = new Thread(requete);
+						thread.start();
 						break;
 					case "3":
 						// répartire la téléchargement entre plusieurs serveurs gerés par plusieurs threads.
