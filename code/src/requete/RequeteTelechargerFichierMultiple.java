@@ -1,12 +1,15 @@
 package requete;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import commun.InfoUtilisateur;
+import commun.ListeDeBlocs;
 import commun.Messages;
 import terminalClient.GestionnaireFichier;
 
@@ -18,6 +21,8 @@ public class RequeteTelechargerFichierMultiple extends Requete {
 
 	private String nomFichier;									// nom du fichier à télécharger.
 	private GestionnaireFichier gestionnaireFichier;			// le gestionnaire de fichier.
+	private HashMap<String, InfoUtilisateur> listeDesUtilisateursAyantLeFichier;
+	private RandomAccessFile fluxFichier;
 	
 	/**
 	 * @brief télécharge un fichier chez un ou plusieurs serveurs.
@@ -47,7 +52,7 @@ public class RequeteTelechargerFichierMultiple extends Requete {
 		Object obj;
 		try {
 			obj = this.objIn.readObject();
-			HashMap<String, InfoUtilisateur> listeDesUtilisateursAyantLeFichier = (HashMap<String, InfoUtilisateur>)obj;
+			this.listeDesUtilisateursAyantLeFichier = (HashMap<String, InfoUtilisateur>)obj;
 			Iterator iterateur = listeDesUtilisateursAyantLeFichier.entrySet().iterator();
 			while (iterateur.hasNext()) {
 				Map.Entry utilisateur = (Entry)iterateur.next();
@@ -57,7 +62,36 @@ public class RequeteTelechargerFichierMultiple extends Requete {
 		} catch (IOException | ClassNotFoundException e) {
 			Messages.getInstance().ecrireErreur("echec à la reception de la liste de la liste des utilisateurs ayant le fichier.");
 		}
+		// construire le fichier "vide" dans le dossier des fichiers incomplets.
+		try {
+			this.fluxFichier = this.gestionnaireFichier.creerFichier(this.nomFichier, determinerTailleDuFichier(this.listeDesUtilisateursAyantLeFichier));
+		} catch (FileNotFoundException e) {
+			Messages.getInstance().ecrireErreur("echec à la création du fichier vide "+this.nomFichier);
+		}
 		// fermer le Thread.
 		terminer();
+	}
+	
+	/**
+	 * @brief methode pour obtenir la taille du fichier.
+	 * @param liste la liste des utilisateurs ayant le fichier.
+	 * @return renvoie la taille du fichier final.
+	 */
+	private long determinerTailleDuFichier(HashMap<String, InfoUtilisateur> liste) {
+		long res = 0;
+		Iterator iterateur = liste.entrySet().iterator();
+		while (iterateur.hasNext()) {
+			Map.Entry utilisateur = (Entry)iterateur.next();
+			// obtenir les infos de l'utilisateur.
+			InfoUtilisateur infos = (InfoUtilisateur) utilisateur.getValue();
+			// obtenir la liste de bloc de l'utilisateur.
+			ListeDeBlocs blocs = infos.blocDuFichier(this.nomFichier);
+			// récuperer la taille du fichier
+			if (blocs.obtenirTailleDuFichier() != -1) {
+				res = blocs.obtenirTailleDuFichier();
+				break;
+			}
+		}
+		return res;
 	}
 }

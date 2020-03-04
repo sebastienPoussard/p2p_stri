@@ -107,7 +107,7 @@ public class GestionnaireFichier {
 		//remplir le fichier de bloc "vides"
 		for (long i = 0; i < taille; i += TAILLEDEBLOC ) {
 			try {
-				// s'il reste encore de la place écrier un bloc entier
+				// s'il reste encore de la place écrire un bloc entier
 				if (taille - i >= TAILLEDEBLOC) {
 					fichier.write(this.marqueurVide);
 				// sinon écrire seulement la taille restante
