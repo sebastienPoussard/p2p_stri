@@ -1,9 +1,11 @@
 package gestionnaireRequete;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.net.Socket;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 
 import commun.Messages;
 import terminalClient.GestionnaireFichier;
@@ -35,41 +37,25 @@ public class GestionnaireRequetesServeur extends GestionnaireRequetes {
 	@Override
 	protected void servirClient(String requete) throws IOException {
 		String[] tableauRequete = requete.split(" ");
+		String nomFichier = tableauRequete[1];
+		int numeroBloc = Integer.parseInt(tableauRequete[2]);
 		switch(tableauRequete[0]) {
-		case "LISTE":
-			// message d'information
-			Messages.getInstance().ecrireMessage("Utilisateur "+this.socService.getInetAddress()+
-					" demande la liste des fichiers");
-			// envoyer la liste des fichiers sur le serveur.
-			this.streamOut.write(this.gestionnaireFichier.listeFichiers().getBytes());
-			this.streamOut.flush();
-			break;
-		case "TELECHARGER":
-			// message d'information
-			Messages.getInstance().ecrireMessage("Utilisateur "+this.socService.getInetAddress()+" demande "
-					+ "à télécharger le fichier : "+tableauRequete[1]);
-			// envoyer le fichier.
-			try {
-				envoyerFichier(this.gestionnaireFichier.rechercherFichier(tableauRequete[1]));
-				Messages.getInstance().ecrireMessage("Fichier "+tableauRequete[1]+" envoyé");
-			} catch (FileNotFoundException e) {
-				Messages.getInstance().ecrireErreur("Le fichier à partager "+tableauRequete[1]+" n'a pas été trouvé");
-			}
-			break;
 		case "TELECHARGER_BLOC":
 			// message d'information
 			Messages.getInstance().ecrireMessage("Utilisateur "+this.socService.getInetAddress()+" demande "
-					+ "à télécharger le fichier : "+tableauRequete[1]+" du bloc "+tableauRequete[2]+
-					" à "+tableauRequete[3]);
+					+ "à télécharger le bloc "+numeroBloc+" du fichier "+nomFichier);
+			// recuperer le stream du fichier.
+			RandomAccessFile fichier = this.gestionnaireFichier.rechercherFichier(nomFichier);
+			FileChannel channel = fichier.getChannel();
+			// positionner le channel sur le bloc désiré.
+			channel.position((numeroBloc-1)*GestionnaireFichier.TAILLEDEBLOC);
 			// envoyer le bloc
-			envoyerfichier(this.gestionnaireFichier.rechercherFichier(tableauRequete[1]), 
-					tableauRequete[2], tableauRequete[3],
-					this.gestionnaireFichier.tailleFichier(tableauRequete[1]));
+			envoyerfichier(channel);
 			break;
 		default:
 			// si le message n'est pas correcte.
 			Messages.getInstance().ecrireErreur("La requête client ne correspond pas au bon standard"
-					+ ": LISTE, TELECHARGER, TELECHARGER_BLOC ");
+					+ ": TELECHARGER_BLOC <nomDuFichier> <numeroDuBloc> ");
 			break;
 		}
 	}
@@ -105,46 +91,19 @@ public class GestionnaireRequetesServeur extends GestionnaireRequetes {
 	 * @param debut numero du premier bloc à envoyr
 	 * @param fin numero du dernier bloc à envoyer
 	 */
-	private void envoyerfichier(FileInputStream streamFichier, String debutString, String finString, long tailleFichier) {
-		long debut;		// numéro du début du bloc à envoyer.
-		long fin;		// numéro du dernier bloc à envoyer.
-		long taille;		// taille envoyé par passage.
-		// convertir le parametre de début.
-		
-		if (debutString.equals("START")) {
-			debut = 0;
-		} else {
-			debut = Long.parseLong(debutString);
-		}
-		// convertir le parametre de fin.
-		if (finString.equals("END")) {
-			fin = tailleFichier;
-		} else {
-			fin = Long.parseLong(finString);
-		}
-		long tailleRestantAEnvoyer = fin - debut;
-		byte[] buffer = new byte[1024];
-		// si le stream du fichier est null, c'est à dire si le fichier n'à pas été trouvé par le gestionnaire
-		// de fichier, envoyer une réponse d'erreur au client.
-		long envoyer =0;
+	private void envoyerfichier(FileChannel channel) {
+		byte[] buffer = new byte[GestionnaireFichier.TAILLEDEBLOC];
+		ByteBuffer bytebuffer = ByteBuffer.wrap(buffer);
 		try {
-			if (streamFichier == null) {
-				this.streamOut.write("FICHIER INEXISTANT".getBytes());
-				this.streamOut.flush();
-			} else {
-				// avancer jusqu'au début du bloc à envoyer
-				if (debut != 0) {
-					streamFichier.skip(debut);
-				}
-				// envoyer le bloc de fichier
-				while ((taille = streamFichier.read(buffer) ) > 0 && tailleRestantAEnvoyer > 0 ) {
-					this.streamOut.write(buffer, 0, (int)Long.min(taille, tailleRestantAEnvoyer));
-					tailleRestantAEnvoyer -= Long.min(taille, tailleRestantAEnvoyer);
-				}
-				this.streamOut.flush();
-			}
+			// lire la partie à envoyer
+			channel.read(bytebuffer);
+			// puis l'envoyer.
+			this.streamOut.write(bytebuffer.array(), 0, GestionnaireFichier.TAILLEDEBLOC);
+			
 		} catch (IOException e) {
+			Messages.getInstance().ecrireErreur("erreur à l'envoie du bloc...");
 		}
-		Messages.getInstance().ecrireMessage("bloc du fichier envoyé");
+		
+		
 	}
 }

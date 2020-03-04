@@ -73,7 +73,7 @@ public class GestionnaireRequetesServeurCentral extends GestionnaireRequetes {
 			Messages.getInstance().ecrireMessage("Utilisateur "+this.socService.getInetAddress()+" demande"
 					+ " la listes des utilisateurs possédant le fichier "+fichier);
 			// créer la listes d'information à renvoyer à l'utilisateur.
-			HashMap<String, InfoUtilisateur> listeUtilisateursAyantLeFichier = ListeDesInfoUtilisateur.getInstance().obtenirLaListeDesUtilisateursAyantLeFichier(fichier);
+			HashMap<String, ListeDeBlocs> listeUtilisateursAyantLeFichier = ListeDesInfoUtilisateur.getInstance().obtenirLaListeDesUtilisateursAyantLeFichier(fichier);
 			// envoyer la listes des utilisateurs ayant le fichier.
 			this.objOut.writeObject(listeUtilisateursAyantLeFichier);
 			this.objOut.flush();

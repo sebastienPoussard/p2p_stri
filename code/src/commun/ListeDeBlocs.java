@@ -20,6 +20,14 @@ public class ListeDeBlocs implements Serializable {
 		return tailleDuFichier;
 	}
 	
+	public boolean detientLeBloc(int numeroDuBloc) {
+		if (this.listeDesBlocs.contains(numeroDuBloc) || this.tailleDuFichier != -1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	/**
 	 * TODO : renvoyer erreur si < 0
 	 * 

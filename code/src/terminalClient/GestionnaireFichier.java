@@ -25,7 +25,7 @@ public class GestionnaireFichier {
 	private String cheminDossierFichiers;
 	private String cheminDossierFichiersComplets;
 	private String cheminDossierFichiersIncomplets;
-	private static int TAILLEDEBLOC = 1000*100;		// un bloc fait 100Ko (doit être multiple de 10)
+	public static int TAILLEDEBLOC = 1000*100;		// un bloc fait 100Ko (doit être multiple de 10)
 	
 	/**
 	 * @brief constructeur de GestionnaireFichier

@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import commun.InfoUtilisateur;
+import commun.ListeDeBlocs;
 
 /** @brief cette classe représente la liste des infos utilisateurs connecté.
  */
@@ -55,8 +56,8 @@ public class ListeDesInfoUtilisateur {
 	 * @param fichier le nom du fichier en question.
 	 * @return renvoie la liste.
 	 */
-	public synchronized HashMap<String, InfoUtilisateur> obtenirLaListeDesUtilisateursAyantLeFichier(String fichier) {
-		HashMap<String, InfoUtilisateur> resultat = new HashMap<String, InfoUtilisateur>();
+	public synchronized HashMap<String, ListeDeBlocs> obtenirLaListeDesUtilisateursAyantLeFichier(String fichier) {
+		HashMap<String, ListeDeBlocs> resultat = new HashMap<String, ListeDeBlocs>();
 		// parcourir la liste complete des utilisateurs.
 		Iterator iterateur = this.listeDesInfoUtilisateur.entrySet().iterator();
 		while (iterateur.hasNext()) {
@@ -65,7 +66,9 @@ public class ListeDesInfoUtilisateur {
 			// à chaque fois qu'un utilisateur posséde le fichier.
 			if (info.detientLeFichier(fichier)) {
 				// rajouter l'utilisateur à la liste à renvoyer.
-				resultat.put((String)utilisateur.getKey(), (InfoUtilisateur)utilisateur.getValue());
+				String adresse = info.getIp()+":"+info.getPort();
+				ListeDeBlocs blocs = info.blocDuFichier(fichier);
+				resultat.put(adresse, blocs);
 			}
 		}
 		return resultat;
