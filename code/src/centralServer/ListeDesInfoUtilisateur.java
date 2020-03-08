@@ -16,7 +16,7 @@ public class ListeDesInfoUtilisateur {
 	private static ListeDesInfoUtilisateur instance = null;				// instance statique pour singleton.
 	
 	/**
-	 * @brief constructeur privé pour sigleton
+	 * @brief constructeur private pour singleton
 	 */
 	private ListeDesInfoUtilisateur() {
 		this.listeDesInfoUtilisateur = new HashMap<String, InfoUtilisateur>();
@@ -35,8 +35,8 @@ public class ListeDesInfoUtilisateur {
 
 	/**
 	 * @brief methode pour ajouter un nouvel utilisateur à la liste des utilisateurs connectés.
-	 * @param adresse adresse ip de l'utilisateur à ajouter.
-	 * @param info la liste des fichiers que l'utilisateur possède.
+	 * @param adresse adresse ip et port de l'utilisateur à ajouter, format <ip>:<port>.
+	 * @param info InfoUtilisateur généré par l'utilisateur qui contient la liste de ses fichiers.
 	 */
 	public synchronized void ajouterUtilisateur(String adresse, InfoUtilisateur info) {
 		if (!this.listeDesInfoUtilisateur.containsKey(adresse))
@@ -45,7 +45,7 @@ public class ListeDesInfoUtilisateur {
 	
 	/**
 	 * @brief methode pour enlever un utilisateur à la liste des utilisateurs connectés.
-	 * @param adresse l'adresse ip de l'utilisateur à enlever de la liste.
+	 * @param adresse l'adresse ip et port de l'utilisateur à enlever de la liste, format <ip>:<port>..
 	 */
 	public synchronized void enleverUtilisateur(String adresse) {
 		this.listeDesInfoUtilisateur.remove(adresse);
@@ -56,9 +56,11 @@ public class ListeDesInfoUtilisateur {
 	 * @param fichier le nom du fichier en question.
 	 * @return renvoie la liste.
 	 */
+	@SuppressWarnings("rawtypes")
 	public synchronized HashMap<String, ListeDeBlocs> obtenirLaListeDesUtilisateursAyantLeFichier(String fichier) {
 		HashMap<String, ListeDeBlocs> resultat = new HashMap<String, ListeDeBlocs>();
 		// parcourir la liste complete des utilisateurs.
+		System.out.println("taille : "+this.listeDesInfoUtilisateur.size());
 		Iterator iterateur = this.listeDesInfoUtilisateur.entrySet().iterator();
 		while (iterateur.hasNext()) {
 			Map.Entry utilisateur = (Entry) iterateur.next();

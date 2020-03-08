@@ -2,7 +2,6 @@ package gestionnaireRequete;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -15,7 +14,7 @@ import commun.ListeDeBlocs;
 import commun.Messages;
 
 /**
- * @brief Cette classe gere les requêtes d'un client 
+ * @brief Cette classe gere les requêtes d'un client vers le serveur central.
  */
 public class GestionnaireRequetesServeurCentral extends GestionnaireRequetes {
 
@@ -51,7 +50,7 @@ public class GestionnaireRequetesServeurCentral extends GestionnaireRequetes {
 					InfoUtilisateur infos = (InfoUtilisateur) obj;
 					// ajouter les infos utilisateur à la liste des infos utilisateur.
 					System.out.println(infos);
-					ListeDesInfoUtilisateur.getInstance().ajouterUtilisateur(infos.getIp(), infos);
+					ListeDesInfoUtilisateur.getInstance().ajouterUtilisateur(infos.getIp()+":"+infos.getPort(), infos);
 					// ajouter les fichiers complets à la liste des fichiers complet.
 					ajouterFichiersCompletsALaListe(infos);
 				}
@@ -59,6 +58,7 @@ public class GestionnaireRequetesServeurCentral extends GestionnaireRequetes {
 				Messages.getInstance().ecrireErreur("Impossible de récuperer les informations sur l'utilisateur.");
 			}
 			break;
+		// l'utilisateur souhaite obtenir la liste des fichiers téléchargeables.
 		case "LISTE":
 			// message d'information;
 			Messages.getInstance().ecrireMessage("Utilisateur "+this.socService.getInetAddress()+" demande "
@@ -67,6 +67,7 @@ public class GestionnaireRequetesServeurCentral extends GestionnaireRequetes {
 			this.objOut.writeObject(ListeDesFichiersComplets.getInstance().obtenirListeDesFichiersComplets());
 			this.objOut.flush();
 			break;
+		// l'utilisateur souhaite télécharger un fichier, il veut la liste des utilisateur ayant ce fichier.
 		case "DOWNLOAD":
 			String fichier = tableauRequete[1];
 			// message d'information
@@ -85,9 +86,12 @@ public class GestionnaireRequetesServeurCentral extends GestionnaireRequetes {
 			break;
 		}
 	}
+	
 	/**
-	 * @param infos
+	 * @brief permet de mettre à jour la liste des fichier complets quand un utilisateur envoie un UPDATE.
+	 * @param infos les infos de l'utilisateur.
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void ajouterFichiersCompletsALaListe(InfoUtilisateur infos) {
 		// parcourir les informations de chaque utilisateur
 		HashMap<String, Long> listeDesFichiersComplets = infos.obtenirLaListeDesFichiersComplets();

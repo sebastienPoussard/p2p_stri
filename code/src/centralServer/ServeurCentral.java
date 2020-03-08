@@ -3,24 +3,19 @@ package centralServer;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.HashMap;
 
-import commun.InfoUtilisateur;
 import commun.Messages;
-import gestionnaireRequete.GestionnaireRequetesServeur;
 import gestionnaireRequete.GestionnaireRequetesServeurCentral;
 
 public class ServeurCentral {
 
-	private int port;									// port du serveur central.
+	private int port;									// port d'écoute du serveur central.
 	private ServerSocket socRDV;						// socket de rendez-vous.
 	private boolean continuer;							// continuer le traitement.
 	
 	/**
 	 * @brief constructeur de ServeurCentral
 	 * @param port port sur lequel va écouter le serveur central.
-	 * @param bdd 
 	 */
 	public ServeurCentral(int port) {
 		this.port = port;
@@ -38,8 +33,7 @@ public class ServeurCentral {
 					Socket socService = socRDV.accept();
 					Messages.getInstance().ecrireMessage("Nouvelle connexion d'un client("+socService.getRemoteSocketAddress().toString()
 							+ ") ouverture du port "+socService.getPort()+" pour servir le client.");
-					// quand un nouveau client se connecte, donner le traitement au gestionnaire de client
-					// qui est un nouveau thread.
+					// quand un nouveau client se connecte, donner le traitement au gestionnaire de client.
 					GestionnaireRequetesServeurCentral gestionnaireRequeteServeurCentral = new GestionnaireRequetesServeurCentral(socService);
 					Thread thread = new Thread(gestionnaireRequeteServeurCentral);
 					thread.start();

@@ -34,7 +34,7 @@ public abstract class Requete implements Runnable {
 	}
 
 	/**
-	 * @brief methode pour lancer le thread.
+	 * @brief methode pour lancer le Thread.
 	 */
 	@Override
 	public void run() {
@@ -75,6 +75,10 @@ public abstract class Requete implements Runnable {
 		}
 	}
 	
+	/**
+	 * @brief envoyer un objet au serveur.
+	 * @param objet l'objet à envoyer au serveur.
+	 */
 	protected void envoyerObjet(Object objet) {
 		try {
 			this.objOut.writeObject(objet);
@@ -84,6 +88,10 @@ public abstract class Requete implements Runnable {
 		}
 	}
 	
+	/**
+	 * @brief recevoir un objet de la part du client.
+	 * @return renvoie l'objet reçue.
+	 */
 	protected Object recevoirObjet() {
 		try {
 			// essayer de recevoir l'objet.
@@ -106,6 +114,8 @@ public abstract class Requete implements Runnable {
 			this.socket.close();
 			this.inStream.close();
 			this.outStream.close();
+			this.objIn.close();
+			this.objOut.close();
 		} catch (IOException e) {
 			Messages.getInstance().ecrireErreur("echec à la fermeture du Thread");
 		}

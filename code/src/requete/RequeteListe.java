@@ -16,7 +16,7 @@ public class RequeteListe extends Requete {
 
 	/**
 	 * @brief constructeur de la classe RequeteListe
-	 * @param adresseServeur adresse et port du serveur de la forme "IP:PORT".
+	 * @param adresseServeur adresse et port du serveur de la forme <IP>:<PORT>.
 	 */
 	public RequeteListe(String adresseServeur) {
 		super(adresseServeur);
@@ -25,6 +25,7 @@ public class RequeteListe extends Requete {
 	/**
 	 * @brief methode pour lancer le Thread.
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void run() {
 		// connecter au serveur et récuperer les fluxs.

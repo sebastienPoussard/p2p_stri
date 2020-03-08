@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * @brief cette classe permet de stocker les informations sur un utilisateur (ip, port, liste des fichiers
+ * qu'il possède et quel parties de ces fichiers il possède)
+ */
 public class InfoUtilisateur implements Serializable {
 
 	private static final long serialVersionUID = 7843530783617937511L;
@@ -34,19 +38,19 @@ public class InfoUtilisateur implements Serializable {
 	}
 	
 	/**
-	 * @brief permet de récuperer la liste des fichiers complets de l'utilisateur.
-	 * @return renvoie la liste des fichiers complets de l'utilisateur.
-	 */
-	public HashMap<String, Long> obtenirLaListeDesFichiersComplets() {
-		return this.listeDesFichiersComplets;
-	}
-
-	/**
 	 * @brief permet d'obtenir le port d'écoute de l'utilisateur.
 	 * @return retourne le port d'écoute de l'utilisateur.
 	 */
 	public int getPort() {
 		return port;
+	}
+	
+	/**
+	 * @brief permet de récuperer la liste des fichiers complets de l'utilisateur.
+	 * @return renvoie la liste des fichiers complets de l'utilisateur.
+	 */
+	public HashMap<String, Long> obtenirLaListeDesFichiersComplets() {
+		return this.listeDesFichiersComplets;
 	}
 	
 	/**
@@ -82,10 +86,9 @@ public class InfoUtilisateur implements Serializable {
 		return this.fichiersPartages.get(nomFichier);
 	}
 	
-	
 	/**
-	 * @brief methode pour obtenir une description de l'info utilisateur 
-	 * principalement utilisé pour debuger.
+	 * @brief methode pour obtenir une description de l'objet l'info utilisateur 
+	 * principalement utilisé pour debuger et pour afficher des informations.
 	 */
 	@Override
 	public String toString() {

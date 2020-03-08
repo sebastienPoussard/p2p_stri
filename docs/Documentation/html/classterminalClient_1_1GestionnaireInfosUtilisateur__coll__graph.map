@@ -1,0 +1,4 @@
+<map id="terminalClient.GestionnaireInfosUtilisateur" name="terminalClient.GestionnaireInfosUtilisateur">
+<area shape="rect" id="node3" href="$classterminalClient_1_1GestionnaireFichier.html" title="Cette classe gere le dossier contenant les fichiers partagés et téléchargés. " alt="" coords="107,81,285,123"/>
+<area shape="rect" id="node4" href="$classcommun_1_1InfoUtilisateur.html" title="cette classe permet de stocker les informations sur un utilisateur (ip, port, liste des fichiers qu&#39;i..." alt="" coords="309,89,467,115"/>
+</map>

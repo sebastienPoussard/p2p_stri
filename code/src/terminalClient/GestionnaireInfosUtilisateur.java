@@ -2,12 +2,14 @@ package terminalClient;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.security.MessageDigest;
 
 import commun.InfoUtilisateur;
 import commun.Messages;
 import requete.RequeteUpdateInfosUtilisateur;
 
+/**
+ * @brief cette classe va permettre d'envoyer régulierement des infos concenrnant l'utilisateur au serveur central. 
+ */
 public class GestionnaireInfosUtilisateur implements Runnable{
 
 	GestionnaireFichier gestionnaireFichier;			// le gestionnaire de fichier.
@@ -15,7 +17,13 @@ public class GestionnaireInfosUtilisateur implements Runnable{
 	String adresseServeurCentral;						// l'adresse et le port du serveur central.
 	int port;											// port d'écoute du serveur.
 	
-	
+	/**
+	 * @brief constructeur de la classe.
+	 * @param gestionnaireFichier le gestionnaire de fichier.
+	 * @param ipServeurCentral l'ip du serveur central.
+	 * @param portServeurCentral le port du serveur central.
+	 * @param port d'écoute de la fonctionnalité serveur du client.
+	 */
 	public GestionnaireInfosUtilisateur(GestionnaireFichier gestionnaireFichier, 
 			String ipServeurCentral, int portServeurCentral, int port) {
 		this.gestionnaireFichier = gestionnaireFichier;
@@ -23,6 +31,9 @@ public class GestionnaireInfosUtilisateur implements Runnable{
 		this.port = port;
 	}
 	
+	/**
+	 * @brief méthode pour lancer le Thread.
+	 */
 	@Override
 	public void run() {
 		while(true) {

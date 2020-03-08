@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['gestionnairefichier',['GestionnaireFichier',['../classcommon_1_1GestionnaireFichier.html',1,'common.GestionnaireFichier'],['../classcommon_1_1GestionnaireFichier.html#af063deb28fa952a2d0c605bc26659b16',1,'common.GestionnaireFichier.GestionnaireFichier()']]],
-  ['gestionnairerequetesserveur',['GestionnaireRequetesServeur',['../classcommon_1_1GestionnaireRequetesServeur.html',1,'common.GestionnaireRequetesServeur'],['../classcommon_1_1GestionnaireRequetesServeur.html#af17b749cf30080cec886973a7cc2f2aa',1,'common.GestionnaireRequetesServeur.GestionnaireRequetesServeur()']]],
-  ['getinstance',['getInstance',['../classcommon_1_1Messages.html#a96928a28b3f958fc717fca2c076f773c',1,'common::Messages']]]
+  ['creerfichier',['creerFichier',['../classterminalClient_1_1GestionnaireFichier.html#a81c7f37ddcde7593ad44cc46063e83c9',1,'terminalClient::GestionnaireFichier']]],
+  ['creerinfosutilisateur',['creerInfosUtilisateur',['../classterminalClient_1_1GestionnaireFichier.html#aec0fe5bdafe5e9e65961e200744ea082',1,'terminalClient::GestionnaireFichier']]]
 ];

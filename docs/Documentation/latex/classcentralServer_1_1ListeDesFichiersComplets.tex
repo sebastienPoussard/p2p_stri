@@ -1,0 +1,73 @@
+\hypertarget{classcentralServer_1_1ListeDesFichiersComplets}{}\section{central\+Server.\+Liste\+Des\+Fichiers\+Complets Class Reference}
+\label{classcentralServer_1_1ListeDesFichiersComplets}\index{central\+Server.\+Liste\+Des\+Fichiers\+Complets@{central\+Server.\+Liste\+Des\+Fichiers\+Complets}}
+
+
+cette classe représente la liste des fichiers complets dont le serveur central à connaissance  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+synchronized void \hyperlink{classcentralServer_1_1ListeDesFichiersComplets_a18c22fffc617f151f9ca3400d185dff9}{ajouter\+Fichier} (String nom, Long taille)
+\begin{DoxyCompactList}\small\item\em permet d\textquotesingle{}ajouter un nouveau fichier à la liste des fichiers enregistrés par le serveur. \end{DoxyCompactList}\item 
+synchronized Hash\+Map$<$ String, Long $>$ \hyperlink{classcentralServer_1_1ListeDesFichiersComplets_a333cc85a4c4d342123ee286b30e7a14e}{obtenir\+Liste\+Des\+Fichiers\+Complets} ()
+\begin{DoxyCompactList}\small\item\em permet d\textquotesingle{}obtenir la liste des fichier complets. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classcentralServer_1_1ListeDesFichiersComplets}{Liste\+Des\+Fichiers\+Complets} \hyperlink{classcentralServer_1_1ListeDesFichiersComplets_af327a19fe5b37b2b1bc5cd0bf118af59}{get\+Instance} ()
+\begin{DoxyCompactList}\small\item\em singleton pour accéder à une instance unique de \hyperlink{classcentralServer_1_1ListeDesFichiersComplets}{Liste\+Des\+Fichiers\+Complets} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+cette classe représente la liste des fichiers complets dont le serveur central à connaissance 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcentralServer_1_1ListeDesFichiersComplets_a18c22fffc617f151f9ca3400d185dff9}\label{classcentralServer_1_1ListeDesFichiersComplets_a18c22fffc617f151f9ca3400d185dff9}} 
+\index{central\+Server\+::\+Liste\+Des\+Fichiers\+Complets@{central\+Server\+::\+Liste\+Des\+Fichiers\+Complets}!ajouter\+Fichier@{ajouter\+Fichier}}
+\index{ajouter\+Fichier@{ajouter\+Fichier}!central\+Server\+::\+Liste\+Des\+Fichiers\+Complets@{central\+Server\+::\+Liste\+Des\+Fichiers\+Complets}}
+\subsubsection{\texorpdfstring{ajouter\+Fichier()}{ajouterFichier()}}
+{\footnotesize\ttfamily synchronized void central\+Server.\+Liste\+Des\+Fichiers\+Complets.\+ajouter\+Fichier (\begin{DoxyParamCaption}\item[{String}]{nom,  }\item[{Long}]{taille }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+permet d\textquotesingle{}ajouter un nouveau fichier à la liste des fichiers enregistrés par le serveur. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nom} & le nom du fichier \\
+\hline
+{\em taille} & la taile du fichier en byte. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcentralServer_1_1ListeDesFichiersComplets_af327a19fe5b37b2b1bc5cd0bf118af59}\label{classcentralServer_1_1ListeDesFichiersComplets_af327a19fe5b37b2b1bc5cd0bf118af59}} 
+\index{central\+Server\+::\+Liste\+Des\+Fichiers\+Complets@{central\+Server\+::\+Liste\+Des\+Fichiers\+Complets}!get\+Instance@{get\+Instance}}
+\index{get\+Instance@{get\+Instance}!central\+Server\+::\+Liste\+Des\+Fichiers\+Complets@{central\+Server\+::\+Liste\+Des\+Fichiers\+Complets}}
+\subsubsection{\texorpdfstring{get\+Instance()}{getInstance()}}
+{\footnotesize\ttfamily static \hyperlink{classcentralServer_1_1ListeDesFichiersComplets}{Liste\+Des\+Fichiers\+Complets} central\+Server.\+Liste\+Des\+Fichiers\+Complets.\+get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+singleton pour accéder à une instance unique de \hyperlink{classcentralServer_1_1ListeDesFichiersComplets}{Liste\+Des\+Fichiers\+Complets} 
+
+\begin{DoxyReturn}{Returns}
+retourne une instance unique de \hyperlink{classcentralServer_1_1ListeDesFichiersComplets}{Liste\+Des\+Fichiers\+Complets} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcentralServer_1_1ListeDesFichiersComplets_a333cc85a4c4d342123ee286b30e7a14e}\label{classcentralServer_1_1ListeDesFichiersComplets_a333cc85a4c4d342123ee286b30e7a14e}} 
+\index{central\+Server\+::\+Liste\+Des\+Fichiers\+Complets@{central\+Server\+::\+Liste\+Des\+Fichiers\+Complets}!obtenir\+Liste\+Des\+Fichiers\+Complets@{obtenir\+Liste\+Des\+Fichiers\+Complets}}
+\index{obtenir\+Liste\+Des\+Fichiers\+Complets@{obtenir\+Liste\+Des\+Fichiers\+Complets}!central\+Server\+::\+Liste\+Des\+Fichiers\+Complets@{central\+Server\+::\+Liste\+Des\+Fichiers\+Complets}}
+\subsubsection{\texorpdfstring{obtenir\+Liste\+Des\+Fichiers\+Complets()}{obtenirListeDesFichiersComplets()}}
+{\footnotesize\ttfamily synchronized Hash\+Map$<$String, Long$>$ central\+Server.\+Liste\+Des\+Fichiers\+Complets.\+obtenir\+Liste\+Des\+Fichiers\+Complets (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+permet d\textquotesingle{}obtenir la liste des fichier complets. 
+
+\begin{DoxyReturn}{Returns}
+renvoie la liste des fichiers complets. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Liste\+Des\+Fichiers\+Complets.\+java\end{DoxyCompactItemize}

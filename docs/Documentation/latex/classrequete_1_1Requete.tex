@@ -30,12 +30,16 @@ Collaboration diagram for requete.\+Requete\+:\nopagebreak
 \begin{DoxyCompactList}\small\item\em constructeur de \hyperlink{classrequete_1_1Requete}{Requete}. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classrequete_1_1Requete_a919081397ea25302286d7077e3ece323}\label{classrequete_1_1Requete_a919081397ea25302286d7077e3ece323}} 
 void \hyperlink{classrequete_1_1Requete_a919081397ea25302286d7077e3ece323}{run} ()
-\begin{DoxyCompactList}\small\item\em methode pour lancer le thread. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em methode pour lancer le Thread. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \hyperlink{classrequete_1_1Requete_a4adc60edaa26be2f8d9b4e4b0a1377cd}{envoyer\+Requete} (String requete)
 \begin{DoxyCompactList}\small\item\em envoie une requête au serveur. \end{DoxyCompactList}\item 
+void \hyperlink{classrequete_1_1Requete_a4c463c0668c443e22d413d788b612794}{envoyer\+Objet} (Object objet)
+\begin{DoxyCompactList}\small\item\em envoyer un objet au serveur. \end{DoxyCompactList}\item 
+Object \hyperlink{classrequete_1_1Requete_a8aeabe00174a3542c9d6bbc940495e04}{recevoir\+Objet} ()
+\begin{DoxyCompactList}\small\item\em recevoir un objet de la part du client. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classrequete_1_1Requete_a139183d42763866d351b3569c858b169}\label{classrequete_1_1Requete_a139183d42763866d351b3569c858b169}} 
 void \hyperlink{classrequete_1_1Requete_a139183d42763866d351b3569c858b169}{terminer} ()
 \begin{DoxyCompactList}\small\item\em fermer les differents éléments du Thread. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -56,6 +60,12 @@ Buffered\+Output\+Stream {\bfseries out\+Stream}
 \item 
 \mbox{\Hypertarget{classrequete_1_1Requete_a8bbfc163d41bdf7d3ed614e0341a1bc8}\label{classrequete_1_1Requete_a8bbfc163d41bdf7d3ed614e0341a1bc8}} 
 Socket {\bfseries socket}
+\item 
+\mbox{\Hypertarget{classrequete_1_1Requete_ab9ab3c25659d29238eba73b1538e6e2f}\label{classrequete_1_1Requete_ab9ab3c25659d29238eba73b1538e6e2f}} 
+Object\+Output\+Stream {\bfseries obj\+Out}
+\item 
+\mbox{\Hypertarget{classrequete_1_1Requete_ad73ac8592d56fed8ed0234fe92354bc7}\label{classrequete_1_1Requete_ad73ac8592d56fed8ed0234fe92354bc7}} 
+Object\+Input\+Stream {\bfseries obj\+In}
 \end{DoxyCompactItemize}
 
 
@@ -81,6 +91,21 @@ constructeur de \hyperlink{classrequete_1_1Requete}{Requete}.
 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{classrequete_1_1Requete_a4c463c0668c443e22d413d788b612794}\label{classrequete_1_1Requete_a4c463c0668c443e22d413d788b612794}} 
+\index{requete\+::\+Requete@{requete\+::\+Requete}!envoyer\+Objet@{envoyer\+Objet}}
+\index{envoyer\+Objet@{envoyer\+Objet}!requete\+::\+Requete@{requete\+::\+Requete}}
+\subsubsection{\texorpdfstring{envoyer\+Objet()}{envoyerObjet()}}
+{\footnotesize\ttfamily void requete.\+Requete.\+envoyer\+Objet (\begin{DoxyParamCaption}\item[{Object}]{objet }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+envoyer un objet au serveur. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em objet} & l\textquotesingle{}objet à envoyer au serveur. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classrequete_1_1Requete_a4adc60edaa26be2f8d9b4e4b0a1377cd}\label{classrequete_1_1Requete_a4adc60edaa26be2f8d9b4e4b0a1377cd}} 
 \index{requete\+::\+Requete@{requete\+::\+Requete}!envoyer\+Requete@{envoyer\+Requete}}
 \index{envoyer\+Requete@{envoyer\+Requete}!requete\+::\+Requete@{requete\+::\+Requete}}
@@ -96,6 +121,19 @@ envoie une requête au serveur.
 {\em requete} & requete envoyé au serveur. \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classrequete_1_1Requete_a8aeabe00174a3542c9d6bbc940495e04}\label{classrequete_1_1Requete_a8aeabe00174a3542c9d6bbc940495e04}} 
+\index{requete\+::\+Requete@{requete\+::\+Requete}!recevoir\+Objet@{recevoir\+Objet}}
+\index{recevoir\+Objet@{recevoir\+Objet}!requete\+::\+Requete@{requete\+::\+Requete}}
+\subsubsection{\texorpdfstring{recevoir\+Objet()}{recevoirObjet()}}
+{\footnotesize\ttfamily Object requete.\+Requete.\+recevoir\+Objet (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+recevoir un objet de la part du client. 
+
+\begin{DoxyReturn}{Returns}
+renvoie l\textquotesingle{}objet reçue. 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

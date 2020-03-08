@@ -1,19 +1,17 @@
 package terminalClient;
 
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 import commun.Messages;
 import gestionnaireRequete.GestionnaireDeTelechargement;
 import requete.RequeteListe;
-import requete.RequeteTelechargerBlocFichier;
 
 public class TerminalMain {
 
 	public static void main(String[] args) {
 		//variable de lancements
-		int portServeur = 8081;										// port du serveur de partage.
-		String adresseDossierTelechargement = "/tmp/dowloads2";		// adresse du dossier de fichiers téléchargés.
+		int portServeur = 8083;										// port du serveur de partage.
+		String adresseDossierTelechargement = "/tmp/downloads3";		// adresse du dossier de fichiers téléchargés.
 		Scanner scanner;											// scanner pr lire les E/S de l'utilisateur.
 		String ipServeurCentral;									// ip du serveur central.
 		int portServeurCentral;										// port du serveur central.

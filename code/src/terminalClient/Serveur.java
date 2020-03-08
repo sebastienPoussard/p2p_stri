@@ -1,47 +1,38 @@
 package terminalClient;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
-import commun.InfoUtilisateur;
 import commun.Messages;
 import gestionnaireRequete.GestionnaireRequetesServeur;
 
 /**
- * @brief Cette classe gère les fonctionnalitées de serveur.
+ * @brief Cette classe gère les fonctionnalitées de serveur d'un client.
  */
 public class Serveur implements Runnable {
 
 	private int port;										// port sur lequelle le serveur écoute.
-	private String ip;										// ip du serveur.
 	private GestionnaireFichier gestionnaireFichier;		// gestionnaire de fichier.
 	private String ipServeurCentral;						// ip du serveur central.
 	private int portServeurCentral;							// port du serveur central.
-	private InfoUtilisateur infos;							// infos de l'utilisateur.
 	
 	/**
-	 * @brief constructeur de la classe.
-	 * @param port port d'écoute du serveur.
-	 * @param adresseDossierPartage adresse du dossier qui contient les fichier partagés par le serveur.
+	 * @brief constructeur de la classe
+	 * @param port le port d'écoute de la fonctionnalité serveur du client.
+	 * @param gestionnaireDeFichier le gestionnaire de fichier.
+	 * @param ipServeurCentral l'ip du serveur central.
+	 * @param portServeurCentral le port du serveur central.
 	 */
 	public Serveur(int port, GestionnaireFichier gestionnaireDeFichier, String ipServeurCentral, int portServeurCentral) {
 		this.port = port;
 		this.ipServeurCentral = ipServeurCentral;
 		this.portServeurCentral = portServeurCentral;
-		try {
-			// récuperer l'adresse IP du serveur.
-			this.ip = InetAddress.getLocalHost().toString().split("/")[1];
-		} catch (UnknownHostException e) {
-			Messages.getInstance().ecrireErreur("Impossible de determiner l'IP du client.");
-		}
 		this.gestionnaireFichier = gestionnaireDeFichier;
 	}
 
 	/**
-	 * @brief Cette méthode permet de lancer le serveur
+	 * @brief méthode pour lancer le Thread.
 	 * @details cette méthode lance le serveur en ouvrant la socket de rendez-vous,
 	 * la méthode va par la suite attendre la venue d'un client puis transferer chaque connexion au gestionnaire de client
 	 * pour qu'il traite les requête de chaque client dans un Thread unique.
