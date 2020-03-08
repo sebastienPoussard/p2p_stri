@@ -1,10 +1,12 @@
 package terminalClient;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.file.Files;
 import java.util.Arrays;
 
 import commun.InfoUtilisateur;
@@ -235,5 +237,46 @@ public class GestionnaireFichier {
 			e.printStackTrace();
 		}
 		return res;
+	}
+
+	/**
+	 * @brief vérifie si le fichier indiqué est complet, dans ce cas on le déplace du dossier incomplet vers le dossier complet.
+	 * @param nomFichier
+	 */
+	public synchronized void verifierIntegritee(String nomFichier) {
+		try {
+			// rechercher le fichier.
+			boolean estIntegre = true;
+			RandomAccessFile fichier = rechercherFichier(nomFichier);
+			// convertir la taille en nombre de blocs
+			long taille = fichier.length();
+			double nombreDeBlocsFlottant = (taille/(TAILLEDEBLOC));
+			int nbrDeBlocs = (int) Math.ceil(nombreDeBlocsFlottant);
+			int tailleLue;
+			byte [] buffer = new byte[TAILLEDEBLOC];
+			ByteArrayOutputStream donnees = new ByteArrayOutputStream();
+			// pour chaque bloc
+			for (int i = 0; i < nbrDeBlocs ; i++) {
+				tailleLue = fichier.read(buffer, 0, TAILLEDEBLOC);
+				if (tailleLue < TAILLEDEBLOC) {
+					donnees.write(buffer, 0, tailleLue);
+					buffer = donnees.toByteArray();
+				}
+				// si le bloc est égale au marqueur vide
+				if (estEgaleAuMarqueurVide(buffer)) {
+					estIntegre = false;
+					break;
+				}
+			}
+			// si le fichier est intègre
+			if (estIntegre) {
+				// déplacer dans le dossier des fichiers terminés
+				File f = new File(this.cheminDossierFichiersIncomplets+"/"+nomFichier);
+				f.renameTo(new File(cheminDossierFichiersComplets+"/"+nomFichier));
+				Messages.getInstance().ecrireMessage("Le fichier "+nomFichier+" est complet et à été déplacé dans le dossier des fichiers complets");
+			}
+		} catch (IOException e) {
+			Messages.getInstance().ecrireErreur("impossible de verifier l'intégritée du fichier.");
+		}
 	}
 }

@@ -3,6 +3,7 @@ package gestionnaireRequete;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -25,6 +26,7 @@ public class GestionnaireDeTelechargement extends Requete {
 	private long tailleDuFichier;												// la taille du fichier.
 	private int nbrDeBlocs;														// le nombre de blocs composant le fichier.
 	private RandomAccessFile file;												// le fichier sur le disque.
+	private ArrayList<Thread> listeDesThreads;									// la liste des thread qui vont télécharger des données.
 	
 	/**
 	 * @brief constructeur de la classe.
@@ -37,6 +39,7 @@ public class GestionnaireDeTelechargement extends Requete {
 		super(adresseServeurCentral);
 		this.nomFichier = nomFichier;
 		this.gestionnaireFichier = gestionnaireFichier;
+		this.listeDesThreads = new ArrayList<Thread>();
 	}
 	
 	/**
@@ -81,6 +84,7 @@ public class GestionnaireDeTelechargement extends Requete {
 					String adresse = (String) utilisateur.getKey();
 					RequeteTelecharger requete = new RequeteTelecharger(adresse, this.file, this.nomFichier, this.gestionnaireFichier, numeroBloc);
 					Thread thread = new Thread(requete);
+					this.listeDesThreads.add(thread);
 					thread.start();
 					// incrémenter le bloc à télécharger
 					numeroBloc++;
@@ -92,6 +96,16 @@ public class GestionnaireDeTelechargement extends Requete {
 				numeroBloc++;
 			}
 		}
+		// attendre que tous les threads de téléchargement ce terminent.
+		for (Thread thread : this.listeDesThreads) {
+			try {
+				thread.join();
+			} catch (InterruptedException e) {
+				Messages.getInstance().ecrireErreur("problème à l'attente de la terminaison des threads fils");
+			}
+		}
+		// tester le fichier pour voir s'il est complet et dans ce cas le déplacer dans les fichier complets.
+		this.gestionnaireFichier.verifierIntegritee(this.nomFichier);
 		// fermer le Thread.
 		terminer();
 	}
