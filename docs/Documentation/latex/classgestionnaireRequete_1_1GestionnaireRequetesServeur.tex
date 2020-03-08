@@ -1,0 +1,90 @@
+\hypertarget{classgestionnaireRequete_1_1GestionnaireRequetesServeur}{}\section{gestionnaire\+Requete.\+Gestionnaire\+Requetes\+Serveur Class Reference}
+\label{classgestionnaireRequete_1_1GestionnaireRequetesServeur}\index{gestionnaire\+Requete.\+Gestionnaire\+Requetes\+Serveur@{gestionnaire\+Requete.\+Gestionnaire\+Requetes\+Serveur}}
+
+
+Cette classe gere les requêtes d\textquotesingle{}un client pour la fonctionnalité \char`\"{}\+Serveur\char`\"{} de chaque client.  
+
+
+
+
+Inheritance diagram for gestionnaire\+Requete.\+Gestionnaire\+Requetes\+Serveur\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classgestionnaireRequete_1_1GestionnaireRequetesServeur__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gestionnaire\+Requete.\+Gestionnaire\+Requetes\+Serveur\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgestionnaireRequete_1_1GestionnaireRequetesServeur__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classgestionnaireRequete_1_1GestionnaireRequetesServeur_a80cb3c0cc910d1678916bd93ea4175d3}{Gestionnaire\+Requetes\+Serveur} (Socket soc\+Service, \hyperlink{classterminalClient_1_1GestionnaireFichier}{Gestionnaire\+Fichier} gestionnaire\+Fichier)  throws I\+O\+Exception 
+\begin{DoxyCompactList}\small\item\em constructeur de \hyperlink{classgestionnaireRequete_1_1GestionnaireRequetesServeur}{Gestionnaire\+Requetes\+Serveur}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classgestionnaireRequete_1_1GestionnaireRequetesServeur_a20c9f53be4a6126872c97d813afb1b51}{servir\+Client} (String requete)  throws I\+O\+Exception 
+\begin{DoxyCompactList}\small\item\em cette fonction répond aux demande du client. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Cette classe gere les requêtes d\textquotesingle{}un client pour la fonctionnalité \char`\"{}\+Serveur\char`\"{} de chaque client. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgestionnaireRequete_1_1GestionnaireRequetesServeur_a80cb3c0cc910d1678916bd93ea4175d3}\label{classgestionnaireRequete_1_1GestionnaireRequetesServeur_a80cb3c0cc910d1678916bd93ea4175d3}} 
+\index{gestionnaire\+Requete\+::\+Gestionnaire\+Requetes\+Serveur@{gestionnaire\+Requete\+::\+Gestionnaire\+Requetes\+Serveur}!Gestionnaire\+Requetes\+Serveur@{Gestionnaire\+Requetes\+Serveur}}
+\index{Gestionnaire\+Requetes\+Serveur@{Gestionnaire\+Requetes\+Serveur}!gestionnaire\+Requete\+::\+Gestionnaire\+Requetes\+Serveur@{gestionnaire\+Requete\+::\+Gestionnaire\+Requetes\+Serveur}}
+\subsubsection{\texorpdfstring{Gestionnaire\+Requetes\+Serveur()}{GestionnaireRequetesServeur()}}
+{\footnotesize\ttfamily gestionnaire\+Requete.\+Gestionnaire\+Requetes\+Serveur.\+Gestionnaire\+Requetes\+Serveur (\begin{DoxyParamCaption}\item[{Socket}]{soc\+Service,  }\item[{\hyperlink{classterminalClient_1_1GestionnaireFichier}{Gestionnaire\+Fichier}}]{gestionnaire\+Fichier }\end{DoxyParamCaption}) throws I\+O\+Exception\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructeur de \hyperlink{classgestionnaireRequete_1_1GestionnaireRequetesServeur}{Gestionnaire\+Requetes\+Serveur}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em soc\+Service} & la socket de service qui permet de communiquer avec le client. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em I\+O\+Exception} & exception qui survient à la création du stream \\
+\hline
+\end{DoxyExceptions}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classgestionnaireRequete_1_1GestionnaireRequetesServeur_a20c9f53be4a6126872c97d813afb1b51}\label{classgestionnaireRequete_1_1GestionnaireRequetesServeur_a20c9f53be4a6126872c97d813afb1b51}} 
+\index{gestionnaire\+Requete\+::\+Gestionnaire\+Requetes\+Serveur@{gestionnaire\+Requete\+::\+Gestionnaire\+Requetes\+Serveur}!servir\+Client@{servir\+Client}}
+\index{servir\+Client@{servir\+Client}!gestionnaire\+Requete\+::\+Gestionnaire\+Requetes\+Serveur@{gestionnaire\+Requete\+::\+Gestionnaire\+Requetes\+Serveur}}
+\subsubsection{\texorpdfstring{servir\+Client()}{servirClient()}}
+{\footnotesize\ttfamily void gestionnaire\+Requete.\+Gestionnaire\+Requetes\+Serveur.\+servir\+Client (\begin{DoxyParamCaption}\item[{String}]{requete }\end{DoxyParamCaption}) throws I\+O\+Exception\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+cette fonction répond aux demande du client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em requete} & requete demandé par l\textquotesingle{}utilisateur \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em I\+O\+Exception} & exception levée par la méthode envoyer\+Liste() \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Gestionnaire\+Requetes\+Serveur.\+java\end{DoxyCompactItemize}

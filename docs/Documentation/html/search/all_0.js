@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['creerdossiertemporaire',['creerDossierTemporaire',['../classcommon_1_1GestionnaireFichier.html#aa32c12e7c7269b4142b4f93dc89603b7',1,'common::GestionnaireFichier']]],
-  ['creerfichier',['creerFichier',['../classcommon_1_1GestionnaireFichier.html#a7aa94ceed1766208e16cd4d3ce8465b7',1,'common::GestionnaireFichier']]],
-  ['creerfichiertemporaire',['creerFichierTemporaire',['../classcommon_1_1GestionnaireFichier.html#a3bdc681e581824bba5c4463c680e4d29',1,'common::GestionnaireFichier']]]
+  ['ajouterfichier',['ajouterFichier',['../classcentralServer_1_1ListeDesFichiersComplets.html#a18c22fffc617f151f9ca3400d185dff9',1,'centralServer.ListeDesFichiersComplets.ajouterFichier()'],['../classcommun_1_1InfoUtilisateur.html#a49464d9eecf82d8768449eabc848aa39',1,'commun.InfoUtilisateur.ajouterFichier()']]],
+  ['ajouterunbloc',['ajouterUnBloc',['../classcommun_1_1ListeDeBlocs.html#a76b292081d24cfdffb66961056e0dab8',1,'commun::ListeDeBlocs']]],
+  ['ajouterutilisateur',['ajouterUtilisateur',['../classcentralServer_1_1ListeDesInfoUtilisateur.html#a310ca7eb2f644fbd22809983e69b77fd',1,'centralServer::ListeDesInfoUtilisateur']]]
 ];

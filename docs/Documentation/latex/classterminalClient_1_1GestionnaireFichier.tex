@@ -1,0 +1,166 @@
+\hypertarget{classterminalClient_1_1GestionnaireFichier}{}\section{terminal\+Client.\+Gestionnaire\+Fichier Class Reference}
+\label{classterminalClient_1_1GestionnaireFichier}\index{terminal\+Client.\+Gestionnaire\+Fichier@{terminal\+Client.\+Gestionnaire\+Fichier}}
+
+
+Cette classe gere le dossier contenant les fichiers partagés et téléchargés.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classterminalClient_1_1GestionnaireFichier_a058b107e8ee834b30e0a86f238afc852}{Gestionnaire\+Fichier} (String chemin\+Dossier\+Fichiers)
+\begin{DoxyCompactList}\small\item\em constructeur de \hyperlink{classterminalClient_1_1GestionnaireFichier}{Gestionnaire\+Fichier} \end{DoxyCompactList}\item 
+Random\+Access\+File \hyperlink{classterminalClient_1_1GestionnaireFichier_ae1ecacc9776836d965a472406f4e9584}{rechercher\+Fichier} (String nom\+Fichier)  throws File\+Not\+Found\+Exception 
+\begin{DoxyCompactList}\small\item\em cette méthode permet d\textquotesingle{}obtenir le stream du fichier à partir d\textquotesingle{}un nom de fichier. \end{DoxyCompactList}\item 
+Random\+Access\+File \hyperlink{classterminalClient_1_1GestionnaireFichier_a81c7f37ddcde7593ad44cc46063e83c9}{creer\+Fichier} (String nom\+Fichier, long taille)  throws File\+Not\+Found\+Exception 
+\begin{DoxyCompactList}\small\item\em permet de créer un fichier \char`\"{}vide\char`\"{} c\textquotesingle{}est à dire de la taille du fichier complet, remplie avec le marqueur vide en attendant de reçevoir les bon blocs. \end{DoxyCompactList}\item 
+\hyperlink{classcommun_1_1InfoUtilisateur}{Info\+Utilisateur} \hyperlink{classterminalClient_1_1GestionnaireFichier_aec0fe5bdafe5e9e65961e200744ea082}{creer\+Infos\+Utilisateur} (String ip, int port)
+\begin{DoxyCompactList}\small\item\em créer les informations sur l\textquotesingle{}utilisateur. \end{DoxyCompactList}\item 
+synchronized void \hyperlink{classterminalClient_1_1GestionnaireFichier_aa88603d9d3f6f2ef654de1e58ad6457e}{ecrire} (byte\mbox{[}$\,$\mbox{]} buffer, int taille, Random\+Access\+File fichier, int numero\+Du\+Bloc)
+\begin{DoxyCompactList}\small\item\em méthode pour écrire un bloc (numero\+Du\+Bloc) depuis un buffer (buffer) de taille (taille) \end{DoxyCompactList}\item 
+synchronized byte \mbox{[}$\,$\mbox{]} \hyperlink{classterminalClient_1_1GestionnaireFichier_a4ec6a1fc51400312212c68f914402cb6}{obtenir\+Donnees} (String nom\+Fichier, int numero\+Bloc)
+\begin{DoxyCompactList}\small\item\em permet de lire les données du bloc d\textquotesingle{}un fichier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classterminalClient_1_1GestionnaireFichier_ad693be33fdd31fe37d8f99d1356f6e76}\label{classterminalClient_1_1GestionnaireFichier_ad693be33fdd31fe37d8f99d1356f6e76}} 
+static int {\bfseries T\+A\+I\+L\+L\+E\+D\+E\+B\+L\+OC} = 100
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Cette classe gere le dossier contenant les fichiers partagés et téléchargés. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classterminalClient_1_1GestionnaireFichier_a058b107e8ee834b30e0a86f238afc852}\label{classterminalClient_1_1GestionnaireFichier_a058b107e8ee834b30e0a86f238afc852}} 
+\index{terminal\+Client\+::\+Gestionnaire\+Fichier@{terminal\+Client\+::\+Gestionnaire\+Fichier}!Gestionnaire\+Fichier@{Gestionnaire\+Fichier}}
+\index{Gestionnaire\+Fichier@{Gestionnaire\+Fichier}!terminal\+Client\+::\+Gestionnaire\+Fichier@{terminal\+Client\+::\+Gestionnaire\+Fichier}}
+\subsubsection{\texorpdfstring{Gestionnaire\+Fichier()}{GestionnaireFichier()}}
+{\footnotesize\ttfamily terminal\+Client.\+Gestionnaire\+Fichier.\+Gestionnaire\+Fichier (\begin{DoxyParamCaption}\item[{String}]{chemin\+Dossier\+Fichiers }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructeur de \hyperlink{classterminalClient_1_1GestionnaireFichier}{Gestionnaire\+Fichier} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em chemin\+Dossier\+Partages} & chemin complet vers le dossiers contenant les fichiers partagés. accepte uniquement un chemin Linux car Linux $>$ Windows ¯\+\_\+(ツ)\+\_\+/¯ . \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classterminalClient_1_1GestionnaireFichier_a81c7f37ddcde7593ad44cc46063e83c9}\label{classterminalClient_1_1GestionnaireFichier_a81c7f37ddcde7593ad44cc46063e83c9}} 
+\index{terminal\+Client\+::\+Gestionnaire\+Fichier@{terminal\+Client\+::\+Gestionnaire\+Fichier}!creer\+Fichier@{creer\+Fichier}}
+\index{creer\+Fichier@{creer\+Fichier}!terminal\+Client\+::\+Gestionnaire\+Fichier@{terminal\+Client\+::\+Gestionnaire\+Fichier}}
+\subsubsection{\texorpdfstring{creer\+Fichier()}{creerFichier()}}
+{\footnotesize\ttfamily Random\+Access\+File terminal\+Client.\+Gestionnaire\+Fichier.\+creer\+Fichier (\begin{DoxyParamCaption}\item[{String}]{nom\+Fichier,  }\item[{long}]{taille }\end{DoxyParamCaption}) throws File\+Not\+Found\+Exception\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+permet de créer un fichier \char`\"{}vide\char`\"{} c\textquotesingle{}est à dire de la taille du fichier complet, remplie avec le marqueur vide en attendant de reçevoir les bon blocs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nom\+Fichier} & le nom du fichier à créer. \\
+\hline
+{\em taille} & la taille du fichier une fois celi-\/ci complet. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+renvoie un lien vers le fichier. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em File\+Not\+Found\+Exception} & remonte une exception en cas de problème. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classterminalClient_1_1GestionnaireFichier_aec0fe5bdafe5e9e65961e200744ea082}\label{classterminalClient_1_1GestionnaireFichier_aec0fe5bdafe5e9e65961e200744ea082}} 
+\index{terminal\+Client\+::\+Gestionnaire\+Fichier@{terminal\+Client\+::\+Gestionnaire\+Fichier}!creer\+Infos\+Utilisateur@{creer\+Infos\+Utilisateur}}
+\index{creer\+Infos\+Utilisateur@{creer\+Infos\+Utilisateur}!terminal\+Client\+::\+Gestionnaire\+Fichier@{terminal\+Client\+::\+Gestionnaire\+Fichier}}
+\subsubsection{\texorpdfstring{creer\+Infos\+Utilisateur()}{creerInfosUtilisateur()}}
+{\footnotesize\ttfamily \hyperlink{classcommun_1_1InfoUtilisateur}{Info\+Utilisateur} terminal\+Client.\+Gestionnaire\+Fichier.\+creer\+Infos\+Utilisateur (\begin{DoxyParamCaption}\item[{String}]{ip,  }\item[{int}]{port }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+créer les informations sur l\textquotesingle{}utilisateur. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ip} & ip de la fonctionnalité serveur du client. \\
+\hline
+{\em port} & port d\textquotesingle{}écoute de la fonctionnalité serveur du client. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+renvoie les infos de l\textquotesingle{}utilisateur. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classterminalClient_1_1GestionnaireFichier_aa88603d9d3f6f2ef654de1e58ad6457e}\label{classterminalClient_1_1GestionnaireFichier_aa88603d9d3f6f2ef654de1e58ad6457e}} 
+\index{terminal\+Client\+::\+Gestionnaire\+Fichier@{terminal\+Client\+::\+Gestionnaire\+Fichier}!ecrire@{ecrire}}
+\index{ecrire@{ecrire}!terminal\+Client\+::\+Gestionnaire\+Fichier@{terminal\+Client\+::\+Gestionnaire\+Fichier}}
+\subsubsection{\texorpdfstring{ecrire()}{ecrire()}}
+{\footnotesize\ttfamily synchronized void terminal\+Client.\+Gestionnaire\+Fichier.\+ecrire (\begin{DoxyParamCaption}\item[{byte \mbox{[}$\,$\mbox{]}}]{buffer,  }\item[{int}]{taille,  }\item[{Random\+Access\+File}]{fichier,  }\item[{int}]{numero\+Du\+Bloc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+méthode pour écrire un bloc (numero\+Du\+Bloc) depuis un buffer (buffer) de taille (taille) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & le buffer contenant les données du bloc à écrire. \\
+\hline
+{\em taille} & la taille que l\textquotesingle{}on souhaite écrire du buffer. \\
+\hline
+{\em fichier} & le fichier vers lequelle on va écrire les données. \\
+\hline
+{\em numero\+Du\+Bloc} & le numéro du bloc que l\textquotesingle{}on souhaite écrire. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classterminalClient_1_1GestionnaireFichier_a4ec6a1fc51400312212c68f914402cb6}\label{classterminalClient_1_1GestionnaireFichier_a4ec6a1fc51400312212c68f914402cb6}} 
+\index{terminal\+Client\+::\+Gestionnaire\+Fichier@{terminal\+Client\+::\+Gestionnaire\+Fichier}!obtenir\+Donnees@{obtenir\+Donnees}}
+\index{obtenir\+Donnees@{obtenir\+Donnees}!terminal\+Client\+::\+Gestionnaire\+Fichier@{terminal\+Client\+::\+Gestionnaire\+Fichier}}
+\subsubsection{\texorpdfstring{obtenir\+Donnees()}{obtenirDonnees()}}
+{\footnotesize\ttfamily synchronized byte \mbox{[}$\,$\mbox{]} terminal\+Client.\+Gestionnaire\+Fichier.\+obtenir\+Donnees (\begin{DoxyParamCaption}\item[{String}]{nom\+Fichier,  }\item[{int}]{numero\+Bloc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+permet de lire les données du bloc d\textquotesingle{}un fichier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nom\+Fichier} & le nom du fichier dont on souhaite obtenir les données. \\
+\hline
+{\em numero\+Bloc} & le numéro du bloc que l\textquotesingle{}on souhaite lire. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+renvoie une chaine de byte contenant les informations. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classterminalClient_1_1GestionnaireFichier_ae1ecacc9776836d965a472406f4e9584}\label{classterminalClient_1_1GestionnaireFichier_ae1ecacc9776836d965a472406f4e9584}} 
+\index{terminal\+Client\+::\+Gestionnaire\+Fichier@{terminal\+Client\+::\+Gestionnaire\+Fichier}!rechercher\+Fichier@{rechercher\+Fichier}}
+\index{rechercher\+Fichier@{rechercher\+Fichier}!terminal\+Client\+::\+Gestionnaire\+Fichier@{terminal\+Client\+::\+Gestionnaire\+Fichier}}
+\subsubsection{\texorpdfstring{rechercher\+Fichier()}{rechercherFichier()}}
+{\footnotesize\ttfamily Random\+Access\+File terminal\+Client.\+Gestionnaire\+Fichier.\+rechercher\+Fichier (\begin{DoxyParamCaption}\item[{String}]{nom\+Fichier }\end{DoxyParamCaption}) throws File\+Not\+Found\+Exception\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+cette méthode permet d\textquotesingle{}obtenir le stream du fichier à partir d\textquotesingle{}un nom de fichier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nom\+Fichier} & nom du fihier que l\textquotesingle{}on souhaite \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+renvoie le fichier que l\textquotesingle{}on souhaite. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em File\+Not\+Found\+Exception} & renvoie cette exception si le fichier demandé d\textquotesingle{}existe pas. \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Gestionnaire\+Fichier.\+java\end{DoxyCompactItemize}

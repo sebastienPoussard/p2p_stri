@@ -3,9 +3,12 @@ package requete;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import common.Messages;
+
+import commun.Messages;
 
 /**
  * @brief classe abstraite définissant une requête d'un client au serveur.
@@ -17,6 +20,8 @@ public abstract class Requete implements Runnable {
 	protected BufferedInputStream inStream;				// flux de données entrant.
 	protected BufferedOutputStream outStream;			// flux de données sortant.
 	protected Socket socket;							// socket de connexion au serveur.
+	protected ObjectOutputStream objOut;				// stream pour envoyer un object.
+	protected ObjectInputStream objIn;					// stream pour recevoir un object.
 	
 	/**
 	 * @brief constructeur de Requete.
@@ -29,7 +34,7 @@ public abstract class Requete implements Runnable {
 	}
 
 	/**
-	 * @brief methode pour lancer le thread.
+	 * @brief methode pour lancer le Thread.
 	 */
 	@Override
 	public void run() {
@@ -47,6 +52,8 @@ public abstract class Requete implements Runnable {
 		try {
 			this.inStream = new BufferedInputStream(this.socket.getInputStream());
 			this.outStream = new BufferedOutputStream(this.socket.getOutputStream());
+			this.objOut = new ObjectOutputStream(this.socket.getOutputStream());
+			this.objIn = new ObjectInputStream(this.socket.getInputStream());
 		} catch (IOException e) {
 			Messages.getInstance().ecrireErreur("Erreur à l'ouverture des flux de données avec le serveur");
 			return;
@@ -69,6 +76,37 @@ public abstract class Requete implements Runnable {
 	}
 	
 	/**
+	 * @brief envoyer un objet au serveur.
+	 * @param objet l'objet à envoyer au serveur.
+	 */
+	protected void envoyerObjet(Object objet) {
+		try {
+			this.objOut.writeObject(objet);
+			this.objOut.flush();
+		} catch (IOException e) {
+			Messages.getInstance().ecrireErreur("Echec à l'envoie de l'objet InfoUtilisateurs");
+		}
+	}
+	
+	/**
+	 * @brief recevoir un objet de la part du client.
+	 * @return renvoie l'objet reçue.
+	 */
+	protected Object recevoirObjet() {
+		try {
+			// essayer de recevoir l'objet.
+			return this.objIn.readObject();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
 	 * @brief fermer les differents éléments du Thread.
 	 */
 	protected void terminer() {
@@ -76,6 +114,8 @@ public abstract class Requete implements Runnable {
 			this.socket.close();
 			this.inStream.close();
 			this.outStream.close();
+			this.objIn.close();
+			this.objOut.close();
 		} catch (IOException e) {
 			Messages.getInstance().ecrireErreur("echec à la fermeture du Thread");
 		}

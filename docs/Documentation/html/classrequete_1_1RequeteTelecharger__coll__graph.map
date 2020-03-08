@@ -1,0 +1,4 @@
+<map id="requete.RequeteTelecharger" name="requete.RequeteTelecharger">
+<area shape="rect" id="node2" href="$classrequete_1_1Requete.html" title="classe abstraite définissant une requête d&#39;un client au serveur. " alt="" coords="301,132,419,159"/>
+<area shape="rect" id="node9" href="$classterminalClient_1_1GestionnaireFichier.html" title="Cette classe gere le dossier contenant les fichiers partagés et téléchargés. " alt="" coords="271,183,449,225"/>
+</map>
