@@ -1,0 +1,192 @@
+@startuml
+
+class ServeurCentralMain { 
+  int port
+}
+class ServeurCentral {
+  -int port
+  -SocketService socRDV
+  +lancer()
+}
+ServeurCentralMain o-- ServeurCentral
+
+class GestionnaireRequetesServeurCentral {
+  
+  #servirClient(String requete)
+  -ajouterFichiersCompletsALaListe(InfoUtilisateur infos)
+}
+
+ServeurCentral o-- GestionnaireRequetesServeurCentral
+
+class GestionnaireRequetes {
+	#Socket socService
+	#BufferedInputStream streamIn
+	#BufferedOutputStream streamOut
+  #ObjectInputStream objIn
+  #ObjectOutputStream objOut
+  #String requete
+  +run()
+  #servirClient(String requete) 
+  #lireRequeteClient() : String
+}
+Runnable <|.. GestionnaireRequetes
+GestionnaireRequetes <|-- GestionnaireRequetesServeurCentral
+
+class TerminalMain{
+	int portServeur
+  String adresseDossierTelechargement
+  Scanner scanner
+  String ipServeurCentral
+  int portServeurCentral
+  String adresseServeurCentral
+  
+}
+
+TerminalMain o-- GestionnaireFichier
+
+class GestionnaireFichier {
+  -File dossierDesFichiers
+  -File dossierDesFichiersComplets
+  -File dossierDesFichiersIncomplets
+  -byte[] marqueurVide
+  -String cheminDossierFichiers
+  -String cheminDossierFichiersComplets
+  -String cheminDossierFichiersIncomplets
+  +{static} int TAILLEDEBLOC
+  +rechercherFichier(String nomFichier) : RandomAccessFile
+  +creerFichier(String nomFichier, long taille) : RandomAccessFile
+  +creerInfosUtilisateur(String ip, int port) : InfoUtilisateur
+  +ecrire(byte[] buffer, int taille, RandomAccessFile fichier, int numeroDuBloc)
+  -stEgaleAuMarqueurVide(byte[] bufferLue) : boolean
+  +obtenirDonnees(String nomFichier, int numeroBloc) : byte[]
+  +verifierIntegritee(String nomFichier)
+}
+
+class Serveur {
+  -int port
+  -GestionnaireFichier gestionnaireFichier
+  -String ipServeurCentral
+  -int portServeurCentral
+  +run()
+}
+TerminalMain o-- Serveur
+TerminalMain o-- RequeteListe
+TerminalMain o-- GestionnaireDeTelechargement
+Runnable <|.. Serveur
+
+
+class gestionnaireInfosUtilisateur {
+  -GestionnaireFichier gestionnaireFichier
+  -InfoUtilisateur infos
+  -String adresseServeurCentral
+  -int port
+  +run()
+}
+gestionnaireInfosUtilisateur o-- RequeteUpdateInfosUtilisateur
+class RequeteUpdateInfosUtilisateur {
+  
+}
+
+Runnable <|.. gestionnaireInfosUtilisateur
+
+class gestionnaireRequeteServeur {
+  -GestionnaireFichier gestionnaireFichier
+  #servirClient(String requete)
+ 
+}
+  
+Serveur o-- gestionnaireInfosUtilisateur
+Serveur o-- gestionnaireRequeteServeur
+
+class Requete {
+  #String ipServeur
+  #int portServeur
+  #BufferedInputStream inStream
+  #BufferedOutputStream outStream
+  #Socket socket
+  #ObjectOutputStream objOut
+  #ObjectInputStream objIn
+  +Requete(String adresseServeur)
+  +run()
+  #envoyerRequete(String requete)
+  #envoyerObjet(Object objet)
+  #recevoirObjet() : Object
+  #terminer()
+}
+
+Runnable <|.. Requete
+
+class GestionnaireDeTelechargement {
+  -String nomFichier
+  -GestionnaireFichier gestionnaireFichier
+  -HashMap<String, ListeDeBlocs> listeDesUtilisateursAyantLeFichier
+  -long tailleDuFichier
+  -int nbrDeBlocs
+  -RandomAccessFile file
+  -ArrayList<Thread> listeDesThreads
+  +run()
+  -determinerTailleDuFichier(HashMap<String, ListeDeBlocs> liste) : long
+}
+
+Requete <|-- GestionnaireDeTelechargement
+GestionnaireDeTelechargement o-- RequeteTelecharger
+class RequeteTelecharger {
+  -int numeroDuBloc
+  -GestionnaireFichier gestionnaireFichier
+  -RandomAccessFile fichier
+  -String nomFichier
+  +run()
+  }
+
+Requete <|-- RequeteTelecharger
+Requete <|-- RequeteListe
+Requete <|-- RequeteUpdateInfosUtilisateur
+
+class RequeteListe {
+  +run()
+}
+class RequeteUpdateInfosUtilisateur {
+  +run()
+}
+
+class Messages {
+  -{static} Messages instance
+  +{static} getInstance() : Messages
+  +ecrireMessage(String message)
+  +ecrireErreur(String message)
+}
+
+class InfoUtilisateur {
+	-String ip
+  -int port
+  -HashMap<String, ListeDeBlocs> fichiersPartages
+  -HashMap<String , Long> listeDesFichiersComplets
+  +getIp() : String
+  +getPort() : int
+  +obtenirLaListeDesFichiersComplets() : HashMap<String, Long>
+  +ajouterFichier(String nomFichier, ListeDeBlocs listeDeBlocs)
+  +detientLeFichier(String nomFichier) : boolean
+  +blocDuFichier(String nomFichier) : ListeDeBlocs
+  +toString() : String
+  }
+
+Serializable <|.. InfoUtilisateur
+
+class ListeDeBlocs {
+  -TreeSet<Integer> listeDesBlocs
+  -long tailleDuFichier
+  +obtenirTailleDuFichier() : long
+  +detientLeBloc(int numeroDuBloc) : boolean
+  +definirTailleDuFichier(long tailleDuFichier)
+  +ajouterUnBloc(int numero)
+  +toString() : String
+  
+}
+
+InfoUtilisateur o-- ListeDeBlocs
+
+
+
+
+
+@enduml
