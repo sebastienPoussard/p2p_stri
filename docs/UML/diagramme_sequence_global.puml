@@ -1,0 +1,32 @@
+@startuml
+
+'acteurs
+actor "Utilisateur" as u
+control "application" as a
+database "serveur centrale" as d
+collections "Utilisateurs connectés" as u2
+
+'parametres
+autonumber 
+
+'actions
+u2 -> d : listeDesFichierPossédé
+a -> d : listeDesFichierPossédé
+u -> a : listeDesFichiersTelechargeable()
+a -> d : listeDesFichiersTelechargeable()
+d --> a : String liste
+a --> u : String liste
+u -> a : telecharger(String nomDuFichier)
+a -> d : utilisateursAyant(String nomDuFichier)
+d --> a : listeDesUtilisateurs
+loop tant que fichier non complet
+    par
+        a -> u2 : telechargerBloc(String nomDuFichier, int numeroBloc)
+        u2 --> a : blocDuFichier
+    end
+end
+a -> d : listeDesFichierPossédé
+u -> a : quitter
+
+
+@enduml
