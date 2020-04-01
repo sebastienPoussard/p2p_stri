@@ -1,5 +1,5 @@
-\hypertarget{classcommun_1_1InfoUtilisateur}{}\section{commun.\+Info\+Utilisateur Class Reference}
-\label{classcommun_1_1InfoUtilisateur}\index{commun.\+Info\+Utilisateur@{commun.\+Info\+Utilisateur}}
+\hypertarget{classcommun_1_1InfoUtilisateur}{}\doxysection{commun.\+Info\+Utilisateur Class Reference}
+\label{classcommun_1_1InfoUtilisateur}\index{commun.InfoUtilisateur@{commun.InfoUtilisateur}}
 
 
 cette classe permet de stocker les informations sur un utilisateur (ip, port, liste des fichiers qu\textquotesingle{}il possède et quel parties de ces fichiers il possède)  
@@ -7,52 +7,54 @@ cette classe permet de stocker les informations sur un utilisateur (ip, port, li
 
 
 
-Inheritance diagram for commun.\+Info\+Utilisateur\+:\nopagebreak
+Inheritance diagram for commun.\+Info\+Utilisateur\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=198pt]{classcommun_1_1InfoUtilisateur__inherit__graph}
+\includegraphics[width=212pt]{classcommun_1_1InfoUtilisateur__inherit__graph}
 \end{center}
 \end{figure}
 
 
-Collaboration diagram for commun.\+Info\+Utilisateur\+:\nopagebreak
+Collaboration diagram for commun.\+Info\+Utilisateur\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=198pt]{classcommun_1_1InfoUtilisateur__coll__graph}
+\includegraphics[width=212pt]{classcommun_1_1InfoUtilisateur__coll__graph}
 \end{center}
 \end{figure}
-\subsection*{Public Member Functions}
+\doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classcommun_1_1InfoUtilisateur_aaa6fb8bb0211678aad4fe5343d36485e}{Info\+Utilisateur} (String ip, int port)
+\mbox{\hyperlink{classcommun_1_1InfoUtilisateur_aaa6fb8bb0211678aad4fe5343d36485e}{Info\+Utilisateur}} (String ip, int port)
 \begin{DoxyCompactList}\small\item\em constructeur de la classe. \end{DoxyCompactList}\item 
-String \hyperlink{classcommun_1_1InfoUtilisateur_acdf31d84ce570faa468b6bae8416e998}{get\+Ip} ()
+String \mbox{\hyperlink{classcommun_1_1InfoUtilisateur_acdf31d84ce570faa468b6bae8416e998}{get\+Ip}} ()
 \begin{DoxyCompactList}\small\item\em permet d\textquotesingle{}obtenir l\textquotesingle{}ip de l\textquotesingle{}utilisateur. \end{DoxyCompactList}\item 
-int \hyperlink{classcommun_1_1InfoUtilisateur_a534d959e66e5495fb67f4289573d7be9}{get\+Port} ()
+int \mbox{\hyperlink{classcommun_1_1InfoUtilisateur_a534d959e66e5495fb67f4289573d7be9}{get\+Port}} ()
 \begin{DoxyCompactList}\small\item\em permet d\textquotesingle{}obtenir le port d\textquotesingle{}écoute de l\textquotesingle{}utilisateur. \end{DoxyCompactList}\item 
-Hash\+Map$<$ String, Long $>$ \hyperlink{classcommun_1_1InfoUtilisateur_a792f0a8d202c280ca41da46151265dea}{obtenir\+La\+Liste\+Des\+Fichiers\+Complets} ()
+Hash\+Map$<$ String, Long $>$ \mbox{\hyperlink{classcommun_1_1InfoUtilisateur_a792f0a8d202c280ca41da46151265dea}{obtenir\+La\+Liste\+Des\+Fichiers\+Complets}} ()
 \begin{DoxyCompactList}\small\item\em permet de récuperer la liste des fichiers complets de l\textquotesingle{}utilisateur. \end{DoxyCompactList}\item 
-void \hyperlink{classcommun_1_1InfoUtilisateur_a49464d9eecf82d8768449eabc848aa39}{ajouter\+Fichier} (String nom\+Fichier, \hyperlink{classcommun_1_1ListeDeBlocs}{Liste\+De\+Blocs} liste\+De\+Blocs)
+void \mbox{\hyperlink{classcommun_1_1InfoUtilisateur_a49464d9eecf82d8768449eabc848aa39}{ajouter\+Fichier}} (String nom\+Fichier, \mbox{\hyperlink{classcommun_1_1ListeDeBlocs}{Liste\+De\+Blocs}} liste\+De\+Blocs)
 \begin{DoxyCompactList}\small\item\em ajoute un fichier et la liste des blocs de ce fichier que l\textquotesingle{}utilisateur possede. \end{DoxyCompactList}\item 
-boolean \hyperlink{classcommun_1_1InfoUtilisateur_ab120b90f5b5cf07fc6ebc9b34488e3b3}{detient\+Le\+Fichier} (String nom\+Fichier)
+boolean \mbox{\hyperlink{classcommun_1_1InfoUtilisateur_ab120b90f5b5cf07fc6ebc9b34488e3b3}{detient\+Le\+Fichier}} (String nom\+Fichier)
 \begin{DoxyCompactList}\small\item\em permet de savoir si l\textquotesingle{}utilisateur detient un fichier spécifique. \end{DoxyCompactList}\item 
-\hyperlink{classcommun_1_1ListeDeBlocs}{Liste\+De\+Blocs} \hyperlink{classcommun_1_1InfoUtilisateur_a9f1e697ade23c76e070c55e03492b085}{bloc\+Du\+Fichier} (String nom\+Fichier)
+\mbox{\hyperlink{classcommun_1_1ListeDeBlocs}{Liste\+De\+Blocs}} \mbox{\hyperlink{classcommun_1_1InfoUtilisateur_a9f1e697ade23c76e070c55e03492b085}{bloc\+Du\+Fichier}} (String nom\+Fichier)
 \begin{DoxyCompactList}\small\item\em permet d\textquotesingle{}obtenir la liste de bloc d\textquotesingle{}un fichier que l\textquotesingle{}utilisateur posséde. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcommun_1_1InfoUtilisateur_af24c4b39eb5d42019c658e37819a2395}\label{classcommun_1_1InfoUtilisateur_af24c4b39eb5d42019c658e37819a2395}} 
-String \hyperlink{classcommun_1_1InfoUtilisateur_af24c4b39eb5d42019c658e37819a2395}{to\+String} ()
+String \mbox{\hyperlink{classcommun_1_1InfoUtilisateur_af24c4b39eb5d42019c658e37819a2395}{to\+String}} ()
 \begin{DoxyCompactList}\small\item\em methode pour obtenir une description de l\textquotesingle{}objet l\textquotesingle{}info utilisateur principalement utilisé pour debuger et pour afficher des informations. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
+\doxysubsection{Detailed Description}
 cette classe permet de stocker les informations sur un utilisateur (ip, port, liste des fichiers qu\textquotesingle{}il possède et quel parties de ces fichiers il possède) 
 
-\subsection{Constructor \& Destructor Documentation}
+\doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{classcommun_1_1InfoUtilisateur_aaa6fb8bb0211678aad4fe5343d36485e}\label{classcommun_1_1InfoUtilisateur_aaa6fb8bb0211678aad4fe5343d36485e}} 
-\index{commun\+::\+Info\+Utilisateur@{commun\+::\+Info\+Utilisateur}!Info\+Utilisateur@{Info\+Utilisateur}}
-\index{Info\+Utilisateur@{Info\+Utilisateur}!commun\+::\+Info\+Utilisateur@{commun\+::\+Info\+Utilisateur}}
-\subsubsection{\texorpdfstring{Info\+Utilisateur()}{InfoUtilisateur()}}
+\index{commun.InfoUtilisateur@{commun.InfoUtilisateur}!InfoUtilisateur@{InfoUtilisateur}}
+\index{InfoUtilisateur@{InfoUtilisateur}!commun.InfoUtilisateur@{commun.InfoUtilisateur}}
+\doxysubsubsection{\texorpdfstring{InfoUtilisateur()}{InfoUtilisateur()}}
 {\footnotesize\ttfamily commun.\+Info\+Utilisateur.\+Info\+Utilisateur (\begin{DoxyParamCaption}\item[{String}]{ip,  }\item[{int}]{port }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -68,12 +70,12 @@ constructeur de la classe.
 \end{DoxyParams}
 
 
-\subsection{Member Function Documentation}
+\doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classcommun_1_1InfoUtilisateur_a49464d9eecf82d8768449eabc848aa39}\label{classcommun_1_1InfoUtilisateur_a49464d9eecf82d8768449eabc848aa39}} 
-\index{commun\+::\+Info\+Utilisateur@{commun\+::\+Info\+Utilisateur}!ajouter\+Fichier@{ajouter\+Fichier}}
-\index{ajouter\+Fichier@{ajouter\+Fichier}!commun\+::\+Info\+Utilisateur@{commun\+::\+Info\+Utilisateur}}
-\subsubsection{\texorpdfstring{ajouter\+Fichier()}{ajouterFichier()}}
-{\footnotesize\ttfamily void commun.\+Info\+Utilisateur.\+ajouter\+Fichier (\begin{DoxyParamCaption}\item[{String}]{nom\+Fichier,  }\item[{\hyperlink{classcommun_1_1ListeDeBlocs}{Liste\+De\+Blocs}}]{liste\+De\+Blocs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\index{commun.InfoUtilisateur@{commun.InfoUtilisateur}!ajouterFichier@{ajouterFichier}}
+\index{ajouterFichier@{ajouterFichier}!commun.InfoUtilisateur@{commun.InfoUtilisateur}}
+\doxysubsubsection{\texorpdfstring{ajouterFichier()}{ajouterFichier()}}
+{\footnotesize\ttfamily void commun.\+Info\+Utilisateur.\+ajouter\+Fichier (\begin{DoxyParamCaption}\item[{String}]{nom\+Fichier,  }\item[{\mbox{\hyperlink{classcommun_1_1ListeDeBlocs}{Liste\+De\+Blocs}}}]{liste\+De\+Blocs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -87,10 +89,10 @@ ajoute un fichier et la liste des blocs de ce fichier que l\textquotesingle{}uti
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classcommun_1_1InfoUtilisateur_a9f1e697ade23c76e070c55e03492b085}\label{classcommun_1_1InfoUtilisateur_a9f1e697ade23c76e070c55e03492b085}} 
-\index{commun\+::\+Info\+Utilisateur@{commun\+::\+Info\+Utilisateur}!bloc\+Du\+Fichier@{bloc\+Du\+Fichier}}
-\index{bloc\+Du\+Fichier@{bloc\+Du\+Fichier}!commun\+::\+Info\+Utilisateur@{commun\+::\+Info\+Utilisateur}}
-\subsubsection{\texorpdfstring{bloc\+Du\+Fichier()}{blocDuFichier()}}
-{\footnotesize\ttfamily \hyperlink{classcommun_1_1ListeDeBlocs}{Liste\+De\+Blocs} commun.\+Info\+Utilisateur.\+bloc\+Du\+Fichier (\begin{DoxyParamCaption}\item[{String}]{nom\+Fichier }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\index{commun.InfoUtilisateur@{commun.InfoUtilisateur}!blocDuFichier@{blocDuFichier}}
+\index{blocDuFichier@{blocDuFichier}!commun.InfoUtilisateur@{commun.InfoUtilisateur}}
+\doxysubsubsection{\texorpdfstring{blocDuFichier()}{blocDuFichier()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcommun_1_1ListeDeBlocs}{Liste\+De\+Blocs}} commun.\+Info\+Utilisateur.\+bloc\+Du\+Fichier (\begin{DoxyParamCaption}\item[{String}]{nom\+Fichier }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -105,9 +107,9 @@ permet d\textquotesingle{}obtenir la liste de bloc d\textquotesingle{}un fichier
 renvoie la liste de blocs du fichier de l\textquotesingle{}utilisateur. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classcommun_1_1InfoUtilisateur_ab120b90f5b5cf07fc6ebc9b34488e3b3}\label{classcommun_1_1InfoUtilisateur_ab120b90f5b5cf07fc6ebc9b34488e3b3}} 
-\index{commun\+::\+Info\+Utilisateur@{commun\+::\+Info\+Utilisateur}!detient\+Le\+Fichier@{detient\+Le\+Fichier}}
-\index{detient\+Le\+Fichier@{detient\+Le\+Fichier}!commun\+::\+Info\+Utilisateur@{commun\+::\+Info\+Utilisateur}}
-\subsubsection{\texorpdfstring{detient\+Le\+Fichier()}{detientLeFichier()}}
+\index{commun.InfoUtilisateur@{commun.InfoUtilisateur}!detientLeFichier@{detientLeFichier}}
+\index{detientLeFichier@{detientLeFichier}!commun.InfoUtilisateur@{commun.InfoUtilisateur}}
+\doxysubsubsection{\texorpdfstring{detientLeFichier()}{detientLeFichier()}}
 {\footnotesize\ttfamily boolean commun.\+Info\+Utilisateur.\+detient\+Le\+Fichier (\begin{DoxyParamCaption}\item[{String}]{nom\+Fichier }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -123,9 +125,9 @@ permet de savoir si l\textquotesingle{}utilisateur detient un fichier spécifiqu
 renvoie true si l\textquotesingle{}utilisateur posséde le fichier, sinon renvoie false. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classcommun_1_1InfoUtilisateur_acdf31d84ce570faa468b6bae8416e998}\label{classcommun_1_1InfoUtilisateur_acdf31d84ce570faa468b6bae8416e998}} 
-\index{commun\+::\+Info\+Utilisateur@{commun\+::\+Info\+Utilisateur}!get\+Ip@{get\+Ip}}
-\index{get\+Ip@{get\+Ip}!commun\+::\+Info\+Utilisateur@{commun\+::\+Info\+Utilisateur}}
-\subsubsection{\texorpdfstring{get\+Ip()}{getIp()}}
+\index{commun.InfoUtilisateur@{commun.InfoUtilisateur}!getIp@{getIp}}
+\index{getIp@{getIp}!commun.InfoUtilisateur@{commun.InfoUtilisateur}}
+\doxysubsubsection{\texorpdfstring{getIp()}{getIp()}}
 {\footnotesize\ttfamily String commun.\+Info\+Utilisateur.\+get\+Ip (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -136,9 +138,9 @@ permet d\textquotesingle{}obtenir l\textquotesingle{}ip de l\textquotesingle{}ut
 retourne l\textquotesingle{}ip de l\textquotesingle{}utilisateur. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classcommun_1_1InfoUtilisateur_a534d959e66e5495fb67f4289573d7be9}\label{classcommun_1_1InfoUtilisateur_a534d959e66e5495fb67f4289573d7be9}} 
-\index{commun\+::\+Info\+Utilisateur@{commun\+::\+Info\+Utilisateur}!get\+Port@{get\+Port}}
-\index{get\+Port@{get\+Port}!commun\+::\+Info\+Utilisateur@{commun\+::\+Info\+Utilisateur}}
-\subsubsection{\texorpdfstring{get\+Port()}{getPort()}}
+\index{commun.InfoUtilisateur@{commun.InfoUtilisateur}!getPort@{getPort}}
+\index{getPort@{getPort}!commun.InfoUtilisateur@{commun.InfoUtilisateur}}
+\doxysubsubsection{\texorpdfstring{getPort()}{getPort()}}
 {\footnotesize\ttfamily int commun.\+Info\+Utilisateur.\+get\+Port (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -149,9 +151,9 @@ permet d\textquotesingle{}obtenir le port d\textquotesingle{}écoute de l\textqu
 retourne le port d\textquotesingle{}écoute de l\textquotesingle{}utilisateur. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classcommun_1_1InfoUtilisateur_a792f0a8d202c280ca41da46151265dea}\label{classcommun_1_1InfoUtilisateur_a792f0a8d202c280ca41da46151265dea}} 
-\index{commun\+::\+Info\+Utilisateur@{commun\+::\+Info\+Utilisateur}!obtenir\+La\+Liste\+Des\+Fichiers\+Complets@{obtenir\+La\+Liste\+Des\+Fichiers\+Complets}}
-\index{obtenir\+La\+Liste\+Des\+Fichiers\+Complets@{obtenir\+La\+Liste\+Des\+Fichiers\+Complets}!commun\+::\+Info\+Utilisateur@{commun\+::\+Info\+Utilisateur}}
-\subsubsection{\texorpdfstring{obtenir\+La\+Liste\+Des\+Fichiers\+Complets()}{obtenirLaListeDesFichiersComplets()}}
+\index{commun.InfoUtilisateur@{commun.InfoUtilisateur}!obtenirLaListeDesFichiersComplets@{obtenirLaListeDesFichiersComplets}}
+\index{obtenirLaListeDesFichiersComplets@{obtenirLaListeDesFichiersComplets}!commun.InfoUtilisateur@{commun.InfoUtilisateur}}
+\doxysubsubsection{\texorpdfstring{obtenirLaListeDesFichiersComplets()}{obtenirLaListeDesFichiersComplets()}}
 {\footnotesize\ttfamily Hash\+Map$<$String, Long$>$ commun.\+Info\+Utilisateur.\+obtenir\+La\+Liste\+Des\+Fichiers\+Complets (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 

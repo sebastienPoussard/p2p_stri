@@ -1,6 +1,8 @@
 <map id="requete.Requete" name="requete.Requete">
-<area shape="rect" id="node3" href="$classgestionnaireRequete_1_1GestionnaireDeTelechargement.html" title="cette classe va gérer les téléchargements d&#39;un fichier depuis un ou plusieurs autres clients..." alt="" coords="297,5,516,47"/>
-<area shape="rect" id="node4" href="$classrequete_1_1RequeteListe.html" title="Cette classe permet de créer un Thread qui va demander à un serveur la liste des fichiers qu&#39;il conti..." alt="" coords="333,71,480,98"/>
-<area shape="rect" id="node5" href="$classrequete_1_1RequeteTelecharger.html" title="cette classe va télécharger un bloc de fichier depuis un serveur. " alt="" coords="313,122,500,149"/>
-<area shape="rect" id="node6" href="$classrequete_1_1RequeteUpdateInfosUtilisateur.html" title="cette classe permet d&#39;envoyer au serveur central les infos concernant le client. " alt="" coords="312,173,501,215"/>
+<area shape="rect" id="node1" title="classe abstraite définissant une requête d&#39;un client au serveur." alt="" coords="136,97,267,123"/>
+<area shape="rect" id="node3" href="$classgestionnaireRequete_1_1GestionnaireDeTelechargement.html" title="cette classe va gérer les téléchargements d&#39;un fichier depuis un ou plusieurs autres clients." alt="" coords="315,5,559,47"/>
+<area shape="rect" id="node4" href="$classrequete_1_1RequeteListe.html" title="Cette classe permet de créer un Thread qui va demander à un serveur la liste des fichiers qu&#39;il conti..." alt="" coords="356,71,517,98"/>
+<area shape="rect" id="node5" href="$classrequete_1_1RequeteTelecharger.html" title="cette classe va télécharger un bloc de fichier depuis un serveur." alt="" coords="334,122,539,149"/>
+<area shape="rect" id="node6" href="$classrequete_1_1RequeteUpdateInfosUtilisateur.html" title="cette classe permet d&#39;envoyer au serveur central les infos concernant le client." alt="" coords="332,173,541,215"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,97,88,123"/>
 </map>

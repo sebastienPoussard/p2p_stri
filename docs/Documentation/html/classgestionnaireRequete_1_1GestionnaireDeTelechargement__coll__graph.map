@@ -1,3 +1,10 @@
 <map id="gestionnaireRequete.GestionnaireDeTelechargement" name="gestionnaireRequete.GestionnaireDeTelechargement">
-<area shape="rect" id="node2" href="$classrequete_1_1Requete.html" title="classe abstraite définissant une requête d&#39;un client au serveur. " alt="" coords="271,132,389,159"/>
+<area shape="rect" id="node1" title="cette classe va gérer les téléchargements d&#39;un fichier depuis un ou plusieurs autres clients." alt="" coords="475,125,719,166"/>
+<area shape="rect" id="node2" href="$classrequete_1_1Requete.html" title="classe abstraite définissant une requête d&#39;un client au serveur." alt="" coords="295,132,425,159"/>
+<area shape="rect" id="node3" title=" " alt="" coords="48,5,131,32"/>
+<area shape="rect" id="node4" title=" " alt="" coords="12,56,167,83"/>
+<area shape="rect" id="node5" title=" " alt="" coords="17,107,161,133"/>
+<area shape="rect" id="node6" title=" " alt="" coords="57,157,122,184"/>
+<area shape="rect" id="node7" title=" " alt="" coords="5,208,173,235"/>
+<area shape="rect" id="node8" title=" " alt="" coords="11,259,168,285"/>
 </map>

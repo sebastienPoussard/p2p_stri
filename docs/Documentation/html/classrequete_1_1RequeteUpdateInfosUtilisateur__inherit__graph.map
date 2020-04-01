@@ -1,3 +1,5 @@
 <map id="requete.RequeteUpdateInfosUtilisateur" name="requete.RequeteUpdateInfosUtilisateur">
-<area shape="rect" id="node2" href="$classrequete_1_1Requete.html" title="classe abstraite définissant une requête d&#39;un client au serveur. " alt="" coords="41,80,159,107"/>
+<area shape="rect" id="node1" title="cette classe permet d&#39;envoyer au serveur central les infos concernant le client." alt="" coords="5,155,215,196"/>
+<area shape="rect" id="node2" href="$classrequete_1_1Requete.html" title="classe abstraite définissant une requête d&#39;un client au serveur." alt="" coords="45,80,175,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="69,5,151,32"/>
 </map>

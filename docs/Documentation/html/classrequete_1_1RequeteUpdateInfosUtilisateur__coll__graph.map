@@ -1,4 +1,12 @@
 <map id="requete.RequeteUpdateInfosUtilisateur" name="requete.RequeteUpdateInfosUtilisateur">
-<area shape="rect" id="node2" href="$classrequete_1_1Requete.html" title="classe abstraite définissant une requête d&#39;un client au serveur. " alt="" coords="290,157,409,184"/>
-<area shape="rect" id="node9" href="$classcommun_1_1InfoUtilisateur.html" title="cette classe permet de stocker les informations sur un utilisateur (ip, port, liste des fichiers qu&#39;i..." alt="" coords="271,259,428,285"/>
+<area shape="rect" id="node1" title="cette classe permet d&#39;envoyer au serveur central les infos concernant le client." alt="" coords="556,226,765,267"/>
+<area shape="rect" id="node2" href="$classrequete_1_1Requete.html" title="classe abstraite définissant une requête d&#39;un client au serveur." alt="" coords="317,157,448,184"/>
+<area shape="rect" id="node3" title=" " alt="" coords="48,5,131,32"/>
+<area shape="rect" id="node4" title=" " alt="" coords="12,56,167,83"/>
+<area shape="rect" id="node5" title=" " alt="" coords="17,107,161,133"/>
+<area shape="rect" id="node6" title=" " alt="" coords="57,157,122,184"/>
+<area shape="rect" id="node7" title=" " alt="" coords="5,208,173,235"/>
+<area shape="rect" id="node8" title=" " alt="" coords="11,259,168,285"/>
+<area shape="rect" id="node9" href="$classcommun_1_1InfoUtilisateur.html" title="cette classe permet de stocker les informations sur un utilisateur (ip, port, liste des fichiers qu&#39;i..." alt="" coords="295,259,471,285"/>
+<area shape="rect" id="node10" title=" " alt="" coords="40,309,139,336"/>
 </map>

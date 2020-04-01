@@ -1,3 +1,5 @@
 <map id="requete.RequeteListe" name="requete.RequeteListe">
-<area shape="rect" id="node2" href="$classrequete_1_1Requete.html" title="classe abstraite définissant une requête d&#39;un client au serveur. " alt="" coords="19,80,138,107"/>
+<area shape="rect" id="node1" title="Cette classe permet de créer un Thread qui va demander à un serveur la liste des fichiers qu&#39;il conti..." alt="" coords="5,155,167,181"/>
+<area shape="rect" id="node2" href="$classrequete_1_1Requete.html" title="classe abstraite définissant une requête d&#39;un client au serveur." alt="" coords="21,80,151,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="45,5,127,32"/>
 </map>

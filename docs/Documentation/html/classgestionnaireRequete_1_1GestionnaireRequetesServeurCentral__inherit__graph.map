@@ -1,3 +1,5 @@
 <map id="gestionnaireRequete.GestionnaireRequetesServeurCentral" name="gestionnaireRequete.GestionnaireRequetesServeurCentral">
-<area shape="rect" id="node2" href="$classgestionnaireRequete_1_1GestionnaireRequetes.html" title="Cette classe abstrait permet de gérer les requêtes d&#39;un client. " alt="" coords="5,80,224,121"/>
+<area shape="rect" id="node1" title="Cette classe gere les requêtes d&#39;un client vers le serveur central." alt="" coords="5,169,249,211"/>
+<area shape="rect" id="node2" href="$classgestionnaireRequete_1_1GestionnaireRequetes.html" title="Cette classe abstrait permet de gérer les requêtes d&#39;un client." alt="" coords="5,80,249,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="86,5,169,32"/>
 </map>

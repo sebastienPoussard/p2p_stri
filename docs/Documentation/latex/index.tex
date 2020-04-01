@@ -1,12 +1,12 @@
 This Java project is developped in collaboration with Romain B\+R\+E\+D\+A\+R\+I\+OL \& Léo-\/\+Paul Dewitte.
 
-\section*{Goal}
+\doxysection*{Goal}
 
 This application act as a P2P Client to share files.
 
-\section*{Subject}
+\doxysection*{Subject}
 
-{\bfseries But} \+: le but de ce projet est de créer une application répartie en Java de téléchargement de fichier en mode P2P (peer to peer ou poste à poste). Les étapes suivantes sont conseillées. \subsection*{Étape 1 \+: Téléchargement à la F\+TP}
+{\bfseries{But}} \+: le but de ce projet est de créer une application répartie en Java de téléchargement de fichier en mode P2P (peer to peer ou poste à poste). Les étapes suivantes sont conseillées. \doxysubsection*{Étape 1 \+: Téléchargement à la F\+TP}
 
 La première étape doit permettre de télécharger un fichier en intégralité d\textquotesingle{}une machine vers une autre machine de façon similaire aux applications suivant le protocole F\+TP.
 
@@ -19,7 +19,7 @@ Plan de travail \+:
 \item Écrire l\textquotesingle{}application serveur et l\textquotesingle{}application cliente.
 \end{DoxyItemize}
 
-\subsection*{Étape 2 \+: Téléchargement en parallèle}
+\doxysubsection*{Étape 2 \+: Téléchargement en parallèle}
 
 Dans la seconde étape, on permet à un client de télécharger le fichier depuis plusieurs serveurs. Le fichier sera découpé en plusieurs blocs de tailles égales (par exemple 4 Ko) qui seront téléchargés depuis plusieurs serveurs. Dans cette étape c\textquotesingle{}est le client qui choisit (par exemple aléatoirement) quel bloc télécharger depuis quel serveur.
 
@@ -31,19 +31,19 @@ Plan de travail \+:
 \item Modifier le client pour qu\textquotesingle{}il puisse demander le téléchargement de n\textquotesingle{}importe quel bloc et re-\/créer le fichier complet.
 \end{DoxyItemize}
 
-\subsection*{Étape 3 \+: Transformation en P2P simple}
+\doxysubsection*{Étape 3 \+: Transformation en P2P simple}
 
 Dans cette étape, il n\textquotesingle{}y a plus de clients ni de serveurs ; les applications sont les deux à la fois. Chaque application devra noter de quelle partie du fichier elle dispose. Au démarrage certaines applications auront le fichier complet et les autres aucun bloc. Les applications demanderont aléatoirement chaque bloc manquant à n\textquotesingle{}importe quelle autre application qui renverra soit le bloc soit un message d\textquotesingle{}erreur.
 
-\subsection*{Étape 4 \+: P2P coordonné}
+\doxysubsection*{Étape 4 \+: P2P coordonné}
 
 Dans cette étape, on ajoute un serveur dont le rôle est de maintenir la liste des applications gérant le téléchargement d\textquotesingle{}un fichier et quel bloc chaque application possède. Ce serveur coordonnera le téléchargement en précisant à chaque application, à qui se connecter et ce qui y est disponible.
 
-\subsection*{Étape 5 \+: P2P coopératif}
+\doxysubsection*{Étape 5 \+: P2P coopératif}
 
 Dans cette étape, on doit s\textquotesingle{}assurer que les applications envoient et reçoivent globalement les même quantités. On essaiera ainsi de désavantager les applications qui ne font que télécharger et n\textquotesingle{}envoient rien.
 
-\subsection*{Options \+:}
+\doxysubsection*{Options \+:}
 
 
 \begin{DoxyItemize}

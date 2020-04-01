@@ -1,2 +1,4 @@
 <map id="commun.InfoUtilisateur" name="commun.InfoUtilisateur">
+<area shape="rect" id="node1" title="cette classe permet de stocker les informations sur un utilisateur (ip, port, liste des fichiers qu&#39;i..." alt="" coords="5,80,181,107"/>
+<area shape="rect" id="node2" title=" " alt="" coords="44,5,143,32"/>
 </map>
