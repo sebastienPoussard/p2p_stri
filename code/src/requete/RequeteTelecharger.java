@@ -13,9 +13,11 @@ import terminalClient.GestionnaireFichier;
 public class RequeteTelecharger extends Requete {
 
 	private int numeroDuBloc;									// le numéro du bloc à télécharger.
-	GestionnaireFichier gestionnaireFichier;					// le gestionnaire de fichier.
-	RandomAccessFile fichier;									// le fichier.
+	private GestionnaireFichier gestionnaireFichier;			// le gestionnaire de fichier.
+	private RandomAccessFile fichier;							// le fichier.
 	private String nomFichier;									// le nom du fichier.
+	private String adresseServeurCentral;						// adresse du serveur central.
+	private String adresseServeur;								// adresse du serveur chez qui on télécharge.
 	
 	/**
 	 * @brief constructeur de la classe permettant de télécharger une bloc d'un fichier depuis un serveur.
@@ -24,9 +26,11 @@ public class RequeteTelecharger extends Requete {
 	 * @param gestionnaireFichier le gestionnaire de fichier.
 	 * @param numeroDuBloc numéro du bloc du fichier que l'on souhaite télécharger.
 	 */
-	public RequeteTelecharger(String adresseServeur, RandomAccessFile fichier, String nomFichier,
+	public RequeteTelecharger(String adresseServeurCentral ,String adresseServeur, RandomAccessFile fichier, String nomFichier,
 			GestionnaireFichier gestionnaireFichier, int numeroDuBloc) {
 		super(adresseServeur);
+		this.adresseServeurCentral = adresseServeurCentral;
+		this.adresseServeur = adresseServeur;
 		this.numeroDuBloc = numeroDuBloc;
 		this.gestionnaireFichier = gestionnaireFichier;
 		this.fichier = fichier;
@@ -62,6 +66,10 @@ public class RequeteTelecharger extends Requete {
 		// écrire les données lues dans le fichier.
 		this.gestionnaireFichier.ecrire(donnees.toByteArray(), tailleTotale, this.fichier, this.numeroDuBloc);
 		Messages.getInstance().ecrireMessage("Téléchargement du bloc "+this.numeroDuBloc+" du fichier "+this.nomFichier+" terminé !");
+		// prevenir le serveur central que le serveur à envoyé des données
+		RequeteEnvoieMessage requete = new RequeteEnvoieMessage(adresseServeurCentral, "RECUE "+this.adresseServeur+" "+tailleTotale );
+		Thread th = new Thread(requete);
+		th.start();
 		// fermer le Thread.
 		terminer();
 	}

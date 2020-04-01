@@ -79,6 +79,12 @@ public class GestionnaireRequetesServeurCentral extends GestionnaireRequetes {
 			this.objOut.writeObject(listeUtilisateursAyantLeFichier);
 			this.objOut.flush();
 			break;
+		// quand l'utilisateur envoie une confirmation qu'il à reçue des données d'un autre serveur.
+		case "RECUE":
+			String adresse = tableauRequete[1];
+			long taille = Long.parseLong(tableauRequete[2]);
+			System.out.println("score : "+adresse+" : "+taille);
+			break;
 		default:
 			// si le message n'est pas correcte.
 			Messages.getInstance().ecrireErreur("La requête client ne correspond pas au bon standard"

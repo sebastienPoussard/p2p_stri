@@ -27,6 +27,7 @@ public class GestionnaireDeTelechargement extends Requete {
 	private int nbrDeBlocs;														// le nombre de blocs composant le fichier.
 	private RandomAccessFile file;												// le fichier sur le disque.
 	private ArrayList<Thread> listeDesThreads;									// la liste des thread qui vont télécharger des données.
+	private String adresseServeurCentral;										// adresse du serveur central.
 	
 	/**
 	 * @brief constructeur de la classe.
@@ -37,6 +38,7 @@ public class GestionnaireDeTelechargement extends Requete {
 	public GestionnaireDeTelechargement(String adresseServeurCentral, String nomFichier,
 			GestionnaireFichier gestionnaireFichier) {
 		super(adresseServeurCentral);
+		this.adresseServeurCentral = adresseServeurCentral;
 		this.nomFichier = nomFichier;
 		this.gestionnaireFichier = gestionnaireFichier;
 		this.listeDesThreads = new ArrayList<Thread>();
@@ -82,7 +84,7 @@ public class GestionnaireDeTelechargement extends Requete {
 				if (blocs.detientLeBloc(numeroBloc)) {
 					// telecharger chez la personne le bloc
 					String adresse = (String) utilisateur.getKey();
-					RequeteTelecharger requete = new RequeteTelecharger(adresse, this.file, this.nomFichier, this.gestionnaireFichier, numeroBloc);
+					RequeteTelecharger requete = new RequeteTelecharger(this.adresseServeurCentral, adresse, this.file, this.nomFichier, this.gestionnaireFichier, numeroBloc);
 					Thread thread = new Thread(requete);
 					this.listeDesThreads.add(thread);
 					thread.start();
