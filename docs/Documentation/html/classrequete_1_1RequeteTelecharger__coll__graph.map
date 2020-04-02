@@ -1,12 +1,10 @@
 <map id="requete.RequeteTelecharger" name="requete.RequeteTelecharger">
-<area shape="rect" id="node1" title="cette classe va télécharger un bloc de fichier depuis un serveur." alt="" coords="675,191,880,217"/>
-<area shape="rect" id="node2" href="$classrequete_1_1Requete.html" title="classe abstraite définissant une requête d&#39;un client au serveur." alt="" coords="331,132,461,159"/>
+<area shape="rect" id="node1" title="cette classe va télécharger un bloc de fichier depuis un serveur." alt="" coords="475,132,680,159"/>
+<area shape="rect" id="node2" href="$classrequete_1_1Requete.html" title="classe abstraite définissant une requête d&#39;un client au serveur." alt="" coords="295,132,425,159"/>
 <area shape="rect" id="node3" title=" " alt="" coords="48,5,131,32"/>
 <area shape="rect" id="node4" title=" " alt="" coords="12,56,167,83"/>
 <area shape="rect" id="node5" title=" " alt="" coords="17,107,161,133"/>
 <area shape="rect" id="node6" title=" " alt="" coords="57,157,122,184"/>
 <area shape="rect" id="node7" title=" " alt="" coords="5,208,173,235"/>
 <area shape="rect" id="node8" title=" " alt="" coords="11,259,168,285"/>
-<area shape="rect" id="node9" href="$classterminalClient_1_1GestionnaireFichier.html" title="Cette classe gere le dossier contenant les fichiers partagés et téléchargés." alt="" coords="295,183,497,225"/>
-<area shape="rect" id="node10" title=" " alt="" coords="324,249,468,276"/>
 </map>

@@ -1,0 +1,80 @@
+\hypertarget{classcentralServer_1_1Ratios}{}\doxysection{central\+Server.\+Ratios Class Reference}
+\label{classcentralServer_1_1Ratios}\index{centralServer.Ratios@{centralServer.Ratios}}
+
+
+cette classe gère les ratios des utilisateurs  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+synchronized void \mbox{\hyperlink{classcentralServer_1_1Ratios_af9a0adb8880045d7647966f0ccb46442}{ajouter\+Infos}} (String receveur, String emetteur, Long quantitee)
+\begin{DoxyCompactList}\small\item\em méthode pour ajouter des quantitées de données à la B\+DD. \end{DoxyCompactList}\item 
+synchronized boolean \mbox{\hyperlink{classcentralServer_1_1Ratios_abb6c9f83f1011daf9dda8111e64a04fd}{ratio\+Est\+Bon}} (String adresse)
+\begin{DoxyCompactList}\small\item\em methode pour savoir si le ratio d\textquotesingle{}un utilisateur est bon ou non. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classcentralServer_1_1Ratios}{Ratios}} \mbox{\hyperlink{classcentralServer_1_1Ratios_acabdef292684d40f4499572d33c35275}{get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em singleton pour accéder à une instance unique de \mbox{\hyperlink{classcentralServer_1_1Ratios}{Ratios}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+cette classe gère les ratios des utilisateurs 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcentralServer_1_1Ratios_af9a0adb8880045d7647966f0ccb46442}\label{classcentralServer_1_1Ratios_af9a0adb8880045d7647966f0ccb46442}} 
+\index{centralServer.Ratios@{centralServer.Ratios}!ajouterInfos@{ajouterInfos}}
+\index{ajouterInfos@{ajouterInfos}!centralServer.Ratios@{centralServer.Ratios}}
+\doxysubsubsection{\texorpdfstring{ajouterInfos()}{ajouterInfos()}}
+{\footnotesize\ttfamily synchronized void central\+Server.\+Ratios.\+ajouter\+Infos (\begin{DoxyParamCaption}\item[{String}]{receveur,  }\item[{String}]{emetteur,  }\item[{Long}]{quantitee }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+méthode pour ajouter des quantitées de données à la B\+DD. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em receveur} & adresse IP\+:P\+O\+RT de la machine qui à reçue des données (en Ko). \\
+\hline
+{\em emetteur} & adresse IP\+:P\+O\+RT de la machine qui à émise les données (en Ko). \\
+\hline
+{\em quantitee} & quantitée de données transmise \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcentralServer_1_1Ratios_acabdef292684d40f4499572d33c35275}\label{classcentralServer_1_1Ratios_acabdef292684d40f4499572d33c35275}} 
+\index{centralServer.Ratios@{centralServer.Ratios}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!centralServer.Ratios@{centralServer.Ratios}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classcentralServer_1_1Ratios}{Ratios}} central\+Server.\+Ratios.\+get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+singleton pour accéder à une instance unique de \mbox{\hyperlink{classcentralServer_1_1Ratios}{Ratios}} 
+
+\begin{DoxyReturn}{Returns}
+retourne une instance unique de \mbox{\hyperlink{classcentralServer_1_1Ratios}{Ratios}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcentralServer_1_1Ratios_abb6c9f83f1011daf9dda8111e64a04fd}\label{classcentralServer_1_1Ratios_abb6c9f83f1011daf9dda8111e64a04fd}} 
+\index{centralServer.Ratios@{centralServer.Ratios}!ratioEstBon@{ratioEstBon}}
+\index{ratioEstBon@{ratioEstBon}!centralServer.Ratios@{centralServer.Ratios}}
+\doxysubsubsection{\texorpdfstring{ratioEstBon()}{ratioEstBon()}}
+{\footnotesize\ttfamily synchronized boolean central\+Server.\+Ratios.\+ratio\+Est\+Bon (\begin{DoxyParamCaption}\item[{String}]{adresse }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+methode pour savoir si le ratio d\textquotesingle{}un utilisateur est bon ou non. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em adresse} & l\textquotesingle{}adresse de l\textquotesingle{}utilisateur IP\+:P\+O\+RT \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+renvoie true sur le ratio de l\textquotesingle{}utilisateur est supérieur à 1,5 ou si celui-\/ci à télécharger moins de 1GO (pour laisser le télécharger à l\textquotesingle{}utilisateur afin de partager par la suite. sinon renvoie false. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Ratios.\+java\end{DoxyCompactItemize}

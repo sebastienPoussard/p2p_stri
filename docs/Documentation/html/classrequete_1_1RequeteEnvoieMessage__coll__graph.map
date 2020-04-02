@@ -1,0 +1,10 @@
+<map id="requete.RequeteEnvoieMessage" name="requete.RequeteEnvoieMessage">
+<area shape="rect" id="node1" title="Cette classe permet d&#39;envoyer un message à un serveur." alt="" coords="475,132,707,159"/>
+<area shape="rect" id="node2" href="$classrequete_1_1Requete.html" title="classe abstraite définissant une requête d&#39;un client au serveur." alt="" coords="295,132,425,159"/>
+<area shape="rect" id="node3" title=" " alt="" coords="48,5,131,32"/>
+<area shape="rect" id="node4" title=" " alt="" coords="12,56,167,83"/>
+<area shape="rect" id="node5" title=" " alt="" coords="17,107,161,133"/>
+<area shape="rect" id="node6" title=" " alt="" coords="57,157,122,184"/>
+<area shape="rect" id="node7" title=" " alt="" coords="5,208,173,235"/>
+<area shape="rect" id="node8" title=" " alt="" coords="11,259,168,285"/>
+</map>

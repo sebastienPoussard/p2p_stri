@@ -92,24 +92,22 @@ Collaboration diagram for requete.RequeteTelecharger:</div>
 <div class="dyncontent">
 <div class="center"><img src="classrequete_1_1RequeteTelecharger__coll__graph.png" border="0" usemap="#requete_8RequeteTelecharger_coll__map" alt="Collaboration graph"/></div>
 <map name="requete_8RequeteTelecharger_coll__map" id="requete_8RequeteTelecharger_coll__map">
-<area shape="rect" title="cette classe va télécharger un bloc de fichier depuis un serveur." alt="" coords="675,191,880,217"/>
-<area shape="rect" href="classrequete_1_1Requete.html" title="classe abstraite définissant une requête d&#39;un client au serveur." alt="" coords="331,132,461,159"/>
+<area shape="rect" title="cette classe va télécharger un bloc de fichier depuis un serveur." alt="" coords="475,132,680,159"/>
+<area shape="rect" href="classrequete_1_1Requete.html" title="classe abstraite définissant une requête d&#39;un client au serveur." alt="" coords="295,132,425,159"/>
 <area shape="rect" title=" " alt="" coords="48,5,131,32"/>
 <area shape="rect" title=" " alt="" coords="12,56,167,83"/>
 <area shape="rect" title=" " alt="" coords="17,107,161,133"/>
 <area shape="rect" title=" " alt="" coords="57,157,122,184"/>
 <area shape="rect" title=" " alt="" coords="5,208,173,235"/>
 <area shape="rect" title=" " alt="" coords="11,259,168,285"/>
-<area shape="rect" href="classterminalClient_1_1GestionnaireFichier.html" title="Cette classe gere le dossier contenant les fichiers partagés et téléchargés." alt="" coords="295,183,497,225"/>
-<area shape="rect" title=" " alt="" coords="324,249,468,276"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5c4fa1ef19064d12dc2ed51ecc5f3ba3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrequete_1_1RequeteTelecharger.html#a5c4fa1ef19064d12dc2ed51ecc5f3ba3">RequeteTelecharger</a> (String adresseServeur, RandomAccessFile fichier, String nomFichier, <a class="el" href="classterminalClient_1_1GestionnaireFichier.html">GestionnaireFichier</a> gestionnaireFichier, int numeroDuBloc)</td></tr>
-<tr class="memdesc:a5c4fa1ef19064d12dc2ed51ecc5f3ba3"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructeur de la classe permettant de télécharger une bloc d'un fichier depuis un serveur.  <a href="classrequete_1_1RequeteTelecharger.html#a5c4fa1ef19064d12dc2ed51ecc5f3ba3">More...</a><br /></td></tr>
-<tr class="separator:a5c4fa1ef19064d12dc2ed51ecc5f3ba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4161905352a64df4c8a9dcb5af718e14"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrequete_1_1RequeteTelecharger.html#a4161905352a64df4c8a9dcb5af718e14">RequeteTelecharger</a> (String adresseServeurCentral, String adresseServeur, RandomAccessFile fichier, String nomFichier, <a class="el" href="classterminalClient_1_1GestionnaireFichier.html">GestionnaireFichier</a> gestionnaireFichier, int numeroDuBloc, int portServeur)</td></tr>
+<tr class="memdesc:a4161905352a64df4c8a9dcb5af718e14"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructeur de la classe permettant de télécharger une bloc d'un fichier depuis un serveur.  <a href="classrequete_1_1RequeteTelecharger.html#a4161905352a64df4c8a9dcb5af718e14">More...</a><br /></td></tr>
+<tr class="separator:a4161905352a64df4c8a9dcb5af718e14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89314ecc5cdf732dd3f1d670dc13551f"><td class="memItemLeft" align="right" valign="top"><a id="a89314ecc5cdf732dd3f1d670dc13551f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrequete_1_1RequeteTelecharger.html#a89314ecc5cdf732dd3f1d670dc13551f">run</a> ()</td></tr>
 <tr class="memdesc:a89314ecc5cdf732dd3f1d670dc13551f"><td class="mdescLeft">&#160;</td><td class="mdescRight">methode pour lancer le Thread. <br /></td></tr>
@@ -161,8 +159,8 @@ ObjectInputStream&#160;</td><td class="memItemRight" valign="bottom"><b>objIn</b
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>cette classe va télécharger un bloc de fichier depuis un serveur. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a5c4fa1ef19064d12dc2ed51ecc5f3ba3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5c4fa1ef19064d12dc2ed51ecc5f3ba3">&#9670;&nbsp;</a></span>RequeteTelecharger()</h2>
+<a id="a4161905352a64df4c8a9dcb5af718e14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4161905352a64df4c8a9dcb5af718e14">&#9670;&nbsp;</a></span>RequeteTelecharger()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -173,6 +171,12 @@ ObjectInputStream&#160;</td><td class="memItemRight" valign="bottom"><b>objIn</b
         <tr>
           <td class="memname">requete.RequeteTelecharger.RequeteTelecharger </td>
           <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>adresseServeurCentral</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">String&#160;</td>
           <td class="paramname"><em>adresseServeur</em>, </td>
         </tr>
@@ -198,7 +202,13 @@ ObjectInputStream&#160;</td><td class="memItemRight" valign="bottom"><b>objIn</b
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>numeroDuBloc</em>&#160;</td>
+          <td class="paramname"><em>numeroDuBloc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>portServeur</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
