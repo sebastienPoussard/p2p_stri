@@ -58,8 +58,8 @@ public abstract class Requete implements Runnable {
 			Messages.getInstance().ecrireErreur("Erreur à l'ouverture des flux de données avec le serveur");
 			return;
 		}
-		// afficher un message de succés de connexion.
-		Messages.getInstance().ecrireMessage("Connexion au serveur "+this.ipServeur+":"+this.portServeur+" avec succés.");
+		// afficher un message de succés de connexion (pour debug).
+		//Ratios.getInstance().ecrireMessage("Connexion au serveur "+this.ipServeur+":"+this.portServeur+" avec succés.");
 	}
 	
 	/**

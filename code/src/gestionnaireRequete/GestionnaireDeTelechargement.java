@@ -28,6 +28,7 @@ public class GestionnaireDeTelechargement extends Requete {
 	private RandomAccessFile file;												// le fichier sur le disque.
 	private ArrayList<Thread> listeDesThreads;									// la liste des thread qui vont télécharger des données.
 	private String adresseServeurCentral;										// adresse du serveur central.
+	private int portServeur;													// port du serveur de l'utilisateur.
 	
 	/**
 	 * @brief constructeur de la classe.
@@ -35,12 +36,13 @@ public class GestionnaireDeTelechargement extends Requete {
 	 * @param nomFichier nom du fichier à télécharger.
 	 * @param gestionnaireFichier le gestionnaire de fichier.
 	 */
-	public GestionnaireDeTelechargement(String adresseServeurCentral, String nomFichier,
-			GestionnaireFichier gestionnaireFichier) {
+	public GestionnaireDeTelechargement(String adresseServeurCentral, String nomFichier, 
+			GestionnaireFichier gestionnaireFichier, int portServeur) {
 		super(adresseServeurCentral);
 		this.adresseServeurCentral = adresseServeurCentral;
 		this.nomFichier = nomFichier;
 		this.gestionnaireFichier = gestionnaireFichier;
+		this.portServeur = portServeur;
 		this.listeDesThreads = new ArrayList<Thread>();
 	}
 	
@@ -84,7 +86,7 @@ public class GestionnaireDeTelechargement extends Requete {
 				if (blocs.detientLeBloc(numeroBloc)) {
 					// telecharger chez la personne le bloc
 					String adresse = (String) utilisateur.getKey();
-					RequeteTelecharger requete = new RequeteTelecharger(this.adresseServeurCentral, adresse, this.file, this.nomFichier, this.gestionnaireFichier, numeroBloc);
+					RequeteTelecharger requete = new RequeteTelecharger(this.adresseServeurCentral, adresse, this.file, this.nomFichier, this.gestionnaireFichier, numeroBloc, this.portServeur);
 					Thread thread = new Thread(requete);
 					this.listeDesThreads.add(thread);
 					thread.start();

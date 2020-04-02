@@ -18,6 +18,7 @@ public class RequeteTelecharger extends Requete {
 	private String nomFichier;									// le nom du fichier.
 	private String adresseServeurCentral;						// adresse du serveur central.
 	private String adresseServeur;								// adresse du serveur chez qui on télécharge.
+	private int portServeur;									// port du serveur de l'utilisateur.
 	
 	/**
 	 * @brief constructeur de la classe permettant de télécharger une bloc d'un fichier depuis un serveur.
@@ -27,7 +28,7 @@ public class RequeteTelecharger extends Requete {
 	 * @param numeroDuBloc numéro du bloc du fichier que l'on souhaite télécharger.
 	 */
 	public RequeteTelecharger(String adresseServeurCentral ,String adresseServeur, RandomAccessFile fichier, String nomFichier,
-			GestionnaireFichier gestionnaireFichier, int numeroDuBloc) {
+			GestionnaireFichier gestionnaireFichier, int numeroDuBloc, int portServeur) {
 		super(adresseServeur);
 		this.adresseServeurCentral = adresseServeurCentral;
 		this.adresseServeur = adresseServeur;
@@ -35,6 +36,7 @@ public class RequeteTelecharger extends Requete {
 		this.gestionnaireFichier = gestionnaireFichier;
 		this.fichier = fichier;
 		this.nomFichier = nomFichier;
+		this.portServeur = portServeur;
 	}
 	
 	/**
@@ -67,7 +69,8 @@ public class RequeteTelecharger extends Requete {
 		this.gestionnaireFichier.ecrire(donnees.toByteArray(), tailleTotale, this.fichier, this.numeroDuBloc);
 		Messages.getInstance().ecrireMessage("Téléchargement du bloc "+this.numeroDuBloc+" du fichier "+this.nomFichier+" terminé !");
 		// prevenir le serveur central que le serveur à envoyé des données
-		RequeteEnvoieMessage requete = new RequeteEnvoieMessage(adresseServeurCentral, "RECUE "+this.adresseServeur+" "+tailleTotale );
+		String adresseLocale = this.socket.getInetAddress().getHostAddress()+":"+this.portServeur;
+		RequeteEnvoieMessage requete = new RequeteEnvoieMessage(adresseServeurCentral, "RECUE "+adresseLocale+" "+this.adresseServeur+" "+tailleTotale );
 		Thread th = new Thread(requete);
 		th.start();
 		// fermer le Thread.

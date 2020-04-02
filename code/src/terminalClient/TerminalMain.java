@@ -54,7 +54,7 @@ public class TerminalMain {
 				threadListe.start();
 				break;
 			case "2":
-				GestionnaireDeTelechargement gestionnaire = new GestionnaireDeTelechargement(adresseServeurCentral, choix[1], gestionnaireDeFichier);
+				GestionnaireDeTelechargement gestionnaire = new GestionnaireDeTelechargement(adresseServeurCentral, choix[1], gestionnaireDeFichier, portServeur);
 				Thread thread = new Thread(gestionnaire);
 				thread.start();
 				break;

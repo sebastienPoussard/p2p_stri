@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 
 import centralServer.ListeDesFichiersComplets;
 import centralServer.ListeDesInfoUtilisateur;
+import centralServer.Ratios;
 import commun.InfoUtilisateur;
 import commun.ListeDeBlocs;
 import commun.Messages;
@@ -81,9 +82,17 @@ public class GestionnaireRequetesServeurCentral extends GestionnaireRequetes {
 			break;
 		// quand l'utilisateur envoie une confirmation qu'il à reçue des données d'un autre serveur.
 		case "RECUE":
-			String adresse = tableauRequete[1];
-			long taille = Long.parseLong(tableauRequete[2]);
-			System.out.println("score : "+adresse+" : "+taille);
+			// récuperer les adresse.
+			String adresseReceveur = tableauRequete[1];
+			String adresseEmetteur = tableauRequete[2];
+			// récuperer la quantitée et la convertir en Ko.
+			long quantitee = (Long.parseLong(tableauRequete[3]))/1000;
+			System.out.println("emetteur : "+adresseEmetteur);
+			System.out.println("qté (Ko): "+quantitee);
+			System.out.println("receveur : "+adresseReceveur);
+			// ajouter les informations aux Ratios
+			Ratios.getInstance().ajouterInfos(adresseReceveur, adresseEmetteur, quantitee);
+			System.out.println("ratios : "+Ratios.getInstance().ratioEstBon(adresseEmetteur));
 			break;
 		default:
 			// si le message n'est pas correcte.
