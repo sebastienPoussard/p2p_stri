@@ -70,15 +70,26 @@ public class GestionnaireRequetesServeurCentral extends GestionnaireRequetes {
 			break;
 		// l'utilisateur souhaite télécharger un fichier, il veut la liste des utilisateur ayant ce fichier.
 		case "DOWNLOAD":
-			String fichier = tableauRequete[1];
+			String portClient = tableauRequete[1];
+			String fichier = tableauRequete[2];
 			// message d'information
 			Messages.getInstance().ecrireMessage("Utilisateur "+this.socService.getInetAddress()+" demande"
 					+ " la listes des utilisateurs possédant le fichier "+fichier);
-			// créer la listes d'information à renvoyer à l'utilisateur.
-			HashMap<String, ListeDeBlocs> listeUtilisateursAyantLeFichier = ListeDesInfoUtilisateur.getInstance().obtenirLaListeDesUtilisateursAyantLeFichier(fichier);
-			// envoyer la listes des utilisateurs ayant le fichier.
-			this.objOut.writeObject(listeUtilisateursAyantLeFichier);
-			this.objOut.flush();
+			// verifier que l'utilisateur à un ratio correcte.
+			String ipClient = this.socService.getRemoteSocketAddress().toString().split(":")[0];
+			ipClient = ipClient.split("/")[1];
+			String adresseClient = ipClient+":"+portClient;
+			// si le ratio est bon envoyer les informations à l'utilisateur
+			if (Ratios.getInstance().ratioEstBon(adresseClient)) {
+				// créer la listes d'information à renvoyer à l'utilisateur.
+				HashMap<String, ListeDeBlocs> listeUtilisateursAyantLeFichier = ListeDesInfoUtilisateur.getInstance().obtenirLaListeDesUtilisateursAyantLeFichier(fichier);
+				// envoyer la listes des utilisateurs ayant le fichier.
+				this.objOut.writeObject(listeUtilisateursAyantLeFichier);
+				this.objOut.flush();
+			} else {
+				// sinon envoyer un message d'erreur pour signaler au client que son ration n'est pas suffisant pour télécharger.
+				this.objOut.writeObject("KO!");
+			}
 			break;
 		// quand l'utilisateur envoie une confirmation qu'il à reçue des données d'un autre serveur.
 		case "RECUE":

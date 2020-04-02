@@ -56,60 +56,69 @@ public class GestionnaireDeTelechargement extends Requete {
 		super.run();
 		// envoyer la requête au serveur pour obtenir la listes des utilisateurs et les blocs qu'ils possèdent
 		// du fichier à télécharger.
-		envoyerRequete("DOWNLOAD "+this.nomFichier);
+		envoyerRequete("DOWNLOAD "+this.portServeur+" "+this.nomFichier);
 		// lire la réponse du serveur central.
 		Object obj;
+		boolean continuer = true;
 		try {
 			obj = this.objIn.readObject();
-			this.listeDesUtilisateursAyantLeFichier = (HashMap<String, ListeDeBlocs>)obj;
+			String reponse = (String)obj;
+			if (reponse.equals("KO!")) {
+				continuer = false;
+				Messages.getInstance().ecrireMessage("Votre ration n'est pas suffisant pour télécharger, vilain!");
+			} else {
+				this.listeDesUtilisateursAyantLeFichier = (HashMap<String, ListeDeBlocs>)obj;
+			}
 		} catch (IOException | ClassNotFoundException e) {
 			Messages.getInstance().ecrireErreur("echec à la reception de la liste de la liste des utilisateurs ayant le fichier.");
 		}
-		// construire le fichier "vide" dans le dossier des fichiers incomplets et récuperer le flux.
-		try {
-			this.tailleDuFichier = determinerTailleDuFichier(this.listeDesUtilisateursAyantLeFichier);
-			this.file = this.gestionnaireFichier.creerFichier(this.nomFichier, this.tailleDuFichier);
-		} catch (FileNotFoundException e) {
-			Messages.getInstance().ecrireErreur("echec à la création du fichier vide "+this.nomFichier);
-		}
-		// calculer le nbr de blocs.
-		float nombreDeBlocsFlottant = (this.tailleDuFichier/((float)GestionnaireFichier.TAILLEDEBLOC));
-		this.nbrDeBlocs = (int) Math.ceil(nombreDeBlocsFlottant);
-		// tenter de telecharger tous les blocs.
-		int numeroBloc = 1;
-		while (numeroBloc <= this.nbrDeBlocs) {
-			boolean tourPourRien = true;
-			Iterator iterateur = this.listeDesUtilisateursAyantLeFichier.entrySet().iterator();
-			while (iterateur.hasNext()) {
-				Map.Entry utilisateur = (Entry)iterateur.next();
-				ListeDeBlocs blocs = (ListeDeBlocs) utilisateur.getValue();
-				if (blocs.detientLeBloc(numeroBloc)) {
-					// telecharger chez la personne le bloc
-					String adresse = (String) utilisateur.getKey();
-					RequeteTelecharger requete = new RequeteTelecharger(this.adresseServeurCentral, adresse, this.file, this.nomFichier, this.gestionnaireFichier, numeroBloc, this.portServeur);
-					Thread thread = new Thread(requete);
-					this.listeDesThreads.add(thread);
-					thread.start();
-					// incrémenter le bloc à télécharger
+		if (continuer) {
+			// construire le fichier "vide" dans le dossier des fichiers incomplets et récuperer le flux.
+			try {
+				this.tailleDuFichier = determinerTailleDuFichier(this.listeDesUtilisateursAyantLeFichier);
+				this.file = this.gestionnaireFichier.creerFichier(this.nomFichier, this.tailleDuFichier);
+			} catch (FileNotFoundException e) {
+				Messages.getInstance().ecrireErreur("echec à la création du fichier vide "+this.nomFichier);
+			}
+			// calculer le nbr de blocs.
+			float nombreDeBlocsFlottant = (this.tailleDuFichier/((float)GestionnaireFichier.TAILLEDEBLOC));
+			this.nbrDeBlocs = (int) Math.ceil(nombreDeBlocsFlottant);
+			// tenter de telecharger tous les blocs.
+			int numeroBloc = 1;
+			while (numeroBloc <= this.nbrDeBlocs) {
+				boolean tourPourRien = true;
+				Iterator iterateur = this.listeDesUtilisateursAyantLeFichier.entrySet().iterator();
+				while (iterateur.hasNext()) {
+					Map.Entry utilisateur = (Entry)iterateur.next();
+					ListeDeBlocs blocs = (ListeDeBlocs) utilisateur.getValue();
+					if (blocs.detientLeBloc(numeroBloc)) {
+						// telecharger chez la personne le bloc
+						String adresse = (String) utilisateur.getKey();
+						RequeteTelecharger requete = new RequeteTelecharger(this.adresseServeurCentral, adresse, this.file, this.nomFichier, this.gestionnaireFichier, numeroBloc, this.portServeur);
+						Thread thread = new Thread(requete);
+						this.listeDesThreads.add(thread);
+						thread.start();
+						// incrémenter le bloc à télécharger
+						numeroBloc++;
+						tourPourRien = false;
+					}
+				}
+				// si le bloc n'est disponible chez personne, le sauter.
+				if (tourPourRien == true) {
 					numeroBloc++;
-					tourPourRien = false;
 				}
 			}
-			// si le bloc n'est disponible chez personne, le sauter.
-			if (tourPourRien == true) {
-				numeroBloc++;
+			// attendre que tous les threads de téléchargement ce terminent.
+			for (Thread thread : this.listeDesThreads) {
+				try {
+					thread.join();
+				} catch (InterruptedException e) {
+					Messages.getInstance().ecrireErreur("problème à l'attente de la terminaison des threads fils");
+				}
 			}
+			// tester le fichier pour voir s'il est complet et dans ce cas le déplacer dans les fichier complets.
+			this.gestionnaireFichier.verifierIntegritee(this.nomFichier);
 		}
-		// attendre que tous les threads de téléchargement ce terminent.
-		for (Thread thread : this.listeDesThreads) {
-			try {
-				thread.join();
-			} catch (InterruptedException e) {
-				Messages.getInstance().ecrireErreur("problème à l'attente de la terminaison des threads fils");
-			}
-		}
-		// tester le fichier pour voir s'il est complet et dans ce cas le déplacer dans les fichier complets.
-		this.gestionnaireFichier.verifierIntegritee(this.nomFichier);
 		// fermer le Thread.
 		terminer();
 	}
