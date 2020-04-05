@@ -1,10 +1,10 @@
 @startuml
 
 'acteurs
-actor "Utilisateur" as u
-control "application" as a
-database "serveur centrale" as d
-collections "Utilisateurs connectés" as u2
+actor "Utilisateur" as u order 1
+control "application" as a order 2
+database "serveur centrale" as d order 4
+collections "Utilisateurs connectés" as u2 order 5
 
 'parametres
 title Diagramme global simplifié
@@ -12,6 +12,8 @@ autonumber
 
 'actions
 u2 -> d : listeDesFichierPossédé
+create "Serveur" as s order 3
+a -> s : lancerServeu()
 a -> d : listeDesFichierPossédé
 u -> a : listeDesFichiersTelechargeable()
 a -> d : listeDesFichiersTelechargeable()
