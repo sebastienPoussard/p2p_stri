@@ -1,0 +1,56 @@
+@startuml
+
+'acteurs
+participant "TerminalMain" as tm
+participant "GestionnaireFichier" as gf order 9
+database "serveur centrale" as sc order 10
+collections "Utilisateurs connectés" as u2 order 20
+
+'parametres
+title Diagramme complet serveur
+autonumber 
+
+'actions
+create "GestionnaireFichier" as gf order 3
+tm -> gf : new GestionnaireFichier()
+create "Serveur" as s order 4
+tm ->  s : new Serveur()
+tm -> s : start()
+create "GestionnaireInfosUtilisateur" as giu order 4
+s -> giu : new GestionnaireInfosUtilisateur()
+s -> giu : start()
+par envoi d'information sur l'utilisateur au serveur
+    loop True 
+        giu -> gf : creerInfosUtilisateur()
+        gf --> giu : InfosUtilisateur
+        create "RequeteUpdateInfosUtilisateur" as ruiu order 5
+        giu -> ruiu : new RequeteUpdateInfosUtilisateur()
+        giu -> ruiu : start()
+        ruiu --> sc : "UPDATE"
+        ruiu --> sc : InfosUtilisateur
+        ref over sc
+            voir :
+            Diagramme sequence complet serveur central
+        end ref
+
+        giu -> giu : attendre(100s)
+    end
+else servir des clients
+    loop True
+        u2 -> s : connexion()
+        u2 --> s : requete
+        create "GestionnaireRequetesServeur" as grs order 6
+        s -> grs : new GestionnaireRequetesServeur()
+        s -> grs : start()
+        par 
+            opt requete == "TELECHARGER_BLOC <nomFichier> <numeroDuBloc>"
+            grs -> gf : obtenirDonnees(nomFichier, numeroDuBloc)
+            gf --> grs : bloc
+            grs --> u2 : bloc
+
+            end
+        end
+    end
+end 
+
+@enduml*

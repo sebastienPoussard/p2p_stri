@@ -1,0 +1,52 @@
+@startuml
+
+'acteurs
+participant "ServeurCentralMain" as scm order 1
+collections "Utilisateurs connectés" as u2 order 10
+database "ListeDesInfosUtilisateurs" as liu order 9
+database "ListeDesFichierComplets" as ldfc order 8
+database "Ratios" as r order 7
+
+'parametres
+title Diagramme complet serveur central
+autonumber 
+
+'actions
+create "ServeurCentral" as sc order 2
+scm -> sc : new ServeurCentral()
+scm -> sc : lancer()
+loop True 
+    u2 -> sc : connextion()
+    create "GestionnaireRequetesServeurCentral" as grsc order 3
+    sc -> grsc : new GestionnaireRequetesServeurCentral()
+    sc -> grsc : start()
+    par
+        u2 --> grsc : requete
+        grsc -> grsc : servirClient(requete)
+        opt requete == "UPDATE"
+            u2 --> grsc : InfoUtilisateur
+            grsc -> liu : ajouterUtilisateur(InfoUtilisateur)
+            grsc -> ldfc : ajouterFichiersCompletsALaListe(InfoUtilisateur)
+        else requete == "LISTE"
+            grsc -> ldfc : listeDesFichiersComplets()
+            ldfc --> grsc : listeDesFichiersComplets
+            grsc --> u2 : listeDesFichiersComplets
+        else requete == "DOWNLOAD"
+            grsc -> r : ratioEstBon(Utilisateur)
+            r --> grsc : reponse
+            opt reponse == True (le ratio est bon)
+                grsc -> liu : obtenirLaListeDesUtilisateursAyantLeFichier(nomFichier)
+                liu --> grsc : ListeDUtilisateurs
+                grsc --> u2 : listeDUtilisateurs
+            else reponse == False (le ratio est mauvais)
+                grsc --> u2 : "KO!"
+            end
+        else requete == "RECUE"
+            grsc -> r : ajouterInfos(quantitée)
+        end
+    end
+end
+
+
+
+@enduml*

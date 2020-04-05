@@ -185,8 +185,31 @@ class ListeDeBlocs {
 
 InfoUtilisateur o-- ListeDeBlocs
 
+Class ListeDesFichiersComplets {
+  -HashMap<String, Long> listeDesFichiersComplets
+  +ajouterFichier(String nom, Long taille)
+  +obtenirListeDesFichiersComplets() : HashMap<String, Long>
+}
+
+GestionnaireRequetesServeurCentral o-- ListeDesFichiersComplets
+
+Class Ratios {
+  -HashMap<String, Long> scoreEnvoie
+  -HashMap<String, Long> scoreRecue
+  -double ratioMin = 1.5
+  +ajouterInfos (String receveur, String emetteur, Long quantitee)
+  +ratioEstBon(String adresse) : boolean
+}
+
+GestionnaireRequetesServeurCentral o-- Ratios
 
 
+Class ListeDesInfoUtilisateur {
+  -HashMap<String, InfoUtilisateur> listeDesInfoUtilisateur
+  +ajouterUtilisateur(String adresse, InfoUtilisateur info)
+  +enleverUtilisateur(String adresse)
+  +obtenirLaListeDesUtilisateursAyantLeFichier(String fichier) : HashMap<String, ListeDeBlocs>
 
-
+}
+GestionnaireRequetesServeurCentral o-- ListeDesInfoUtilisateur
 @enduml

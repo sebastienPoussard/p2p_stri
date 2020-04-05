@@ -1,0 +1,87 @@
+@startuml
+
+'acteurs
+actor "Utilisateur" as u order 1
+database "serveur centrale" as sc order 10
+collections "Utilisateurs connectés" as u2 order 20
+
+'parametres
+title Diagramme complet client
+autonumber 
+
+'actions
+create "terminalMain" as tm order 2
+u -> tm : lancer application
+create "GestionnaireFichier" as gf order 3
+tm -> gf : new GestionnaireFichier()
+create "Serveur" as s order 4
+tm ->  s : new Serveur()
+tm -> s : start()
+ref over s
+    voir : 
+    "Diagramme sequence complet serveur"
+end ref
+loop tant que le choix n'est pas quitter
+    tm --> u : "Menu"
+    u -> tm : int choix
+    alt choix : obtenir la liste des fichiers
+        create "RequeteListe" as rl order 5
+        tm -> rl : new RequeteListe()
+        tm -> rl : start()
+        rl -> sc : "LISTE"
+        ref over sc
+            voir : 
+            "Diagramme sequence complet serveur central"
+        end ref
+        sc --> rl : listeDesFichiersComplets
+        rl --> u : liste des fichiers et leur tailles
+    else choix : telecharger un fichiers
+        create "GestionnaireDeTelechargement" as gt order 6
+        tm -> gt : new GestionnaireDeTelechargement()
+        tm -> gt : start()
+        gt -> sc : "DOWNLOAD <port du serveur du client> <nom du fichier>"
+        ref over sc
+            voir : 
+            "Diagramme sequence complet serveur central"
+        end ref
+        opt ratio bon
+            sc --> gt : listeDesUtilisateursAyantLeFichier
+            gt -> gf : creerFichier(nomFichier, tailleDuFichier)
+            gf --> gt : randomAccessFile
+            loop tant qu'il reste des blocs à télécharger
+                par
+                    create "RequeteTelecharger" as rt order 7
+                    gt -> rt : new RequeteTelecharger()
+                    gt -> rt : start()
+                    rt -> u2 : "TELECHARGER_BLOC <nomDuFichier> <numeroDuBloc>
+                    ref over u2
+                        voir : 
+                        "Diagramme sequence complet serveur"
+                    end ref
+                    u2 --> rt : blocDeDonnees
+                    rt -> gf : ecrire(RandomAccessFile, BlocDeDonnees, taille, position)
+                    rt --> u : "Téléchargement du bloc X terminé"
+                    create "RequeteEnvoieMessage" as rem order 8
+                    rt -> rem : new RequeteEnvoieMessage()
+                    rt -> rem : start()
+                    rem -> sc : "RECUE <tailleDonnees> <adresseDeEnvoyeur>""
+                    ref over sc
+                        voir : 
+                        "Diagramme sequence complet serveur central"
+                    end ref
+                end
+            end loop
+            gt -> gf : verifierIntegritee(nomDuFichier)
+        else ratio mauvais
+            sc --> gt : "KO!"
+            gt --> u : "ratio insuffisant pour télécharger"
+        end
+    else choix : quitter
+    tm --> u : "Client terminé"
+end
+
+end
+
+
+
+@enduml

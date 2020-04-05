@@ -7,6 +7,7 @@ database "serveur centrale" as d
 collections "Utilisateurs connectés" as u2
 
 'parametres
+title Diagramme global simplifié
 autonumber 
 
 'actions
@@ -19,10 +20,13 @@ a --> u : String liste
 u -> a : telecharger(String nomDuFichier)
 a -> d : utilisateursAyant(String nomDuFichier)
 d --> a : listeDesUtilisateurs
-loop tant que fichier non complet
-    par
-        a -> u2 : telechargerBloc(String nomDuFichier, int numeroBloc)
-        u2 --> a : blocDuFichier
+opt ratio est bon
+    loop tant que fichier non complet
+        par 
+            a -> u2 : telechargerBloc(String nomDuFichier, int numeroBloc)
+            u2 --> a : blocDuFichier
+            a --> d : long tailleRecue
+        end
     end
 end
 a -> d : listeDesFichierPossédé
