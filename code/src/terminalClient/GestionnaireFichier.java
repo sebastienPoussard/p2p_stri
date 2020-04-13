@@ -25,8 +25,8 @@ public class GestionnaireFichier {
 	private String cheminDossierFichiers;				// le chemin du dossier qui contient les fichiers "COMPLETS" et "INCOMPLETS".
 	private String cheminDossierFichiersComplets;		// le chemin du dossier contenat les fichiers complets.
 	private String cheminDossierFichiersIncomplets;		// le chemin du dossier contenant les fichiers incomplets.
-	public static int TAILLEDEBLOC = 1000*100;			// un bloc fait 100Ko (doit être multiple de 10)
-//	public static int TAILLEDEBLOC = 100;				// un bloc fait 100o pour tests (doit être multiple de 10)
+//	public static int TAILLEDEBLOC = 1000*100;			// un bloc fait 100Ko (doit être multiple de 10)
+	public static int TAILLEDEBLOC = 10;				// un bloc fait 100o pour tests (doit être multiple de 10)
 	
 	/**
 	 * @brief constructeur de GestionnaireFichier

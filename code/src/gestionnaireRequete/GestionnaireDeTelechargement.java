@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+
 import commun.ListeDeBlocs;
 import commun.Messages;
 import requete.Requete;
@@ -62,11 +63,14 @@ public class GestionnaireDeTelechargement extends Requete {
 		boolean continuer = true;
 		try {
 			obj = this.objIn.readObject();
-			String reponse = (String)obj;
-			if (reponse.equals("KO!")) {
-				continuer = false;
-				Messages.getInstance().ecrireMessage("Votre ration n'est pas suffisant pour télécharger, vilain!");
-			} else {
+			if (obj instanceof String) {
+				String reponse = (String)obj;
+				if (reponse.equals("KO!")) {
+					continuer = false;
+					Messages.getInstance().ecrireMessage("Votre ration n'est pas suffisant pour télécharger, vilain!");
+				} 
+			}
+			else {
 				this.listeDesUtilisateursAyantLeFichier = (HashMap<String, ListeDeBlocs>)obj;
 			}
 		} catch (IOException | ClassNotFoundException e) {
