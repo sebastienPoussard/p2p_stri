@@ -6,6 +6,10 @@ This Java project is developped in collaboration with Romain BREDARIOL & Léo-Pa
 
 This application act as a P2P Client to share files.
 
+# Links
+[Git](https://github.com/sebastienPoussard/p2p_stri)
+[Documentation Doxygen](https://pouseb.fr/P2P/index.html)
+
 # Subject
 
 **But** : le but de ce projet est de créer une application répartie en Java de téléchargement de fichier en mode P2P (peer to peer ou poste à poste).
